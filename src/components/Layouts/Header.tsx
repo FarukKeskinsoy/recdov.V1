@@ -103,7 +103,7 @@ const Header = () => {
         {
             id: 1,
             profile: 'user-profile.jpeg',
-            message: '<strong className="text-sm mr-1">John Doe</strong>invite you to <strong>Prototyping</strong>',
+            message: '<strong className="text-sm mr-1">Murat Kılıç</strong>invite you to <strong>Prototyping</strong>',
             time: '45 min ago',
         },
         {
@@ -268,7 +268,7 @@ const Header = () => {
                                                     height: '100%',
                                                 }}
                                             ></div>
-                                            <h4 className="font-semibold relative z-10 text-lg">Messages</h4>
+                                            <h4 className="font-semibold relative z-10 text-lg">Mesajlar</h4>
                                         </div>
                                     </li>
                                     {messages.length > 0 ? (
@@ -294,7 +294,7 @@ const Header = () => {
                                             </li>
                                             <li className="border-t border-white-light text-center dark:border-white/10 mt-5">
                                                 <button type="button" className="text-primary font-semibold group dark:text-gray-400 justify-center !py-4 !h-[48px]">
-                                                    <span className="group-hover:underline ltr:mr-1 rtl:ml-1">VIEW ALL ACTIVITIES</span>
+                                                    <span className="group-hover:underline ltr:mr-1 rtl:ml-1">Bütün Aktiviteleri Görüntüle</span>
                                                     <IconArrowLeft className="group-hover:translate-x-1 transition duration-300 ltr:ml-1 rtl:mr-1" />
                                                 </button>
                                             </li>
@@ -303,7 +303,9 @@ const Header = () => {
                                         <li className="mb-5" onClick={(e) => e.stopPropagation()}>
                                             <button type="button" className="!grid place-content-center hover:!bg-transparent text-lg min-h-[200px]">
                                                 <div className="mx-auto ring-4 ring-primary/30 rounded-full mb-4 text-primary">
-                                                    <IconInfoCircle fill={true} className="w-10 h-10" />
+                                  
+                                  
+                                                   <IconInfoCircle fill={true} className="w-10 h-10" />
                                                 </div>
                                                 No data available.
                                             </button>
