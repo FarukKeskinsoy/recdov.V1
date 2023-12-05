@@ -10,8 +10,8 @@ const About = () => {
     });
     return (
         <div>
-            <Link to="/">Home</Link>
-            <h1>About!</h1>
+            <Link to="/">Anasayfa</Link>
+            <h1>Hakkında!</h1>
         </div>
     );
 };

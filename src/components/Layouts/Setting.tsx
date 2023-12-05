@@ -47,12 +47,12 @@ const Setting = () => {
                         <div className="grid grid-cols-3 gap-2 mt-3">
                             <button type="button" className={`${themeConfig.theme === 'light' ? 'btn-primary' : 'btn-outline-primary'} btn`} onClick={() => dispatch(toggleTheme('light'))}>
                                 <IconSun className="w-5 h-5 shrink-0 ltr:mr-2 rtl:ml-2" />
-                                Light
+                                Açık
                             </button>
 
                             <button type="button" className={`${themeConfig.theme === 'dark' ? 'btn-primary' : 'btn-outline-primary'} btn`} onClick={() => dispatch(toggleTheme('dark'))}>
                                 <IconMoon className="w-5 h-5 shrink-0 ltr:mr-2 rtl:ml-2" />
-                                Dark
+                                Koyu
                             </button>
 
                             <button type="button" className={`${themeConfig.theme === 'system' ? 'btn-primary' : 'btn-outline-primary'} btn`} onClick={() => dispatch(toggleTheme('system'))}>

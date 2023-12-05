@@ -118,7 +118,7 @@ const LoginCover = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <label htmlFor="Password">Password</label>
+                                    <label htmlFor="Password">Şifre</label>
                                     <div className="relative text-white-dark">
                                         <input id="Password" type="password" placeholder="Enter Password" className="form-input ps-10 placeholder:text-white-dark" />
                                         <span className="absolute start-4 top-1/2 -translate-y-1/2">
@@ -133,7 +133,7 @@ const LoginCover = () => {
                                     </label>
                                 </div>
                                 <button type="submit" className="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
-                                    Sign in
+                                    Giriş Yap
                                 </button>
                             </form>
 
@@ -182,9 +182,9 @@ const LoginCover = () => {
                                 </ul>
                             </div>
                             <div className="text-center dark:text-white">
-                                Don't have an account ?&nbsp;
+                            Henüz bir hesabın yok mu?&nbsp;
                                 <Link to="/auth/cover-register" className="uppercase text-primary underline transition hover:text-black dark:hover:text-white">
-                                    SIGN UP
+                                    Kayıt Ol
                                 </Link>
                             </div>
                         </div>

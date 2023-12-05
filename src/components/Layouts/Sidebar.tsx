@@ -149,7 +149,7 @@ const Sidebar = () => {
                                         <AnimateHeight duration={300} height={currentMenu === 'invoice' ? 'auto' : 0}>
                                             <ul className="sub-menu text-gray-500">
                                                 <li>
-                                                    <NavLink to="/apps/invoice/list">Liste</NavLink>
+                                                    <NavLink to="/apps/invoice/list">Fatura Listesi</NavLink>
                                                 </li>
                                                 <li>
                                                     <NavLink to="/apps/invoice/list">Veri Aktarımı</NavLink>
@@ -216,7 +216,7 @@ const Sidebar = () => {
                                 <AnimateHeight duration={300} height={currentMenu === 'users' ? 'auto' : 0}>
                                     <ul className="sub-menu text-gray-500">
                                         <li>
-                                            <NavLink to="/users/profile">{t('profile')}</NavLink>
+                                            <NavLink to="/users/profile">{t('Profil')}</NavLink>
                                         </li>
                                         <li>
                                             <NavLink to="/users/user-account-settings">{t('account_settings')}</NavLink>
@@ -312,7 +312,7 @@ const Sidebar = () => {
                                 <button type="button" className={`${currentMenu === 'auth' ? 'active' : ''} nav-link group w-full`} onClick={() => toggleMenu('auth')}>
                                     <div className="flex items-center">
                                         <IconMenuAuthentication className="group-hover:!text-primary shrink-0" />
-                                        <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{t('authentication')}</span>
+                                        <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{t('Kimlik Doğrulama')}</span>
                                     </div>
 
                                     <div className={currentMenu !== 'auth' ? 'rtl:rotate-90 -rotate-90' : ''}>

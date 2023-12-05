@@ -100,7 +100,7 @@ const RecoverIdCover = () => {
                         <div className="w-full max-w-[440px] lg:mt-16">
                             <div className="mb-7">
                                 <h1 className="mb-3 text-2xl font-bold !leading-snug dark:text-white">Password Reset</h1>
-                                <p>Enter your email to recover your ID</p>
+                                <p>Mail adresinizi yazın</p>
                             </div>
                             <form className="space-y-5" onSubmit={submitForm}>
                                 <div>

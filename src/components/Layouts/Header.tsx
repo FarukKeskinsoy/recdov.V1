@@ -68,29 +68,29 @@ const Header = () => {
         {
             id: 1,
             image: '<span className="grid place-content-center w-9 h-9 rounded-full bg-success-light dark:bg-success text-success dark:text-success-light"><svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>',
-            title: 'Congratulations!',
-            message: 'Your OS has been updated.',
+            title: 'Tebrikler!',
+            message: 'İşletim sisteminiz güncellendi.',
             time: '1hr',
         },
         {
             id: 2,
             image: '<span className="grid place-content-center w-9 h-9 rounded-full bg-info-light dark:bg-info text-info dark:text-info-light"><svg g xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>',
-            title: 'Did you know?',
-            message: 'You can switch between artboards.',
+            title: 'Biliyor muydun?',
+            message: 'Çalışma yüzeyleri arasında geçiş yapabilirsiniz.',
             time: '2hr',
         },
         {
             id: 3,
             image: '<span className="grid place-content-center w-9 h-9 rounded-full bg-danger-light dark:bg-danger text-danger dark:text-danger-light"> <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>',
-            title: 'Something went wrong!',
-            message: 'Send Reposrt',
+            title: 'Bir şeyler ters gitti!',
+            message: 'Rapor Gönder.',
             time: '2days',
         },
         {
             id: 4,
             image: '<span className="grid place-content-center w-9 h-9 rounded-full bg-warning-light dark:bg-warning text-warning dark:text-warning-light"><svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">    <circle cx="12" cy="12" r="10"></circle>    <line x1="12" y1="8" x2="12" y2="12"></line>    <line x1="12" y1="16" x2="12.01" y2="16"></line></svg></span>',
-            title: 'Warning',
-            message: 'Your password strength is low.',
+            title: 'Uyarı',
+            message: 'Şifre güvenliği az.',
             time: '5days',
         },
     ]);
@@ -103,19 +103,19 @@ const Header = () => {
         {
             id: 1,
             profile: 'user-profile.jpeg',
-            message: '<strong className="text-sm mr-1">John Doe</strong>invite you to <strong>Prototyping</strong>',
+            message: '<strong className="text-sm mr-1">John Doe</strong> sizi <strong>Prototyping çalışmasına</strong> davet ediyor.',
             time: '45 min ago',
         },
         {
             id: 2,
             profile: 'profile-34.jpeg',
-            message: '<strong className="text-sm mr-1">Adam Nolan</strong>mentioned you to <strong>UX Basics</strong>',
+            message: '<strong className="text-sm mr-1">Adam Nolan</strong> sizden <strong>UX Basics çalışmasında</strong> bahsetti.',
             time: '9h Ago',
         },
         {
             id: 3,
             profile: 'profile-16.jpeg',
-            message: '<strong className="text-sm mr-1">Anna Morgan</strong>Upload a file',
+            message: '<strong className="text-sm mr-1">Anna Morgan</strong> dosya yükledi.',
             time: '9h Ago',
         },
     ]);
@@ -187,7 +187,7 @@ const Header = () => {
                                     <input
                                         type="text"
                                         className="form-input ltr:pl-9 rtl:pr-9 ltr:sm:pr-4 rtl:sm:pl-4 ltr:pr-9 rtl:pl-9 peer sm:bg-transparent bg-gray-100 placeholder:tracking-widest"
-                                        placeholder="ara.."
+                                        placeholder="Arama..."
                                     />
                                     <button type="button" className="absolute w-9 h-9 inset-0 ltr:right-auto rtl:left-auto appearance-none peer-focus:text-primary">
                                         <IconSearch className="mx-auto" />
@@ -268,7 +268,7 @@ const Header = () => {
                                                     height: '100%',
                                                 }}
                                             ></div>
-                                            <h4 className="font-semibold relative z-10 text-lg">Messages</h4>
+                                            <h4 className="font-semibold relative z-10 text-lg">Mesajlar</h4>
                                         </div>
                                     </li>
                                     {messages.length > 0 ? (
@@ -294,7 +294,7 @@ const Header = () => {
                                             </li>
                                             <li className="border-t border-white-light text-center dark:border-white/10 mt-5">
                                                 <button type="button" className="text-primary font-semibold group dark:text-gray-400 justify-center !py-4 !h-[48px]">
-                                                    <span className="group-hover:underline ltr:mr-1 rtl:ml-1">VIEW ALL ACTIVITIES</span>
+                                                    <span className="group-hover:underline ltr:mr-1 rtl:ml-1">Tüm Aktiviteleri Gör</span>
                                                     <IconArrowLeft className="group-hover:translate-x-1 transition duration-300 ltr:ml-1 rtl:mr-1" />
                                                 </button>
                                             </li>
@@ -330,8 +330,8 @@ const Header = () => {
                                 <ul className="!py-0 text-dark dark:text-white-dark w-[300px] sm:w-[350px] divide-y dark:divide-white/10">
                                     <li onClick={(e) => e.stopPropagation()}>
                                         <div className="flex items-center px-4 py-2 justify-between font-semibold">
-                                            <h4 className="text-lg">Notification</h4>
-                                            {notifications.length ? <span className="badge bg-primary/80">{notifications.length}New</span> : ''}
+                                            <h4 className="text-lg">Bildirimler</h4>
+                                            {notifications.length ? <span className="badge bg-primary/80">{notifications.length} Yeni</span> : ''}
                                         </div>
                                     </li>
                                     {notifications.length > 0 ? (
@@ -399,11 +399,11 @@ const Header = () => {
                                             <img className="rounded-md w-10 h-10 object-cover" src="/assets/images/user-profile.jpeg" alt="userProfile" />
                                             <div className="ltr:pl-4 rtl:pr-4 truncate">
                                                 <h4 className="text-base">
-                                                    John Doe
+                                                    Eyüp Sezgin
                                                     <span className="text-xs bg-success-light rounded text-success px-1 ltr:ml-2 rtl:ml-2">Pro</span>
                                                 </h4>
                                                 <button type="button" className="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white">
-                                                    johndoe@gmail.com
+                                                    eyüpsezgin@gmail.com
                                                 </button>
                                             </div>
                                         </div>
@@ -411,25 +411,25 @@ const Header = () => {
                                     <li>
                                         <Link to="/users/profile" className="dark:hover:text-white">
                                             <IconUser className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 shrink-0" />
-                                            Profile
+                                            Profil
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="/apps/mailbox" className="dark:hover:text-white">
                                             <IconMail className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 shrink-0" />
-                                            Inbox
+                                            Gelen Kutusu
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="/auth/boxed-lockscreen" className="dark:hover:text-white">
                                             <IconLockDots className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 shrink-0" />
-                                            Lock Screen
+                                            Kilit Ekranı
                                         </Link>
                                     </li>
                                     <li className="border-t border-white-light dark:border-white-light/10">
                                         <Link to="/auth/boxed-signin" className="text-danger !py-3">
                                             <IconLogout className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 rotate-90 shrink-0" />
-                                            Sign Out
+                                            Çıkış Yap
                                         </Link>
                                     </li>
                                 </ul>

@@ -86,8 +86,8 @@ const RecoverIdBox = () => {
                         </div>
                         <div className="mx-auto w-full max-w-[440px]">
                             <div className="mb-7">
-                                <h1 className="mb-3 text-2xl font-bold !leading-snug dark:text-white">Password Reset</h1>
-                                <p>Enter your email to recover your ID</p>
+                                <h1 className="mb-3 text-2xl font-bold !leading-snug dark:text-white">Şifre Sıfırla</h1>
+                                <p>Mail adresinizi yazın</p>
                             </div>
                             <form className="space-y-5" onSubmit={submitForm}>
                                 <div>
@@ -102,7 +102,7 @@ const RecoverIdBox = () => {
                                     </div>
                                 </div>
                                 <button type="submit" className="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
-                                    RECOVER
+                                    Kurtar
                                 </button>
                             </form>
                         </div>
