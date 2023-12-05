@@ -13,7 +13,9 @@ import IconInstagram from '../../components/Icon/IconInstagram';
 import IconLinkedin from '../../components/Icon/IconLinkedin';
 import IconTwitter from '../../components/Icon/IconTwitter';
 import IconX from '../../components/Icon/IconX';
+import {mukellefExtraInfo , iller , mukellefList} from "../../rawData/mukellefs"
 
+  
 const Contacts = () => {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -24,11 +26,41 @@ const Contacts = () => {
     const [value, setValue] = useState<any>('list');
     const [defaultParams] = useState({
         id: null,
-        name: '',
-        email: '',
-        phone: '',
-        role: '',
-        location: '',
+        adi:"",
+        soyadi:"",
+        unvani:"",
+        yetkili:"",
+        tc:"",
+        kurulusTarihi:"",
+        kapanısTarihi:"",
+        faaliyetKodu:"",
+        faaliyetAdi:"",
+        vergiDairesiKodu:"",
+        vergiDairesi:"",
+        vergiililce:"",
+        vergiKimlikNo:"",
+        ticSicilNo:"",
+        tescilTarihi:"",
+        tescilYeri:"",
+        kdvMukellefi:"",
+        kdvVergiDairesiKodu:"",
+        kdvVergiDairesi:"",
+        kdvVergiDairesiişilce:"",
+        mersisNo:"",
+        taahhütEdilensermaye:"",
+        odenmisSermaye:"",
+        bagliSosyalGuvKur:"",
+        sosGuvKurNo:"",
+        bagliMesTes:"",
+        mesTesNo:"",
+        basitUsulFaaliyetKodu:"",
+        basitOnayAdi:"",
+        basitOnaySoyadi:"",
+        basitOnayTc:"",
+        isim:"",
+        soyisim:"",
+        phone:"",
+        email:""
     });
 
     const [params, setParams] = useState<any>(JSON.parse(JSON.stringify(defaultParams)));
@@ -38,6 +70,16 @@ const Contacts = () => {
         setParams({ ...params, [id]: value });
     };
 
+    const userIdToExtraInfo = mukellefExtraInfo.reduce((map, extraInfo) => {
+        map[extraInfo.id] = extraInfo;
+        return map;
+    }, {});
+    
+    // Combine the arrays based on userId
+    const combinedArray = mukellefList.map((mukellef) => ({
+        ...mukellef,
+        ...userIdToExtraInfo[mukellef.id],
+    }));
     const [search, setSearch] = useState<any>('');
     const [contactList] = useState<any>([
         {
@@ -186,57 +228,114 @@ const Contacts = () => {
         },
     ]);
 
-    const [filteredItems, setFilteredItems] = useState<any>(contactList);
+    const [filteredItems, setFilteredItems] = useState<any>(combinedArray);
 
     useEffect(() => {
         setFilteredItems(() => {
-            return contactList.filter((item: any) => {
-                return item.name.toLowerCase().includes(search.toLowerCase());
+            return combinedArray.filter((item: any) => {
+                return String(item.unvani).toLowerCase().includes(search.toLowerCase());
             });
         });
-    }, [search, contactList]);
+    }, [search, combinedArray]);
 
     const saveUser = () => {
-        if (!params.name) {
-            showMessage('Name is required.', 'error');
-            return true;
-        }
-        if (!params.email) {
-            showMessage('Email is required.', 'error');
+        if (!params.adi) {
+            showMessage('İsim girmek zorunludur.', 'error');
             return true;
         }
         if (!params.phone) {
-            showMessage('Phone is required.', 'error');
+            showMessage('Telefon numarası zorunludur.', 'error');
             return true;
         }
-        if (!params.role) {
-            showMessage('Occupation is required.', 'error');
+        if (!params.tc && !params.vergiKimlikNo) {
+            showMessage('TC veya VkN gereklidir', 'error');
+            return true;
+        }
+        if (!params.vergiililce) {
+            showMessage('Vergi Dairesi için şehir seçimi zorunludur', 'error');
             return true;
         }
 
         if (params.id) {
             //update user
             let user: any = filteredItems.find((d: any) => d.id === params.id);
-            user.name = params.name;
+            user.adi = params.adi;
+            user.soyadi = params.soyadi;
             user.email = params.email;
             user.phone = params.phone;
-            user.role = params.role;
-            user.location = params.location;
+            user.unvani=params.unvani;
+            user.yetkili=params.yetkili;
+            user.tc=params.tc;
+            user.kurulusTarihi=params.kurulusTarihi;
+            user.kapanısTarihi=params.kapanısTarihi;
+            user.faaliyetKodu=params.faaliyetKodu;
+            user.faaliyetAdi=params.faaliyetAdi;
+            user.vergiDairesiKodu=params.vergiDairesiKodu;
+            user.vergiDairesi=params.vergiDairesi;
+            user.vergiililce=params.vergiililce;
+            user.vergiKimlikNo=params.vergiKimlikNo;
+            user.ticSicilNo=params.ticSicilNo;
+            user.tescilTarihi=params.tescilTarihi;
+            user.tescilYeri=params.tescilYeri;
+            user.kdvMukellefi=params.kdvMukellefi;
+            user.kdvVergiDairesiKodu=params.kdvVergiDairesiKodu;
+            user.kdvVergiDairesi=params.kdvVergiDairesi;
+            user.kdvVergiDairesiililce=params.kdvVergiDairesiililce;
+            user.mersisNo=params.mersisNo;
+            user.taahhütEdilensermaye=params.taahhütEdilensermaye;
+            user.odenmisSermaye=params.odenmisSermaye;
+            user.bagliSosyalGuvKur=params.bagliSosyalGuvKur;
+            user.sosGuvKurNo=params.sosGuvKurNo;
+            user.bagliMesTes=params.bagliMesTes;
+            user.mesTesNo=params.mesTesNo;
+            user.basitUsulFaaliyetKodu=params.basitUsulFaaliyetKodu;
+            user.basitOnayAdi=params.basitOnayAdi;
+            user.basitOnaySoyadi=params.basitOnaySoyadi;
+            user.basitOnayTc=params.basitOnayTc;
+            user.isim=params.isim;
+            user.soyisim=params.soyisim;
         } else {
             //add user
             let maxUserId = filteredItems.length ? filteredItems.reduce((max: any, character: any) => (character.id > max ? character.id : max), filteredItems[0].id) : 0;
 
             let user = {
                 id: maxUserId + 1,
-                path: 'profile-35.png',
-                name: params.name,
+                adi: params.name,
                 email: params.email,
                 phone: params.phone,
-                role: params.role,
-                location: params.location,
-                posts: 20,
-                followers: '5K',
-                following: 500,
+                soyadi : params.soyadi,
+                unvani:params.unvani,
+                yetkili:params.yetkili,
+                tc:params.tc,
+                kurulusTarihi:params.kurulusTarihi,
+                kapanısTarihi:params.kapanısTarihi,
+                faaliyetKodu:params.faaliyetKodu,
+                faaliyetAdi:params.faaliyetAdi,
+                vergiDairesiKodu:params.vergiDairesiKodu,
+                vergiDairesi:params.vergiDairesi,
+                vergiililce:params.vergiililce,
+                vergiKimlikNo:params.vergiKimlikNo,
+                ticSicilNo:params.ticSicilNo,
+                tescilTarihi:params.tescilTarihi,
+                tescilYeri:params.tescilYeri,
+                kdvMukellefi:params.kdvMukellefi,
+                kdvVergiDairesiKodu:params.kdvVergiDairesiKodu,
+                kdvVergiDairesi:params.kdvVergiDairesi,
+                kdvVergiDairesiililce:params.kdvVergiDairesiililce,
+                mersisNo:params.mersisNo,
+                taahhütEdilensermaye:params.taahhütEdilensermaye,
+                odenmisSermaye:params.odenmisSermaye,
+                bagliSosyalGuvKur:params.bagliSosyalGuvKur,
+                sosGuvKurNo:params.sosGuvKurNo,
+                bagliMesTes:params.bagliMesTes,
+                mesTesNo:params.mesTesNo,
+                basitUsulFaaliyetKodu:params.basitUsulFaaliyetKodu,
+                basitOnayAdi:params.basitOnayAdi,
+                basitOnaySoyadi:params.basitOnaySoyadi,
+                basitOnayTc:params.basitOnayTc,
+                isim:params.isim,
+                soyisim:params.soyisim,
+                
             };
             filteredItems.splice(0, 0, user);
             //   searchContacts();
@@ -300,7 +399,7 @@ const Contacts = () => {
                         </div>
                     </div>
                     <div className="relative">
-                        <input type="text" placeholder="Search Contacts" className="form-input py-2 ltr:pr-11 rtl:pl-11 peer" value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <input type="text" placeholder="mükellef ara" className="form-input py-2 ltr:pr-11 rtl:pl-11 peer" value={search} onChange={(e) => setSearch(e.target.value)} />
                         <button type="button" className="absolute ltr:right-[11px] rtl:left-[11px] top-1/2 -translate-y-1/2 peer-focus:text-primary">
                             <IconSearch className="mx-auto" />
                         </button>
@@ -339,11 +438,11 @@ const Contacts = () => {
                                                             <IconUser className="w-4.5 h-4.5" />
                                                         </div>
                                                     )}
-                                                    <div>{contact.name}</div>
+                                                    <div>{contact.adi||contact.unvani}</div>
                                                 </div>
                                             </td>
                                             <td>{contact.email}</td>
-                                            <td className="whitespace-nowrap">{contact.location}</td>
+                                            <td className="whitespace-nowrap">{contact.vergiililce}</td>
                                             <td className="whitespace-nowrap">{contact.phone}</td>
                                             <td>
                                                 <div className="flex gap-4 items-center justify-center">
@@ -485,7 +584,15 @@ const Contacts = () => {
                                         <form>
                                             <div className="mb-5">
                                                 <label htmlFor="name">İsim</label>
-                                                <input id="name" type="text" placeholder="İsim giriniz" className="form-input" value={params.name} onChange={(e) => changeValue(e)} />
+                                                <input id="adi" type="text" placeholder="İsim giriniz" className="form-input" value={params.adi} onChange={(e) => changeValue(e)} />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="name">TC Kimlik Numarası</label>
+                                                <input id="tc" type="text" placeholder="TC giriniz" className="form-input" value={params.tc} onChange={(e) => changeValue(e)} />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="name">VKN</label>
+                                                <input id="vergiKimlikNo" type="text" placeholder="VKN giriniz" className="form-input" value={params.vergiKimlikNo} onChange={(e) => changeValue(e)} />
                                             </div>
                                             <div className="mb-5">
                                                 <label htmlFor="email">E-Posta</label>
@@ -497,18 +604,26 @@ const Contacts = () => {
                                             </div>
                                             <div className="mb-5">
                                                 <label htmlFor="occupation">Çalışma Alanı</label>
-                                                <input id="role" type="text" placeholder="Alan" className="form-input" value={params.role} onChange={(e) => changeValue(e)} />
+                                                <input id="faaliyetAdi" type="text" placeholder="Alan" className="form-input" value={params.faaliyetAdi} onChange={(e) => changeValue(e)} />
                                             </div>
                                             <div className="mb-5">
-                                                <label htmlFor="address">Adres</label>
-                                                <textarea
-                                                    id="location"
-                                                    rows={3}
+                                                <label htmlFor="address">Vergi Dairesi İl</label>
+                                                <select
+                                                    id="vergiililce"
                                                     placeholder="adres giriniz"
-                                                    className="form-textarea resize-none min-h-[130px]"
-                                                    value={params.location}
+                                                    className="form-input"
+                                                    value={params.vergiililce}
                                                     onChange={(e) => changeValue(e)}
-                                                ></textarea>
+                                                >
+                                                       <option value="" disabled selected>Şehir Seçiniz</option>
+                                                       {iller.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i}>{i}</option>
+                                                        )
+                                                       })}
+
+ 
+                                                </select>
                                             </div>
                                             <div className="flex justify-end items-center mt-8">
                                                 <button type="button" className="btn btn-outline-danger" onClick={() => setAddContactModal(false)}>
