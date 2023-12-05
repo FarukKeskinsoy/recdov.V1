@@ -1238,7 +1238,7 @@ const Mailbox = () => {
                     <div className="flex flex-col h-full pb-16">
                         <div className="pb-5">
                             <button className="btn btn-primary w-full" type="button" onClick={() => openMail('add', null)}>
-                                New Message
+                                Yeni Mesaj
                             </button>
                         </div>
                         <PerfectScrollbar className="relative ltr:pr-3.5 rtl:pl-3.5 ltr:-mr-3.5 rtl:-ml-3.5 h-full grow">
@@ -1255,7 +1255,7 @@ const Mailbox = () => {
                                 >
                                     <div className="flex items-center">
                                         <IconMail className="w-5 h-5 shrink-0" />
-                                        <div className="ltr:ml-3 rtl:mr-3">Inbox</div>
+                                        <div className="ltr:ml-3 rtl:mr-3">Gelen Kutusu</div>
                                     </div>
                                     <div className="bg-primary-light dark:bg-[#060818] rounded-md py-0.5 px-2 font-semibold whitespace-nowrap">
                                         {mailList && mailList.filter((d) => d.type === 'inbox').length}
@@ -1274,7 +1274,7 @@ const Mailbox = () => {
                                 >
                                     <div className="flex items-center">
                                         <IconStar className="shrink-0" />
-                                        <div className="ltr:ml-3 rtl:mr-3">Marked</div>
+                                        <div className="ltr:ml-3 rtl:mr-3">Yıldızlı</div>
                                     </div>
                                 </button>
 
@@ -1291,7 +1291,7 @@ const Mailbox = () => {
                                     <div className="flex items-center">
                                         <IconSend className="shrink-0" />
 
-                                        <div className="ltr:ml-3 rtl:mr-3">Sent</div>
+                                        <div className="ltr:ml-3 rtl:mr-3">Gönderilmiş Postalar</div>
                                     </div>
                                 </button>
 
@@ -1323,7 +1323,7 @@ const Mailbox = () => {
                                 >
                                     <div className="flex items-center">
                                         <IconFile className="w-4.5 h-4.5" />
-                                        <div className="ltr:ml-3 rtl:mr-3">Drafts</div>
+                                        <div className="ltr:ml-3 rtl:mr-3">Taslaklar</div>
                                     </div>
                                     <div className="bg-primary-light dark:bg-[#060818] rounded-md py-0.5 px-2 font-semibold whitespace-nowrap">
                                         {mailList && mailList.filter((d) => d.type === 'draft').length}
@@ -1342,7 +1342,7 @@ const Mailbox = () => {
                                 >
                                     <div className="flex items-center">
                                         <IconTrashLines className="shrink-0" />
-                                        <div className="ltr:ml-3 rtl:mr-3">Trash</div>
+                                        <div className="ltr:ml-3 rtl:mr-3">Çöp Kutusu</div>
                                     </div>
                                 </button>
 
@@ -1352,7 +1352,7 @@ const Mailbox = () => {
                                             <Disclosure.Button className="w-full flex items-center p-2 hover:bg-white-dark/10 rounded-md dark:hover:text-primary hover:text-primary dark:hover:bg-[#181F32] font-medium h-10">
                                                 <IconCaretDown className={`w-5 h-5 shrink-0 ${open && 'rotate-180'}`} />
 
-                                                <div className="ltr:ml-3 rtl:mr-3">{open ? 'Less' : 'More'}</div>
+                                                <div className="ltr:ml-3 rtl:mr-3">{open ? 'Daha az' : 'Daha fazla'}</div>
                                             </Disclosure.Button>
 
                                             <Disclosure.Panel as="ul" unmount={false} className="mt-1 space-y-1">
@@ -1368,7 +1368,7 @@ const Mailbox = () => {
                                                         }}
                                                     >
                                                         <IconArchive className="shrink-0" />
-                                                        <div className="ltr:ml-3 rtl:mr-3">Archive</div>
+                                                        <div className="ltr:ml-3 rtl:mr-3">Arşiv</div>
                                                     </button>
                                                 </li>
                                                 <li>
@@ -1383,7 +1383,7 @@ const Mailbox = () => {
                                                         }}
                                                     >
                                                         <IconBookmark className="shrink-0" />
-                                                        <div className="ltr:ml-3 rtl:mr-3">Important</div>
+                                                        <div className="ltr:ml-3 rtl:mr-3">Özel</div>
                                                     </button>
                                                 </li>
                                             </Disclosure.Panel>
@@ -1399,7 +1399,7 @@ const Mailbox = () => {
                                 >
                                     <div className="flex items-center">
                                         <IconVideo className="shrink-0" />
-                                        <div className="ltr:ml-3 rtl:mr-3">New meeting</div>
+                                        <div className="ltr:ml-3 rtl:mr-3">Yeni Toplantı</div>
                                     </div>
                                 </button>
                                 <button
@@ -1408,7 +1408,7 @@ const Mailbox = () => {
                                 >
                                     <div className="flex items-center">
                                         <IconChartSquare className="shrink-0 rotate-180" />
-                                        <div className="ltr:ml-3 rtl:mr-3">Join a meeting</div>
+                                        <div className="ltr:ml-3 rtl:mr-3">Toplantıya Katıl</div>
                                     </div>
                                 </button>
                                 <div className="h-px border-b border-white-light dark:border-[#1b2e4b]"></div>
@@ -1423,7 +1423,7 @@ const Mailbox = () => {
                             >
                                 <div className="flex items-center">
                                     <IconUserPlus className="shrink-0" />
-                                    <div className="ltr:ml-3 rtl:mr-3">Add Account</div>
+                                    <div className="ltr:ml-3 rtl:mr-3">Hesap Ekle</div>
                                 </div>
                                 <div className="bg-primary-light dark:bg-[#060818] rounded-md py-1 px-2">
                                     <IconPlus />
@@ -1459,7 +1459,7 @@ const Mailbox = () => {
                                     </div>
 
                                     <div className="ltr:mr-4 rtl:ml-4">
-                                        <Tippy content="Refresh">
+                                        <Tippy content="Yenile">
                                             <button type="button" className="hover:text-primary flex items-center" onClick={() => refreshMails()}>
                                                 <IconRefresh />
                                             </button>
@@ -1470,7 +1470,7 @@ const Mailbox = () => {
                                         <ul className="flex grow items-center sm:flex-none gap-4 ltr:sm:mr-4 rtl:sm:ml-4">
                                             <li>
                                                 <div>
-                                                    <Tippy content="Archive">
+                                                    <Tippy content="Arşiv">
                                                         <button type="button" className="hover:text-primary flex items-center" onClick={setArchive}>
                                                             <IconArchive />
                                                         </button>
@@ -1493,7 +1493,7 @@ const Mailbox = () => {
                                                         placement={`${isRtl ? 'bottom-start' : 'bottom-end'}`}
                                                         btnClassName="hover:text-primary flex items-center"
                                                         button={
-                                                            <Tippy content="Group">
+                                                            <Tippy content="Grup">
                                                                 <span>
                                                                     <IconWheel />
                                                                 </span>
@@ -1504,25 +1504,25 @@ const Mailbox = () => {
                                                             <li>
                                                                 <button type="button" onClick={() => setGroup('personal')}>
                                                                     <div className="w-2 h-2 rounded-full bg-primary ltr:mr-3 rtl:ml-3 shrink-0"></div>
-                                                                    Personal
+                                                                    Kişisel
                                                                 </button>
                                                             </li>
                                                             <li>
                                                                 <button type="button" onClick={() => setGroup('work')}>
                                                                     <div className="w-2 h-2 rounded-full bg-warning ltr:mr-3 rtl:ml-3 shrink-0"></div>
-                                                                    Work
+                                                                    İş
                                                                 </button>
                                                             </li>
                                                             <li>
                                                                 <button type="button" onClick={() => setGroup('social')}>
                                                                     <div className="w-2 h-2 rounded-full bg-success ltr:mr-3 rtl:ml-3 shrink-0"></div>
-                                                                    Social
+                                                                    Sosyal
                                                                 </button>
                                                             </li>
                                                             <li>
                                                                 <button type="button" onClick={() => setGroup('private')}>
                                                                     <div className="w-2 h-2 rounded-full bg-danger ltr:mr-3 rtl:ml-3 shrink-0"></div>
-                                                                    Private
+                                                                    Özel
                                                                 </button>
                                                             </li>
                                                         </ul>
@@ -1541,19 +1541,19 @@ const Mailbox = () => {
                                                             <li>
                                                                 <button type="button" onClick={() => setAction('read')}>
                                                                     <IconOpenBook className="ltr:mr-2 rtl:ml-2 shrink-0" />
-                                                                    Mark as Read
+                                                                    Okundu olarak işaretle
                                                                 </button>
                                                             </li>
                                                             <li>
                                                                 <button type="button" onClick={() => setAction('unread')}>
                                                                     <IconBook className="ltr:mr-2 rtl:ml-2 shrink-0" />
-                                                                    Mark as Unread
+                                                                    Okunmadı olarak işaretle
                                                                 </button>
                                                             </li>
                                                             <li>
                                                                 <button type="button" onClick={() => setAction('trash')}>
                                                                     <IconTrashLines className="ltr:mr-2 rtl:ml-2 shrink-0" />
-                                                                    Trash
+                                                                    Çöp
                                                                 </button>
                                                             </li>
                                                         </ul>
@@ -1596,7 +1596,7 @@ const Mailbox = () => {
                                             <input
                                                 type="text"
                                                 className="form-input ltr:pr-8 rtl:pl-8 peer"
-                                                placeholder="Search Mail"
+                                                placeholder="Ara"
                                                 value={searchText}
                                                 onChange={(e) => setSearchText(e.target.value)}
                                                 onKeyUp={() => searchMails()}
@@ -1608,14 +1608,14 @@ const Mailbox = () => {
                                     </div>
                                     <div className="flex items-center">
                                         <div className="ltr:mr-4 rtl:ml-4">
-                                            <Tippy content="Settings">
+                                            <Tippy content="Ayarlar">
                                                 <button type="button" className="hover:text-primary">
                                                     <IconSettings />
                                                 </button>
                                             </Tippy>
                                         </div>
                                         <div>
-                                            <Tippy content="Help">
+                                            <Tippy content="Yardım">
                                                 <button type="button" className="hover:text-primary">
                                                     <IconHelpCircle className="w-6 h-6" />
                                                 </button>
@@ -1638,7 +1638,7 @@ const Mailbox = () => {
                                         }}
                                     >
                                         <IconUser className="w-5 h-5 ltr:mr-2 rtl:ml-2" />
-                                        Personal
+                                        Kişisel
                                     </button>
 
                                     <button
@@ -1650,7 +1650,7 @@ const Mailbox = () => {
                                         }}
                                     >
                                         <IconMessage2 className="w-5 h-5 ltr:mr-2 rtl:ml-2" />
-                                        Work
+                                        İş
                                     </button>
 
                                     <button
@@ -1662,7 +1662,7 @@ const Mailbox = () => {
                                         }}
                                     >
                                         <IconUsers className="ltr:mr-2 rtl:ml-2" />
-                                        Social
+                                        Sosyal
                                     </button>
 
                                     <button
@@ -1674,7 +1674,7 @@ const Mailbox = () => {
                                         }}
                                     >
                                         <IconTag className="ltr:mr-2 rtl:ml-2" />
-                                        Private
+                                        Özel
                                     </button>
                                 </div>
 
@@ -1858,7 +1858,7 @@ const Mailbox = () => {
                                                     </Tippy>
                                                 </div>
                                             )}
-                                            <div className="text-white-dark whitespace-nowrap">1 days ago</div>
+                                            <div className="text-white-dark whitespace-nowrap">1 gün önce</div>
                                         </div>
                                         <div className="text-white-dark flex items-center">
                                             <div className="ltr:mr-1 rtl:ml-1">{selectedMail.type === 'sent_mail' ? selectedMail.email : 'to me'}</div>
@@ -1872,25 +1872,25 @@ const Mailbox = () => {
                                                     <ul className="sm:w-56">
                                                         <li>
                                                             <div className="flex items-center px-4 py-2">
-                                                                <div className="text-white-dark ltr:mr-2 rtl:ml-2 w-1/4">From:</div>
+                                                                <div className="text-white-dark ltr:mr-2 rtl:ml-2 w-1/4">Gönderen:</div>
                                                                 <div className="flex-1">{selectedMail.type === 'sent_mail' ? 'recdov@gmail.com' : selectedMail.email}</div>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="flex items-center px-4 py-2">
-                                                                <div className="text-white-dark ltr:mr-2 rtl:ml-2 w-1/4">To:</div>
+                                                                <div className="text-white-dark ltr:mr-2 rtl:ml-2 w-1/4">Alıcı:</div>
                                                                 <div className="flex-1">{selectedMail.type !== 'sent_mail' ? 'recdov@gmail.com' : selectedMail.email}</div>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="flex items-center px-4 py-2">
-                                                                <div className="text-white-dark ltr:mr-2 rtl:ml-2 w-1/4">Date:</div>
+                                                                <div className="text-white-dark ltr:mr-2 rtl:ml-2 w-1/4">Tarih:</div>
                                                                 <div className="flex-1">{selectedMail.date + ', ' + selectedMail.time}</div>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="flex items-center px-4 py-2">
-                                                                <div className="text-white-dark ltr:mr-2 rtl:ml-2 w-1/4">Subject:</div>
+                                                                <div className="text-white-dark ltr:mr-2 rtl:ml-2 w-1/4">Konu:</div>
                                                                 <div className="flex-1">{selectedMail.title}</div>
                                                             </div>
                                                         </li>
@@ -1986,7 +1986,7 @@ const Mailbox = () => {
                                 <button type="button" className="xl:hidden hover:text-primary block ltr:mr-3 rtl:ml-3" onClick={() => setIsShowMailMenu(!isShowMailMenu)}>
                                     <IconMenu />
                                 </button>
-                                <h4 className="text-lg text-gray-600 dark:text-gray-400 font-medium">Message</h4>
+                                <h4 className="text-lg text-gray-600 dark:text-gray-400 font-medium">Mesaj</h4>
                             </div>
                             <div className="h-px bg-gradient-to-l from-indigo-900/20 via-black dark:via-white to-indigo-900/20 opacity-[0.1]"></div>
                             <form className="p-6 grid gap-6">
@@ -1995,7 +1995,7 @@ const Mailbox = () => {
                                         id="to"
                                         type="text"
                                         className="form-input"
-                                        placeholder="Enter To"
+                                        placeholder="Kime"
                                         defaultValue={params.to}
                                         onChange={(e) => {
                                             changeValue(e);
@@ -2004,11 +2004,11 @@ const Mailbox = () => {
                                 </div>
 
                                 <div>
-                                    <input id="cc" type="text" className="form-input" placeholder="Enter Cc" defaultValue={params.cc} onChange={(e) => changeValue(e)} />
+                                    <input id="cc" type="text" className="form-input" placeholder="Cc" defaultValue={params.cc} onChange={(e) => changeValue(e)} />
                                 </div>
 
                                 <div>
-                                    <input id="title" type="text" className="form-input" placeholder="Enter Subject" defaultValue={params.title} onChange={(e) => changeValue(e)} />
+                                    <input id="title" type="text" className="form-input" placeholder="Konu" defaultValue={params.title} onChange={(e) => changeValue(e)} />
                                 </div>
 
                                 <div className="h-fit">
@@ -2038,13 +2038,13 @@ const Mailbox = () => {
                                 </div>
                                 <div className="flex items-center ltr:ml-auto rtl:mr-auto mt-8">
                                     <button type="button" className="btn btn-outline-danger ltr:mr-3 rtl:ml-3" onClick={closeMsgPopUp}>
-                                        Close
+                                        Kapat
                                     </button>
                                     <button type="button" className="btn btn-success ltr:mr-3 rtl:ml-3" onClick={() => saveMail('save', null)}>
-                                        Save
+                                        Kaydet
                                     </button>
                                     <button type="button" className="btn btn-primary" onClick={() => saveMail('send', params.id)}>
-                                        Send
+                                        Gönder
                                     </button>
                                 </div>
                             </form>

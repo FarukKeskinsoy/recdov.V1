@@ -265,7 +265,7 @@ const Notes = () => {
                             <div className="shrink-0">
                                 <IconNotes />
                             </div>
-                            <h3 className="text-lg font-semibold ltr:ml-3 rtl:mr-3">Notes</h3>
+                            <h3 className="text-lg font-semibold ltr:ml-3 rtl:mr-3">Notlar</h3>
                         </div>
 
                         <div className="h-px w-full border-b border-white-light dark:border-[#1b2e4b] my-4"></div>

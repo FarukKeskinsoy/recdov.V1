@@ -32,14 +32,14 @@ const Calendar = () => {
             start: now.getFullYear() + '-' + getMonth(now) + '-01T14:30:00',
             end: now.getFullYear() + '-' + getMonth(now) + '-02T14:30:00',
             className: 'danger',
-            description: 'Bugün halletmem grekenler burada',
+            description: 'Bugün halletmem gerekenler burada',
         },
         {
             id: 2,
             title: 'Sistem Entegrasyonu',
             start: now.getFullYear() + '-' + getMonth(now) + '-07T19:30:00',
             end: now.getFullYear() + '-' + getMonth(now) + '-08T14:30:00',
-            className: 'önemi',
+            className: 'önemli',
             description: 'Sistem entegrasyonu',
         },
         
@@ -134,7 +134,7 @@ const Calendar = () => {
                 setEvents(dataevent);
             });
         }
-        showMessage('Event has been saved successfully.');
+        showMessage('Başarıyla Kaydedildi!');
         setIsAddEventModal(false);
     };
     const startDateChange = (event: any) => {
@@ -360,7 +360,7 @@ const Calendar = () => {
                                             </div>
                                             <div className="flex justify-end items-center !mt-8">
                                                 <button type="button" className="btn btn-outline-danger" onClick={() => setIsAddEventModal(false)}>
-                                                    Cancel
+                                                    İptal
                                                 </button>
                                                 <button type="button" onClick={() => saveEvent()} className="btn btn-primary ltr:ml-4 rtl:mr-4">
                                                     {params.id ? 'Update Event' : 'Create Event'}
