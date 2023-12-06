@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../store';
-import Dropdown from '../../components/Dropdown';
 import { setPageTitle } from '../../store/themeConfigSlice';
 import { useEffect } from 'react';
 import IconPencilPaper from '../../components/Icon/IconPencilPaper';
@@ -13,11 +12,6 @@ import IconPhone from '../../components/Icon/IconPhone';
 import IconTwitter from '../../components/Icon/IconTwitter';
 import IconDribbble from '../../components/Icon/IconDribbble';
 import IconGithub from '../../components/Icon/IconGithub';
-import IconShoppingBag from '../../components/Icon/IconShoppingBag';
-import IconTag from '../../components/Icon/IconTag';
-import IconCreditCard from '../../components/Icon/IconCreditCard';
-import IconClock from '../../components/Icon/IconClock';
-import IconHorizontalDots from '../../components/Icon/IconHorizontalDots';
 
 const Profile = () => {
     const dispatch = useDispatch();

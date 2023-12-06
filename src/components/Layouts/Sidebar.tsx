@@ -152,7 +152,7 @@ const Sidebar = () => {
                                                     <NavLink to="/apps/invoice/list">Fatura Listesi</NavLink>
                                                 </li>
                                                 <li>
-                                                    <NavLink to="/apps/invoice/list">Veri Aktarımı</NavLink>
+                                                    <NavLink to="/apps/invoice/veri-yukleme">Veri Aktarımı</NavLink>
                                                 </li>
                                                 <li>
                                                     <NavLink to="/apps/invoice/add">Yeni Oluştur</NavLink>
