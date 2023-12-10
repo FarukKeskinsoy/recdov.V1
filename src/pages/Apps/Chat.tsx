@@ -2,29 +2,7 @@ import Dropdown from '../../components/Dropdown';
 import { IRootState } from '../../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import { setPageTitle } from '../../store/themeConfigSlice';
-import IconHorizontalDots from '../../components/Icon/IconHorizontalDots';
-import IconSettings from '../../components/Icon/IconSettings';
-import IconHelpCircle from '../../components/Icon/IconHelpCircle';
-import IconLogin from '../../components/Icon/IconLogin';
-import IconSearch from '../../components/Icon/IconSearch';
-import IconMessagesDot from '../../components/Icon/IconMessagesDot';
-import IconPhone from '../../components/Icon/IconPhone';
-import IconUserPlus from '../../components/Icon/IconUserPlus';
-import IconBell from '../../components/Icon/IconBell';
-import IconMenu from '../../components/Icon/IconMenu';
-import IconMessage from '../../components/Icon/IconMessage';
-import IconPhoneCall from '../../components/Icon/IconPhoneCall';
-import IconVideo from '../../components/Icon/IconVideo';
-import IconCopy from '../../components/Icon/IconCopy';
-import IconTrashLines from '../../components/Icon/IconTrashLines';
-import IconShare from '../../components/Icon/IconShare';
-import IconMoodSmile from '../../components/Icon/IconMoodSmile';
-import IconSend from '../../components/Icon/IconSend';
-import IconMicrophoneOff from '../../components/Icon/IconMicrophoneOff';
-import IconDownload from '../../components/Icon/IconDownload';
-import IconCamera from '../../components/Icon/IconCamera';
 
 const contactList = [
     {
