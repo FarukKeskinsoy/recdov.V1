@@ -9,6 +9,7 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { Close, Refresh, Upload } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import TextConverter from './TextConverter';
+import "./pdf.scss"
 
 
 
@@ -73,6 +74,7 @@ const PdfViewer = () => {
         })
         .then((response) => {
           setPdfText(response.data);
+          console.log(response.data);
           
           // Handle the response as needed
         })
@@ -178,11 +180,13 @@ const PdfViewer = () => {
                     )}
                     </div>
                 </Worker>
-            </div>
-        
-                    {viewPdf !==null&&<TextConverter
+                {viewPdf !==null&&<TextConverter
                         result={pdfText}
                     />}
+            </div>
+            
+        
+                    
                 
                 {/* {viewPdf&&pdfText&&
                     <TextConverter

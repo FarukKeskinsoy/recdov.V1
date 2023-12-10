@@ -13,7 +13,7 @@ import IconInstagram from '../../components/Icon/IconInstagram';
 import IconLinkedin from '../../components/Icon/IconLinkedin';
 import IconTwitter from '../../components/Icon/IconTwitter';
 import IconX from '../../components/Icon/IconX';
-import {mukellefExtraInfo , iller , mukellefList} from "../../rawData/mukellefs"
+import {mukellefExtraInfo , iller , mukellefList} from "../../rawData/mukellefs.js"
 
   
 const Contacts = () => {
@@ -78,7 +78,7 @@ const Contacts = () => {
     // Combine the arrays based on userId
     const combinedArray = mukellefList.map((mukellef) => ({
         ...mukellef,
-        ...userIdToExtraInfo[mukellef.id],
+        ...(userIdToExtraInfo[mukellef.id] || {}),
     }));
     const [search, setSearch] = useState<any>('');
     const [contactList] = useState<any>([
