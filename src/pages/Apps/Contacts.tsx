@@ -70,15 +70,15 @@ const Contacts = () => {
         setParams({ ...params, [id]: value });
     };
 
-    const userIdToExtraInfo = mukellefExtraInfo.reduce((map, extraInfo) => {
+    const userIdToExtraInfo:{} = mukellefExtraInfo.reduce((map:any, extraInfo:any) => {
         map[extraInfo.id] = extraInfo;
         return map;
     }, {});
     
     // Combine the arrays based on userId
-    const combinedArray = mukellefList.map((mukellef) => ({
+    const combinedArray = mukellefList.map((mukellef:any) => ({
         ...mukellef,
-        ...(userIdToExtraInfo[mukellef.id] || {}),
+        //...userIdToExtraInfo[mukellef.id] || {},
     }));
     const [search, setSearch] = useState<any>('');
     const [contactList] = useState<any>([

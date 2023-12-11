@@ -16,7 +16,7 @@ import "./pdf.scss"
 const PdfViewer = () => {
   const [pdfFile, setPdfFile] = useState(null);
   const [viewPdf, setViewPdf] = useState(null);
-  const [pdfText, setPdfText] = useState({});
+  const [pdfText, setPdfText] = useState<{[key: string]: any}>({});
 
   const fileType = ['application/pdf'];
  
@@ -116,6 +116,23 @@ const PdfViewer = () => {
     setViewPdf(null)
   }
   console.log(typeof pdfText)
+  
+  type result = {
+    success: boolean;
+    textContent: string;
+    textLines: object;
+    Cari_Adı: string;
+    Cari_Vkn_Tckn: any[]; // Replace 'any' with the actual type if known
+    Fatura_No: any[];
+    Fatura_Tarihi: any[];
+    Fatura_Tipi: any[];
+    Senaryo: any[];
+    ETTN: any[];
+    KDV_Oranı: any[];
+    KDV_Tutari: any[];
+    Hizmet_Toplam_Tutar: any[];
+    Genel_Toplam: any[];
+  };
   return (
     <div className="container">
         <div className="page">
@@ -180,9 +197,131 @@ const PdfViewer = () => {
                     )}
                     </div>
                 </Worker>
-                {viewPdf !==null&&<TextConverter
-                        result={pdfText}
-                    />}
+                {viewPdf !==null&&
+                // <TextConverter result={pdfText}/>
+                <div
+      id='drawer'
+        className="fetched-info"
+    >
+        <div className="one-line">
+            <span className='row-ti' >Cari Adı</span>
+            <span className='row-te'>{pdfText?.Cari_Adı}</span>       
+        </div>
+        <div className="one-line">
+            <span className='row-ti' >Cari VKV/TCKN</span>
+            <select
+              className='minimal'
+            >
+            {pdfText.Cari_Vkn_Tckn?.map((r:string,rdx:number)=>{
+              return(
+                  <option key={rdx} value={r} >{r}</option>
+                )
+            })}
+            </select>
+        </div>
+        <div className="one-line">
+            <span className='row-ti' >Fatura No</span>
+            <select
+            className='minimal'
+            >
+            {pdfText.Fatura_No?.map((r:string,rdx:number)=>{
+              return(
+                  <option key={rdx} value={r} >{r}</option>
+                )
+            })}
+            </select>
+        </div>
+       <div className="one-line">
+            <span className='row-ti' >Fatura Tarihi</span>
+            <select
+            className='minimal'
+            >
+            {pdfText.Fatura_Tarihi?.map((r:string,rdx:number)=>{
+              return(
+                  <option key={rdx} value={r} >{r}</option>
+                )
+            })}
+            </select>
+        </div>
+
+
+        <div className="one-line">
+            <span className='row-ti' >Fatura Tipi</span>
+            <select>
+            {pdfText.Fatura_Tipi?.map((r:string,rdx:number)=>{
+              return(
+                  <option key={rdx} value={r} >{r}</option>
+                )
+            })}
+            </select>
+        </div>
+
+
+
+        <div className="one-line">
+            <span className='row-ti' >Senaryo</span>
+            <select>
+            {pdfText.Senaryo?.map((r:string,rdx:number)=>{
+              return(
+                  <option key={rdx} value={r} >{r}</option>
+                )
+            })}
+            </select>
+        </div>
+
+        <div className="one-line">
+            <span className='row-ti' >ETTN</span>
+            <select>
+            {pdfText.ETTN?.map((r:string,rdx:number)=>{
+              return(
+                  <option key={rdx} value={r} >{r}</option>
+                )
+            })}
+            </select>
+        </div>
+
+        <div className="one-line">
+            <span className='row-ti' >KDV Oranı</span>
+            <select>
+            {pdfText.KDV_Oranı?.map((r:string,rdx:number)=>{
+              return(
+                  <option key={rdx} value={r} >{r}</option>
+                )
+            })}
+            </select>
+        </div>
+        <div className="one-line">
+            <span className='row-ti' >KDV Tutarı</span>
+            <select>
+            {pdfText.KDV_Tutari?.map((r:string,rdx:number)=>{
+              return(
+                  <option key={rdx} value={r} >{r}</option>
+                )
+            })}
+            </select>
+        </div>
+        <div className="one-line">
+            <span className='row-ti' >Hizmet Toplam Tutarı</span>
+            <select>
+            {pdfText.Hizmet_Toplam_Tutar?.map((r:string,rdx:number)=>{
+              return(
+                  <option key={rdx} value={r} >{r}</option>
+                )
+            })}
+            </select>
+        </div>
+        <div className="one-line">
+            <span className='row-ti' >Genel Toplam</span>
+            <select>
+            {pdfText.Genel_Toplam?.map((r:string,rdx:number)=>{
+              return(
+                  <option key={rdx} value={r} >{r}</option>
+                )
+            })}
+            </select>
+        </div>
+    </div>
+                }
             </div>
             
         

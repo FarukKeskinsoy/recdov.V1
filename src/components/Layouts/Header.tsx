@@ -103,11 +103,9 @@ const Header = () => {
         {
             id: 1,
             profile: 'user-profile.jpeg',
-<<<<<<< HEAD
+
             message: '<strong className="text-sm mr-1">John Doe</strong> sizi <strong>Prototyping çalışmasına</strong> davet ediyor.',
-=======
-            message: '<strong className="text-sm mr-1">Murat Kılıç</strong>invite you to <strong>Prototyping</strong>',
->>>>>>> 5b4cff0bb7cfe6d319c248543efe8f22c5936ea2
+
             time: '45 min ago',
         },
         {
@@ -298,11 +296,7 @@ const Header = () => {
                                             </li>
                                             <li className="border-t border-white-light text-center dark:border-white/10 mt-5">
                                                 <button type="button" className="text-primary font-semibold group dark:text-gray-400 justify-center !py-4 !h-[48px]">
-<<<<<<< HEAD
                                                     <span className="group-hover:underline ltr:mr-1 rtl:ml-1">Tüm Aktiviteleri Gör</span>
-=======
-                                                    <span className="group-hover:underline ltr:mr-1 rtl:ml-1">Bütün Aktiviteleri Görüntüle</span>
->>>>>>> 5b4cff0bb7cfe6d319c248543efe8f22c5936ea2
                                                     <IconArrowLeft className="group-hover:translate-x-1 transition duration-300 ltr:ml-1 rtl:mr-1" />
                                                 </button>
                                             </li>

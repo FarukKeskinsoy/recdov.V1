@@ -1,7 +1,8 @@
 import React from 'react'
 import "./pdf.scss"
 interface documentProps {
-    result:{success: boolean;
+    result:{
+    success: boolean;
     textContent: string;
     textLines: object;
     Cari_Adı:string;
