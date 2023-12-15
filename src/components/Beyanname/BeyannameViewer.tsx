@@ -52,8 +52,8 @@ const BeyannameViewer = () => {
 
     try {
       setFetchingData(true)
-      //const serverUrl = 'https://beyanname-production.up.railway.app';
-      const serverUrl = 'http://localhost:5002';
+      const serverUrl = 'https://beyanname-production.up.railway.app';
+      //const serverUrl = 'http://localhost:5002';
 
       const response = await axios.post(`${serverUrl}/feedback`, {
         declarationNo: declarationNo,
@@ -120,8 +120,8 @@ const BeyannameViewer = () => {
   const handleButtonClick = async () => {
     try {
       setFetchingImage(true);
-      //const serverUrl = 'https://beyanname-production.up.railway.app';
-      const serverUrl = 'http://localhost:5002';
+      const serverUrl = 'https://beyanname-production.up.railway.app';
+      //const serverUrl = 'http://localhost:5002';
 
       const response = await axios.post(`${serverUrl}/declaration`);
   
