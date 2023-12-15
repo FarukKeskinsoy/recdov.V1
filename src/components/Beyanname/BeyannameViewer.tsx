@@ -52,8 +52,8 @@ const BeyannameViewer = () => {
 
     try {
       setFetchingData(true)
-      const serverUrl = 'https://beyanname-production.up.railway.app';
-      //const serverUrl = 'http://localhost:5002';
+      //const serverUrl = 'https://beyanname-production.up.railway.app';
+      const serverUrl = 'http://localhost:5002';
 
       const response = await axios.post(`${serverUrl}/feedback`, {
         declarationNo: declarationNo,
@@ -63,19 +63,47 @@ const BeyannameViewer = () => {
         console.log('Response:', response.data);
         var texted=response.data.text
         setResponseText(texted)
-        setDollar(response.data.currencyUSDtext)
-        setEuro(response.data.currencyEURtext)
         setStatueText(response.data.statuetext)
         setErrMessage("")
         setFetchingData(false)
+
+            if(String(texted).includes("Tarihi")){
+              const dateRegex = /Kapanma Tarihi: (\d{2})\.(\d{2})\.(\d{4})/;
+              const match = dateRegex.exec(texted);
+              if (match && match[1] && match[2] && match[3]) {
+
+                const day = match[1];
+                const month = match[2];
+                const year = match[3];
+                
+                // Construct the date string in the "DD/MM/YYYY" format
+                const dateObjString = `${month}/${day}/${year}`;
+                var date = new Date(dateObjString);
+                var yesterday = new Date(dateObjString);
+                yesterday.setDate(date.getDate() - 1);
+                const postDate=yesterday.toLocaleDateString("tr")
+                const responseCurr = await axios.post(`${serverUrl}/currget`, {
+                  date: postDate,
+
+                });
+
+                setDollar(responseCurr.data.currencyUSDtext)
+                setEuro(response.data.currencyEURtext)
+                
+                } else {
+                console.log("Date not found in the text.");
+                }
+            
+            } 
         
-      }else {
-        setFetchingData(false);
-        setFileUrl("");
-        setVerificationCode("")
-        // If the status code is not 200, show an error message
-        setErrMessage("İstek zaman aşımına uğramış olabilir. Lütfen tekrar deneyiniz")
-        console.error('Error fetching file. Status code:', response.status);
+        
+        }else {
+          setFetchingData(false);
+          setFileUrl("");
+          setVerificationCode("")
+          // If the status code is not 200, show an error message
+          setErrMessage("İstek zaman aşımına uğramış olabilir. Lütfen tekrar deneyiniz")
+          console.error('Error fetching file. Status code:', response.status);
         // You can set an error state or display a message to the user
       }
 
@@ -92,8 +120,8 @@ const BeyannameViewer = () => {
   const handleButtonClick = async () => {
     try {
       setFetchingImage(true);
-      const serverUrl = 'https://beyanname-production.up.railway.app';
-      //const serverUrl = 'http://localhost:5002';
+      //const serverUrl = 'https://beyanname-production.up.railway.app';
+      const serverUrl = 'http://localhost:5002';
 
       const response = await axios.post(`${serverUrl}/declaration`);
   
