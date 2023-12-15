@@ -13,7 +13,7 @@ const Add = () => {
     useEffect(() => {
         dispatch(setPageTitle('Invoice Add'));
     });
-    const currencyList = ['USD - US Dollar', 'GBP - British Pound', 'IDR - Indonesian Rupiah', 'INR - Indian Rupee', 'BRL - Brazilian Real', 'EUR - Germany (Euro)', 'TRY - Turkish Lira'];
+    const currencyList = ["TL - ₺",'USD - US Dollar', 'GBP - British Pound', 'IDR - Indonesian Rupiah', 'INR - Indian Rupee', 'BRL - Brazilian Real', 'EUR - Germany (Euro)',];
 
     const [items, setItems] = useState<any>([
         {
@@ -58,33 +58,33 @@ const Add = () => {
                             <img src="/assets/images/logo.svg" alt="img" className="w-14" />
                         </div>
                         <div className="space-y-1 mt-6 text-gray-500 dark:text-gray-400">
-                            <div>13 Tetrick Road, Cypress Gardens, Florida, 33884, US</div>
-                            <div>recdov@gmail.com</div>
-                            <div>+1 (070) 123-4567</div>
+                            <div>Üçevler, Nilüfer, BURSA, 16120, TR</div>
+                            <div>recdo@gmail.com</div>
+                            <div>+90 (530) 8652121</div>
                         </div>
                     </div>
                     <div className="lg:w-1/2 w-full lg:max-w-fit">
                         <div className="flex items-center">
                             <label htmlFor="number" className="flex-1 ltr:mr-2 rtl:ml-2 mb-0">
-                                Invoice Number
+                                Fatura Numarası
                             </label>
                             <input id="number" type="text" name="inv-num" className="form-input lg:w-[250px] w-2/3" placeholder="#8801" />
                         </div>
                         <div className="flex items-center mt-4">
                             <label htmlFor="invoiceLabel" className="flex-1 ltr:mr-2 rtl:ml-2 mb-0">
-                                Invoice Label
+                                Fatura Türü
                             </label>
                             <input id="invoiceLabel" type="text" name="inv-label" className="form-input lg:w-[250px] w-2/3" placeholder="Enter Invoice Label" />
                         </div>
                         <div className="flex items-center mt-4">
                             <label htmlFor="startDate" className="flex-1 ltr:mr-2 rtl:ml-2 mb-0">
-                                Invoice Date
+                                Fatura Tarihi
                             </label>
                             <input id="startDate" type="date" name="inv-date" className="form-input lg:w-[250px] w-2/3" />
                         </div>
                         <div className="flex items-center mt-4">
                             <label htmlFor="dueDate" className="flex-1 ltr:mr-2 rtl:ml-2 mb-0">
-                                Due Date
+                                Geçerlilik Tarihi
                             </label>
                             <input id="dueDate" type="date" name="due-date" className="form-input lg:w-[250px] w-2/3" />
                         </div>
@@ -94,64 +94,59 @@ const Add = () => {
                 <div className="mt-8 px-4">
                     <div className="flex justify-between lg:flex-row flex-col">
                         <div className="lg:w-1/2 w-full ltr:lg:mr-6 rtl:lg:ml-6 mb-6">
-                            <div className="text-lg">Bill To :-</div>
+                            <div className="text-lg">Sayın :</div>
                             <div className="mt-4 flex items-center">
                                 <label htmlFor="reciever-name" className="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
-                                    Name
+                                    Ad Soyad
                                 </label>
-                                <input id="reciever-name" type="text" name="reciever-name" className="form-input flex-1" placeholder="Enter Name" />
+                                <input id="reciever-name" type="text" name="reciever-name" className="form-input flex-1" placeholder="isim giriniz" />
                             </div>
                             <div className="mt-4 flex items-center">
                                 <label htmlFor="reciever-email" className="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
-                                    Email
+                                    E-Posta
                                 </label>
-                                <input id="reciever-email" type="email" name="reciever-email" className="form-input flex-1" placeholder="Enter Email" />
+                                <input id="reciever-email" type="email" name="reciever-email" className="form-input flex-1" placeholder="e-posta giriniz" />
                             </div>
                             <div className="mt-4 flex items-center">
                                 <label htmlFor="reciever-address" className="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
-                                    Address
+                                    Adres
                                 </label>
-                                <input id="reciever-address" type="text" name="reciever-address" className="form-input flex-1" placeholder="Enter Address" />
+                                <input id="reciever-address" type="text" name="reciever-address" className="form-input flex-1" placeholder="adres giriniz" />
                             </div>
                             <div className="mt-4 flex items-center">
                                 <label htmlFor="reciever-number" className="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
-                                    Phone Number
+                                    Telefon Numarası
                                 </label>
-                                <input id="reciever-number" type="text" name="reciever-number" className="form-input flex-1" placeholder="Enter Phone number" />
+                                <input id="reciever-number" type="text" name="reciever-number" className="form-input flex-1" placeholder="telefon numarası giriniz" />
                             </div>
                         </div>
                         <div className="lg:w-1/2 w-full">
-                            <div className="text-lg">Payment Details:</div>
+                            <div className="text-lg">Ödeme Bilgileri:</div>
                             <div className="flex items-center mt-4">
                                 <label htmlFor="acno" className="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
-                                    Account Number
+                                    Hesap Numarası
                                 </label>
-                                <input id="acno" type="text" name="acno" className="form-input flex-1" placeholder="Enter Account Number" />
+                                <input id="acno" type="text" name="acno" className="form-input flex-1" placeholder="hesap numarası giriniz" />
                             </div>
                             <div className="flex items-center mt-4">
                                 <label htmlFor="bank-name" className="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
-                                    Bank Name
+                                    Banka Adı
                                 </label>
-                                <input id="bank-name" type="text" name="bank-name" className="form-input flex-1" placeholder="Enter Bank Name" />
+                                <input id="bank-name" type="text" name="bank-name" className="form-input flex-1" placeholder="banka adı giriniz" />
                             </div>
-                            <div className="flex items-center mt-4">
-                                <label htmlFor="swift-code" className="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
-                                    SWIFT Number
-                                </label>
-                                <input id="swift-code" type="text" name="swift-code" className="form-input flex-1" placeholder="Enter SWIFT Number" />
-                            </div>
+                            
                             <div className="flex items-center mt-4">
                                 <label htmlFor="iban-code" className="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
-                                    IBAN Number
+                                    IBAN Numarası
                                 </label>
-                                <input id="iban-code" type="text" name="iban-code" className="form-input flex-1" placeholder="Enter IBAN Number" />
+                                <input id="iban-code" type="text" name="iban-code" className="form-input flex-1" placeholder="TR" />
                             </div>
                             <div className="flex items-center mt-4">
                                 <label htmlFor="country" className="ltr:mr-2 rtl:ml-2 w-1/3 mb-0">
-                                    Country
+                                    Ülke
                                 </label>
                                 <select id="country" name="country" className="form-select flex-1">
-                                    <option value="">Choose Country</option>
+                                    <option value="">Ülke Seçiniz</option>
                                     <option value="United States">United States</option>
                                     <option value="United Kingdom">United Kingdom</option>
                                     <option value="Canada">Canada</option>
@@ -329,7 +324,7 @@ const Add = () => {
                                     <option value="Tonga">Tonga</option>
                                     <option value="Trinidad-and-Tobago">Trinidad &amp; Tobago</option>
                                     <option value="Tunisia">Tunisia</option>
-                                    <option value="Turkey">Turkey</option>
+                                    <option value="Turkey">Türkiye</option>
                                     <option value="Turkmenistan">Turkmenistan</option>
                                     <option value="Uganda">Uganda</option>
                                     <option value="Ukraine">Ukraine</option>
@@ -352,10 +347,10 @@ const Add = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Item</th>
-                                    <th className="w-1">Quantity</th>
-                                    <th className="w-1">Price</th>
-                                    <th>Total</th>
+                                    <th>Mal/ Hizmet</th>
+                                    <th className="w-1">Miktar</th>
+                                    <th className="w-1">Fiyat</th>
+                                    <th>Toplam</th>
                                     <th className="w-1"></th>
                                 </tr>
                             </thead>
@@ -363,7 +358,7 @@ const Add = () => {
                                 {items.length <= 0 && (
                                     <tr>
                                         <td colSpan={5} className="!text-center font-semibold">
-                                            No Item Available
+                                            Henüz bir mal/hizmet girilmedi
                                         </td>
                                     </tr>
                                 )}
@@ -371,14 +366,14 @@ const Add = () => {
                                     return (
                                         <tr className="align-top" key={item.id}>
                                             <td>
-                                                <input type="text" className="form-input min-w-[200px]" placeholder="Enter Item Name" defaultValue={item.title} />
+                                                <input type="text" className="form-input min-w-[200px]" placeholder="mal / hizmet adı" defaultValue={item.title} />
                                                 <textarea className="form-textarea mt-4" placeholder="Enter Description" defaultValue={item.description}></textarea>
                                             </td>
                                             <td>
                                                 <input
                                                     type="number"
                                                     className="form-input w-32"
-                                                    placeholder="Quantity"
+                                                    placeholder="miktar"
                                                     min={0}
                                                     defaultValue={item.quantity}
                                                     onChange={(e) => changeQuantityPrice('quantity', e.target.value, item.id)}
@@ -388,13 +383,13 @@ const Add = () => {
                                                 <input
                                                     type="number"
                                                     className="form-input w-32"
-                                                    placeholder="Price"
+                                                    placeholder="fiyat"
                                                     min={0}
                                                     defaultValue={item.amount}
                                                     onChange={(e) => changeQuantityPrice('price', e.target.value, item.id)}
                                                 />
                                             </td>
-                                            <td>${item.quantity * item.amount}</td>
+                                            <td>{item.quantity * item.amount} ₺</td>
                                             <td>
                                                 <button type="button" onClick={() => removeItem(item)}>
                                                     <IconX className="w-5 h-5" />
@@ -409,41 +404,41 @@ const Add = () => {
                     <div className="flex justify-between sm:flex-row flex-col mt-6 px-4">
                         <div className="sm:mb-0 mb-6">
                             <button type="button" className="btn btn-primary" onClick={() => addItem()}>
-                                Add Item
+                                Mal / Hizmet Ekle
                             </button>
                         </div>
                         <div className="sm:w-2/5">
                             <div className="flex items-center justify-between">
-                                <div>Subtotal</div>
-                                <div>$0.00</div>
+                                <div>Ara Toplam</div>
+                                <div>0.00 ₺</div>
                             </div>
                             <div className="flex items-center justify-between mt-4">
-                                <div>Tax(%)</div>
-                                <div>0%</div>
+                                <div>KDV(%)</div>
+                                <div>1%</div>
                             </div>
                             <div className="flex items-center justify-between mt-4">
-                                <div>Shipping Rate($)</div>
-                                <div>$0.00</div>
+                                <div>Navlun (₺)</div>
+                                <div>0.00 ₺</div>
                             </div>
                             <div className="flex items-center justify-between mt-4">
-                                <div>Discount(%)</div>
-                                <div>0%</div>
+                                <div>İskonto (%)</div>
+                                <div>1%</div>
                             </div>
                             <div className="flex items-center justify-between mt-4 font-semibold">
-                                <div>Total</div>
-                                <div>$0.00</div>
+                                <div>Toplam</div>
+                                <div>0.00 ₺</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="mt-8 px-4">
-                    <label htmlFor="notes">Notes</label>
-                    <textarea id="notes" name="notes" className="form-textarea min-h-[130px]" placeholder="Notes...."></textarea>
+                    <label htmlFor="notes">Notlar</label>
+                    <textarea id="notes" name="notes" className="form-textarea min-h-[130px]" placeholder="not...."></textarea>
                 </div>
             </div>
             <div className="xl:w-96 w-full xl:mt-0 mt-6">
                 <div className="panel mb-5">
-                    <label htmlFor="currency">Currency</label>
+                    <label htmlFor="currency">Para Birimi</label>
                     <select id="currency" name="currency" className="form-select">
                         {currencyList.map((i) => (
                             <option key={i}>{i}</option>
@@ -452,26 +447,26 @@ const Add = () => {
                     <div className="mt-4">
                         <div className="grid sm:grid-cols-2 grid-cols-1 gap-4">
                             <div>
-                                <label htmlFor="tax">Tax(%) </label>
-                                <input id="tax" type="number" name="tax" className="form-input" defaultValue={0} placeholder="Tax" />
+                                <label htmlFor="tax">KDV (%) </label>
+                                <input id="tax" type="number" name="tax" className="form-input" defaultValue={0} placeholder="KDV" />
                             </div>
                             <div>
-                                <label htmlFor="discount">Discount(%) </label>
-                                <input id="discount" type="number" name="discount" className="form-input" defaultValue={0} placeholder="Discount" />
+                                <label htmlFor="discount">İskonto (%) </label>
+                                <input id="discount" type="number" name="discount" className="form-input" defaultValue={0} placeholder="iskonto" />
                             </div>
                         </div>
                     </div>
                     <div className="mt-4">
                         <div>
-                            <label htmlFor="shipping-charge">Shipping Charge($) </label>
-                            <input id="shipping-charge" type="number" name="shipping-charge" className="form-input" defaultValue={0} placeholder="Shipping Charge" />
+                            <label htmlFor="shipping-charge">Ulaştırma Bedeli(₺) </label>
+                            <input id="shipping-charge" type="number" name="shipping-charge" className="form-input" defaultValue={0} placeholder="ulaştırma bedeli" />
                         </div>
                     </div>
                     <div className="mt-4">
-                        <label htmlFor="payment-method">Accept Payment Via</label>
+                        <label htmlFor="payment-method">Ödeme Yöntemi</label>
                         <select id="payment-method" name="payment-method" className="form-select">
-                            <option value=" ">Select Payment</option>
-                            <option value="bank">Bank Account</option>
+                            <option value=" ">Ödeme Yöntemi Seç</option>
+                            <option value="bank">Banka Hesabına EFT / Havale</option>
                             <option value="paypal">Paypal</option>
                             <option value="upi">UPI Transfer</option>
                         </select>
@@ -481,22 +476,22 @@ const Add = () => {
                     <div className="grid xl:grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
                         <button type="button" className="btn btn-success w-full gap-2">
                             <IconSave className="ltr:mr-2 rtl:ml-2 shrink-0" />
-                            Save
+                            Kaydet
                         </button>
 
                         <button type="button" className="btn btn-info w-full gap-2">
                             <IconSend className="ltr:mr-2 rtl:ml-2 shrink-0" />
-                            Send Invoice
+                            Faturayı Gönder
                         </button>
 
                         <Link to="/apps/invoice/preview" className="btn btn-primary w-full gap-2">
                             <IconEye className="ltr:mr-2 rtl:ml-2 shrink-0" />
-                            Preview
+                            Önizle
                         </Link>
 
                         <button type="button" className="btn btn-secondary w-full gap-2">
                             <IconDownload className="ltr:mr-2 rtl:ml-2 shrink-0" />
-                            Download
+                            İndir
                         </button>
                     </div>
                 </div>

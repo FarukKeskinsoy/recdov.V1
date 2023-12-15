@@ -52,6 +52,8 @@ const PdfViewer = () => {
     }
   };
 
+  
+
   const handleSubmit = (e:any) => {
     e.preventDefault();
     if (pdfFile !== null) {
@@ -61,38 +63,28 @@ const PdfViewer = () => {
     }
   };
 
+  const handleUploadTry = () => {
+      axios
+        //.get('http://localhost:5001')
+        .get('https://apiheroku-production.up.railway.app')
+        .then((response) => {
+          console.log(response.data);
+          
+          // Handle the response as needed
+        })
+        .catch((error) => {
+          console.error('getting error:', error);
+          // Handle errors
+        });
+  };
   const handleUpload = (file:File) => {
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
 
       axios
-        .post('http://localhost:3002/getText', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((response) => {
-          setPdfText(response.data);
-          console.log(response.data);
-          
-          // Handle the response as needed
-        })
-        .catch((error) => {
-          console.error('Error uploading file:', error);
-          // Handle errors
-        });
-    } else {
-      console.log('Please select a file');
-    }
-  };
-  const handleUploadHtml = (file:File) => {
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      axios
-        .post('http://localhost:3002/pdftohtml', formData, {
+        //.post('http://localhost:5001/getText', formData, {
+        .post('https://apiheroku-production.up.railway.app/getText', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -107,7 +99,7 @@ const PdfViewer = () => {
           // Handle errors
         });
     } else {
-      console.log('Please select a file');
+      console.log('Lütfen dosya seçiniz');
     }
   };
 
@@ -115,12 +107,10 @@ const PdfViewer = () => {
     setPdfFile(null)
     setViewPdf(null)
   }
-  console.log(typeof pdfText)
   
   type result = {
     success: boolean;
-    textContent: string;
-    textLines: object;
+    billType:string;
     Cari_Adı: string;
     Cari_Vkn_Tckn: any[]; // Replace 'any' with the actual type if known
     Fatura_No: any[];
@@ -132,7 +122,10 @@ const PdfViewer = () => {
     KDV_Tutari: any[];
     Hizmet_Toplam_Tutar: any[];
     Genel_Toplam: any[];
+
+
   };
+
   return (
     <div className="container">
         <div className="page">
@@ -203,9 +196,14 @@ const PdfViewer = () => {
       id='drawer'
         className="fetched-info"
     >
+
+        <div className="one-line">
+            <span className='row-ti' >Döküman Bilgisi</span>
+            <span className='row-te'>{`${pdfText?.billType&& `Bu bir ${pdfText?.billType} fatura olabilir` }`}</span>       
+        </div>
         <div className="one-line">
             <span className='row-ti' >Cari Adı</span>
-            <span className='row-te'>{pdfText?.Cari_Adı}</span>       
+            <span className='row-te'>{pdfText?.Cari_Adı?.toUpperCase()}</span>       
         </div>
         <div className="one-line">
             <span className='row-ti' >Cari VKV/TCKN</span>
@@ -214,7 +212,7 @@ const PdfViewer = () => {
             >
             {pdfText.Cari_Vkn_Tckn?.map((r:string,rdx:number)=>{
               return(
-                  <option key={rdx} value={r} >{r}</option>
+                  <option key={rdx} value={r} >{r?.toUpperCase()}</option>
                 )
             })}
             </select>
@@ -226,7 +224,7 @@ const PdfViewer = () => {
             >
             {pdfText.Fatura_No?.map((r:string,rdx:number)=>{
               return(
-                  <option key={rdx} value={r} >{r}</option>
+                  <option key={rdx} value={r} >{r?.toUpperCase()}</option>
                 )
             })}
             </select>
@@ -238,7 +236,7 @@ const PdfViewer = () => {
             >
             {pdfText.Fatura_Tarihi?.map((r:string,rdx:number)=>{
               return(
-                  <option key={rdx} value={r} >{r}</option>
+                  <option key={rdx} value={r} >{r?.toUpperCase()}</option>
                 )
             })}
             </select>
@@ -250,7 +248,7 @@ const PdfViewer = () => {
             <select>
             {pdfText.Fatura_Tipi?.map((r:string,rdx:number)=>{
               return(
-                  <option key={rdx} value={r} >{r}</option>
+                  <option key={rdx} value={r} >{r?.toUpperCase()}</option>
                 )
             })}
             </select>
@@ -263,7 +261,7 @@ const PdfViewer = () => {
             <select>
             {pdfText.Senaryo?.map((r:string,rdx:number)=>{
               return(
-                  <option key={rdx} value={r} >{r}</option>
+                  <option key={rdx} value={r} >{r?.toUpperCase()}</option>
                 )
             })}
             </select>
@@ -274,7 +272,7 @@ const PdfViewer = () => {
             <select>
             {pdfText.ETTN?.map((r:string,rdx:number)=>{
               return(
-                  <option key={rdx} value={r} >{r}</option>
+                  <option key={rdx} value={r} >{r?.toUpperCase()}</option>
                 )
             })}
             </select>
@@ -285,7 +283,7 @@ const PdfViewer = () => {
             <select>
             {pdfText.KDV_Oranı?.map((r:string,rdx:number)=>{
               return(
-                  <option key={rdx} value={r} >{r}</option>
+                  <option key={rdx} value={r} >{r?.toUpperCase()}</option>
                 )
             })}
             </select>
@@ -295,7 +293,7 @@ const PdfViewer = () => {
             <select>
             {pdfText.KDV_Tutari?.map((r:string,rdx:number)=>{
               return(
-                  <option key={rdx} value={r} >{r}</option>
+                  <option key={rdx} value={r} >{r?.toUpperCase()}</option>
                 )
             })}
             </select>
@@ -305,7 +303,7 @@ const PdfViewer = () => {
             <select>
             {pdfText.Hizmet_Toplam_Tutar?.map((r:string,rdx:number)=>{
               return(
-                  <option key={rdx} value={r} >{r}</option>
+                  <option key={rdx} value={r} >{r?.toUpperCase()}</option>
                 )
             })}
             </select>
@@ -315,7 +313,7 @@ const PdfViewer = () => {
             <select>
             {pdfText.Genel_Toplam?.map((r:string,rdx:number)=>{
               return(
-                  <option key={rdx} value={r} >{r}</option>
+                  <option key={rdx} value={r} >{r?.toUpperCase()}</option>
                 )
             })}
             </select>

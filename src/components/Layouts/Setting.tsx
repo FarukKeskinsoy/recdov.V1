@@ -37,32 +37,32 @@ const Setting = () => {
                             <IconX className="w-5 h-5" />
                         </button>
 
-                        <h4 className="mb-1 dark:text-white">TEMPLATE CUSTOMIZER</h4>
-                        <p className="text-white-dark">Set preferences that will be cookied for your live preview demonstration.</p>
+                        <h4 className="mb-1 dark:text-white">Görünüm Ayarları</h4>
+                        <p className="text-white-dark">Görünüm ayarlarını buradan düzenleyebilirsiniz</p>
                     </div>
 
                     <div className="border border-dashed border-white-light dark:border-[#1b2e4b] rounded-md mb-3 p-3">
-                        <h5 className="mb-1 text-base dark:text-white leading-none">Color Scheme</h5>
-                        <p className="text-white-dark text-xs">Overall light or dark presentation.</p>
+                        <h5 className="mb-1 text-base dark:text-white leading-none">Renk Modu</h5>
+                        <p className="text-white-dark text-xs">Genel olarak gündüz veya gece modu.</p>
                         <div className="grid grid-cols-3 gap-2 mt-3">
                             <button type="button" className={`${themeConfig.theme === 'light' ? 'btn-primary' : 'btn-outline-primary'} btn`} onClick={() => dispatch(toggleTheme('light'))}>
                                 <IconSun className="w-5 h-5 shrink-0 ltr:mr-2 rtl:ml-2" />
-                                Açık
+                                Gündüz
                             </button>
 
                             <button type="button" className={`${themeConfig.theme === 'dark' ? 'btn-primary' : 'btn-outline-primary'} btn`} onClick={() => dispatch(toggleTheme('dark'))}>
                                 <IconMoon className="w-5 h-5 shrink-0 ltr:mr-2 rtl:ml-2" />
-                                Koyu
+                                Gece
                             </button>
 
                             <button type="button" className={`${themeConfig.theme === 'system' ? 'btn-primary' : 'btn-outline-primary'} btn`} onClick={() => dispatch(toggleTheme('system'))}>
                                 <IconLaptop className="w-5 h-5 shrink-0 ltr:mr-2 rtl:ml-2" />
-                                System
+                                Sistem
                             </button>
                         </div>
                     </div>
 
-                    <div className="border border-dashed border-white-light dark:border-[#1b2e4b] rounded-md mb-3 p-3">
+                    {/* <div className="border border-dashed border-white-light dark:border-[#1b2e4b] rounded-md mb-3 p-3">
                         <h5 className="mb-1 text-base dark:text-white leading-none">Navigation Position</h5>
                         <p className="text-white-dark text-xs">Select the primary navigation paradigm for your app.</p>
                         <div className="grid grid-cols-3 gap-2 mt-3">
@@ -93,27 +93,27 @@ const Setting = () => {
                                 <span>Semi Dark (Sidebar & Header)</span>
                             </label>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="border border-dashed border-white-light dark:border-[#1b2e4b] rounded-md mb-3 p-3">
-                        <h5 className="mb-1 text-base dark:text-white leading-none">Layout Style</h5>
-                        <p className="text-white-dark text-xs">Select the primary layout style for your app.</p>
+                        <h5 className="mb-1 text-base dark:text-white leading-none">Düzen Stili</h5>
+                        <p className="text-white-dark text-xs">Uygulama için öncelikli düzeni seçin</p>
                         <div className="flex gap-2 mt-3">
                             <button
                                 type="button"
                                 className={`${themeConfig.layout === 'boxed-layout' ? 'btn-primary' : 'btn-outline-primary'} btn flex-auto`}
                                 onClick={() => dispatch(toggleLayout('boxed-layout'))}
                             >
-                                Box
+                                Kutu
                             </button>
 
                             <button type="button" className={`${themeConfig.layout === 'full' ? 'btn-primary' : 'btn-outline-primary'} btn flex-auto`} onClick={() => dispatch(toggleLayout('full'))}>
-                                Full
+                                Geniş Ekran
                             </button>
                         </div>
                     </div>
 
-                    <div className="border border-dashed border-white-light dark:border-[#1b2e4b] rounded-md mb-3 p-3">
+                    {/* <div className="border border-dashed border-white-light dark:border-[#1b2e4b] rounded-md mb-3 p-3">
                         <h5 className="mb-1 text-base dark:text-white leading-none">Direction</h5>
                         <p className="text-white-dark text-xs">Select the direction for your app.</p>
                         <div className="flex gap-2 mt-3">
@@ -125,9 +125,9 @@ const Setting = () => {
                                 RTL
                             </button>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="border border-dashed border-white-light dark:border-[#1b2e4b] rounded-md mb-3 p-3">
+                    {/* <div className="border border-dashed border-white-light dark:border-[#1b2e4b] rounded-md mb-3 p-3">
                         <h5 className="mb-1 text-base dark:text-white leading-none">Navbar Type</h5>
                         <p className="text-white-dark text-xs">Sticky or Floating.</p>
                         <div className="mt-3 flex items-center gap-3 text-primary">
@@ -162,9 +162,9 @@ const Setting = () => {
                                 <span>Static</span>
                             </label>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="border border-dashed border-white-light dark:border-[#1b2e4b] rounded-md mb-3 p-3">
+                    {/* <div className="border border-dashed border-white-light dark:border-[#1b2e4b] rounded-md mb-3 p-3">
                         <h5 className="mb-1 text-base dark:text-white leading-none">Router Transition</h5>
                         <p className="text-white-dark text-xs">Animation of main content.</p>
                         <div className="mt-3">
@@ -181,7 +181,7 @@ const Setting = () => {
                                 <option value="animate__zoomIn">Zoom In</option>
                             </select>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </nav>
         </div>

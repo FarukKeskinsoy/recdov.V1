@@ -134,7 +134,7 @@ const themeConfigSlice = createSlice({
         },
 
         setPageTitle(state, { payload }) {
-            document.title = `${payload} | Recdov - Çok amaçlı döküman otomasyonu`;
+            document.title = `${payload} | Recdo - Çok amaçlı döküman otomasyonu`;
         },
     },
 });

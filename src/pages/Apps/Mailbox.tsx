@@ -833,7 +833,7 @@ const Mailbox = () => {
 
     const defaultParams = {
         id: null,
-        from: 'recdov@gmail.com',
+        from: 'recdo@gmail.com',
         to: '',
         cc: '',
         title: '',
@@ -1873,13 +1873,13 @@ const Mailbox = () => {
                                                         <li>
                                                             <div className="flex items-center px-4 py-2">
                                                                 <div className="text-white-dark ltr:mr-2 rtl:ml-2 w-1/4">Gönderen:</div>
-                                                                <div className="flex-1">{selectedMail.type === 'sent_mail' ? 'recdov@gmail.com' : selectedMail.email}</div>
+                                                                <div className="flex-1">{selectedMail.type === 'sent_mail' ? 'recdo@gmail.com' : selectedMail.email}</div>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="flex items-center px-4 py-2">
                                                                 <div className="text-white-dark ltr:mr-2 rtl:ml-2 w-1/4">Alıcı:</div>
-                                                                <div className="flex-1">{selectedMail.type !== 'sent_mail' ? 'recdov@gmail.com' : selectedMail.email}</div>
+                                                                <div className="flex-1">{selectedMail.type !== 'sent_mail' ? 'recdo@gmail.com' : selectedMail.email}</div>
                                                             </div>
                                                         </li>
                                                         <li>

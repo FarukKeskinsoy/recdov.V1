@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import VeriUploadPage from '../pages/Apps/Invoice/VeriUploadPage';
+import BeyannameSorgula from '../pages/Apps/Invoice/BeyannameSorgula';
 const Index = lazy(() => import('../pages/Index'));
 const Finance = lazy(() => import('../pages/Finance'));
 const Crypto = lazy(() => import('../pages/Crypto'));
@@ -72,6 +73,10 @@ const routes = [
     {
         path: '/apps/invoice/veri-yukleme',
         element: <VeriUploadPage />,
+    },
+    {
+        path: '/apps/invoice/beyanname-sorgula',
+        element: <BeyannameSorgula />,
     },
     {
         path: '/apps/banka/list',
