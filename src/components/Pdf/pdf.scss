@@ -106,6 +106,7 @@
     width: 30%;
     min-width: 250px;
     gap: 1rem;
+    margin-top: 1rem;
     .curr-title{
       font-weight: 600;
       flex: 1;
@@ -287,3 +288,27 @@
       
 }
 
+.err-text{
+  opacity: .7;
+  text-align: center;
+  margin-top: 1rem;
+}
+input[type="date"]{
+  background-color: #1976d2;
+  margin-top: 1rem;
+  padding: 15px;
+  top: 50%;
+  left: 50%;
+  font-family: "Roboto Mono",monospace;
+  color: #ffffff;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+::-webkit-calendar-picker-indicator{
+  background-color: #ffffff;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}

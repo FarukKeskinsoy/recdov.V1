@@ -23,6 +23,8 @@ const BeyannameViewer = () => {
   const [dollar, setDollar] = useState('');
   const [euro, setEuro] = useState('');
   const [statueText, setStatueText] = useState('');
+  const [dateMismatch, setDateMismatch] = useState("");
+  const [errText, setErrText] = useState('');
 
   const [declarationNo, setDeclarationNo] = useState<string>('');
   const [verificationCode, setVerificationCode] = useState<string>('');
@@ -37,6 +39,43 @@ const BeyannameViewer = () => {
     const newValue = e.currentTarget.value;
 
     setVerificationCode(newValue);
+  };
+  const handleInputChangeDate = async(e:FormEvent<HTMLInputElement>):Promise<void> => {
+          const serverUrl = 'https://beyanname-production.up.railway.app';
+          //const serverUrl = 'http://localhost:5002';
+
+    const newValue = e.currentTarget.value;
+    try {
+      const responseCurr = await axios.post(`${serverUrl}/currs`, {
+        d: String(newValue).split("-")[2],
+        m: String(newValue).split("-")[1],
+        y:String(newValue).split("-")[0],
+      });
+    
+      console.log(responseCurr.data);
+    
+      if (responseCurr.data.result.status === 404) {
+        setErrText('Resmi tatil, hafta sonu ve yarım iş günü çalısılan günlerde gösterge niteliginde kur bilgisi yayımlanmamaktadır.',
+        );
+      } else {
+                    // Handle the successful response here
+                    const doll=responseCurr.data.result.Tarih_Date.Currency[0].BanknoteBuying._text;
+                    const euro=responseCurr.data.result.Tarih_Date.Currency[3].BanknoteBuying._text;
+                    setDollar(doll);
+                    setEuro(euro);
+      }
+    } catch (error:any) {
+      // Handle errors here
+      if (error.response && error.response.status === 404) {
+        console.log('404 error:', error.response.data.errText);
+        // Handle 404 error specifically
+        setErrText(error.response.data.errText);
+      } else {
+        console.error('Error making API request:', error.message);
+        // Handle other errors
+      }
+    }
+    setDateMismatch(newValue);
   };
 
   const handleTamam=()=>{
@@ -59,7 +98,7 @@ const BeyannameViewer = () => {
         declarationNo: declarationNo,
         verificationCode: verificationCode,
       });
-      if (response.status === 200) {
+      if ((response.status != 500) ) {
         console.log('Response:', response.data);
         var texted=response.data.text
         setResponseText(texted)
@@ -78,17 +117,43 @@ const BeyannameViewer = () => {
                 
                 // Construct the date string in the "DD/MM/YYYY" format
                 const dateObjString = `${month}/${day}/${year}`;
+                setDateMismatch(`${year}-${month}-${day}`)
                 var date = new Date(dateObjString);
                 var yesterday = new Date(dateObjString);
                 yesterday.setDate(date.getDate() - 1);
-                const postDate=yesterday.toLocaleDateString("tr")
-                const responseCurr = await axios.post(`${serverUrl}/currget`, {
-                  date: postDate,
-
-                });
-
-                setDollar(responseCurr.data.currencyUSDtext)
-                setEuro(response.data.currencyEURtext)
+                try {
+                  const responseCurr = await axios.post(`${serverUrl}/currs`, {
+                    d: yesterday.getDate(),
+                    m: yesterday.getMonth() + 1,
+                    y: yesterday.getFullYear(),
+                  });
+                
+                  console.log(responseCurr.data);
+                
+                  if (responseCurr.data.result.status === 404) {
+                    setErrText('Resmi tatil, hafta sonu ve yarım iş günü çalısılan günlerde gösterge niteliginde kur bilgisi yayımlanmamaktadır.',
+                    );
+                  } else {
+                    // Handle the successful response here
+                    const doll=responseCurr.data.result.Tarih_Date.Currency[0].BanknoteBuying._text;
+                    const euro=responseCurr.data.result.Tarih_Date.Currency[3].BanknoteBuying._text;
+                    setDollar(doll);
+                    setEuro(euro);
+                  }
+                } catch (error:any) {
+                  // Handle errors here
+                  if (error.response && error.response.status === 404) {
+                    console.log('404 error:', error.response.data.errText);
+                    // Handle 404 error specifically
+                    setErrText(error.response.data.errText);
+                  } else {
+                    console.error('Error making API request:', error.message);
+                    // Handle other errors
+                  }
+                }
+                
+                //setDollar(responseCurr.data.currencyUSDtext)
+                //setEuro(response.data.currencyEURtext)
                 
                 } else {
                 console.log("Date not found in the text.");
@@ -356,6 +421,7 @@ const BeyannameViewer = () => {
                         variant='outlined'
                         >Tamam</Button>}
 
+                        
                         {statueText&&
                           <div
                             className='curr-responses'
@@ -364,13 +430,25 @@ const BeyannameViewer = () => {
 
                           </div>
                         }
+                        
+                       
                         {responseText&&
                         <span
                           className='response-text'
                         >{responseText}</span>}
-                        {dollar||euro&&<div
-                          className='curr-responses'
-                        >
+                         {errText&&
+                        <span
+                          className='err-text'
+                        >{errText}</span>}
+                        {dateMismatch&&
+                            <input
+                              type='date'
+                              value={dateMismatch}
+                              onChange={handleInputChangeDate}
+                            />
+
+                          
+                        }
                         {dollar&&
                         <div className='curr-container USDBuy'>
                           <span className='curr-title' >Dolar</span>
@@ -383,7 +461,6 @@ const BeyannameViewer = () => {
                           <span className='curr-value'>{euro} ₺</span>
                         </div>
                         }
-                        </div>}
                         </form>
                     }
                     </div>                
