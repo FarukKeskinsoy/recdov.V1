@@ -7,7 +7,7 @@ import { Viewer, Worker } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { Close, Refresh, Upload } from '@mui/icons-material';
-import { Button, CircularProgress, IconButton } from '@mui/material';
+import { Alert, Button, CircularProgress, IconButton } from '@mui/material';
 import "./beyanname.scss"
 
 
@@ -18,12 +18,14 @@ const BeyannameViewer = () => {
   const [pdfText, setPdfText] = useState<{[key: string]: any}>({});
   const [fetchingImage,setFetchingImage]=useState<boolean>(false)
   const [fetchingData,setFetchingData]=useState<boolean>(false)
+  const [fetchingCurr,setFetchingCurr]=useState<boolean>(false)
   const [errMessage,setErrMessage]=useState<any>("")
   const [fileUrl, setFileUrl] = useState('');
   const [dollar, setDollar] = useState('');
   const [euro, setEuro] = useState('');
   const [statueText, setStatueText] = useState('');
   const [dateMismatch, setDateMismatch] = useState("");
+  const [dateMax, setDateMax] = useState("");
   const [errText, setErrText] = useState('');
 
   const [declarationNo, setDeclarationNo] = useState<string>('');
@@ -45,7 +47,10 @@ const BeyannameViewer = () => {
           //const serverUrl = 'http://localhost:5002';
 
     const newValue = e.currentTarget.value;
+    setDateMismatch(newValue);
+
     try {
+      setFetchingCurr(true)
       const responseCurr = await axios.post(`${serverUrl}/currs`, {
         d: String(newValue).split("-")[2],
         m: String(newValue).split("-")[1],
@@ -57,14 +62,17 @@ const BeyannameViewer = () => {
       if (responseCurr.data.result.status === 404) {
         setErrText('Resmi tatil, hafta sonu ve yarım iş günü çalısılan günlerde gösterge niteliginde kur bilgisi yayımlanmamaktadır.',
         );
+        setFetchingCurr(false)
       } else {
                     // Handle the successful response here
                     const doll=responseCurr.data.result.Tarih_Date.Currency[0].BanknoteBuying._text;
                     const euro=responseCurr.data.result.Tarih_Date.Currency[3].BanknoteBuying._text;
                     setDollar(doll);
                     setEuro(euro);
+                    setFetchingCurr(false)
       }
     } catch (error:any) {
+      setFetchingCurr(false)
       // Handle errors here
       if (error.response && error.response.status === 404) {
         console.log('404 error:', error.response.data.errText);
@@ -75,7 +83,6 @@ const BeyannameViewer = () => {
         // Handle other errors
       }
     }
-    setDateMismatch(newValue);
   };
 
   const handleTamam=()=>{
@@ -118,10 +125,12 @@ const BeyannameViewer = () => {
                 // Construct the date string in the "DD/MM/YYYY" format
                 const dateObjString = `${month}/${day}/${year}`;
                 setDateMismatch(`${year}-${month}-${day}`)
+                setDateMax(`${year}-${month}-${day}`)
                 var date = new Date(dateObjString);
                 var yesterday = new Date(dateObjString);
                 yesterday.setDate(date.getDate() - 1);
                 try {
+                  setFetchingCurr(true)
                   const responseCurr = await axios.post(`${serverUrl}/currs`, {
                     d: yesterday.getDate(),
                     m: yesterday.getMonth() + 1,
@@ -133,14 +142,17 @@ const BeyannameViewer = () => {
                   if (responseCurr.data.result.status === 404) {
                     setErrText('Resmi tatil, hafta sonu ve yarım iş günü çalısılan günlerde gösterge niteliginde kur bilgisi yayımlanmamaktadır.',
                     );
+                    setFetchingCurr(false)
                   } else {
                     // Handle the successful response here
                     const doll=responseCurr.data.result.Tarih_Date.Currency[0].BanknoteBuying._text;
                     const euro=responseCurr.data.result.Tarih_Date.Currency[3].BanknoteBuying._text;
                     setDollar(doll);
                     setEuro(euro);
+                    setFetchingCurr(false)
                   }
                 } catch (error:any) {
+                  setFetchingCurr(false)
                   // Handle errors here
                   if (error.response && error.response.status === 404) {
                     console.log('404 error:', error.response.data.errText);
@@ -156,6 +168,7 @@ const BeyannameViewer = () => {
                 //setEuro(response.data.currencyEURtext)
                 
                 } else {
+                  setFetchingCurr(false)
                 console.log("Date not found in the text.");
                 }
             
@@ -436,19 +449,29 @@ const BeyannameViewer = () => {
                         <span
                           className='response-text'
                         >{responseText}</span>}
-                         {errText&&
-                        <span
-                          className='err-text'
-                        >{errText}</span>}
-                        {dateMismatch&&
+                             {dateMismatch&&<Alert severity="warning">Kur bilgisi olarak, 'Kapanma Tarihinden' 1 (bir) gün öncesi dikkate alınmalıdır.</Alert>}
+
+                         {errText&&(!dollar&&!euro)&&
+                        <Alert
+                        severity="warning"
+                        >{errText}</Alert>}
+                        {
+                        dateMismatch&&
                             <input
+                              disabled={fetchingCurr}
+                              id='curr-date'
                               type='date'
                               value={dateMismatch}
+                              max={dateMismatch}
                               onChange={handleInputChangeDate}
                             />
 
                           
                         }
+                        <div
+                          className={`currency-container ${fetchingCurr?"weak":"nn"}`}
+                        >
+                        {fetchingCurr&&<div      className='loaderCurr'>                        </div>}
                         {dollar&&
                         <div className='curr-container USDBuy'>
                           <span className='curr-title' >Dolar</span>
@@ -461,8 +484,12 @@ const BeyannameViewer = () => {
                           <span className='curr-value'>{euro} ₺</span>
                         </div>
                         }
+                        </div>
+
                         </form>
                     }
+                                            
+
                     </div>                
                 
             
