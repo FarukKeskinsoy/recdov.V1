@@ -1,5 +1,5 @@
 
-import { useState,FormEvent, ChangeEvent, DragEvent } from 'react';
+import { useState,FormEvent, ChangeEvent, DragEvent, useEffect } from 'react';
 import axios from 'axios';
 
 import { Viewer, Worker } from '@react-pdf-viewer/core';
@@ -10,16 +10,36 @@ import { Close, Refresh, Upload } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import TextConverter from './TextConverter';
 import "./pdf.scss"
+import { useParams } from 'react-router-dom';
+import { mukellefList } from '../../rawData/mukellefs';
 
 
 
-const PdfViewer = () => {
+const PdfViewerInBox = () => {
   const [pdfFile, setPdfFile] = useState(null);
   const [viewPdf, setViewPdf] = useState(null);
   const [pdfText, setPdfText] = useState<{[key: string]: any}>({});
 
   const fileType = ['application/pdf'];
+  interface Mukellef {
+    id: string;
+    // other properties...
+  }
+  
+  const [loadingThis, setLoadingThis] = useState<boolean>(true);
+  const { mukellefid } = useParams();
+  const [thisMukellef, setThisMukellef] = useState<Mukellef | undefined>(undefined);
+  
  
+  
+  useEffect(()=>{
+    const obj = mukellefList.find((m) => m.id === mukellefid);
+    if (obj) {
+      setThisMukellef(obj);
+    }
+  },[])
+ console.log(thisMukellef)
+
   const handleFileChange = (e:FormEvent<HTMLInputElement>):void => {
     const selectedFile = e.currentTarget.files?.[0];
     handleFile(selectedFile as File);
@@ -68,6 +88,7 @@ const PdfViewer = () => {
         //.get('http://localhost:5001')
         .get('https://apiheroku-production.up.railway.app')
         .then((response) => {
+          console.log(response.data);
           
           // Handle the response as needed
         })
@@ -336,4 +357,4 @@ const PdfViewer = () => {
   );
 };
 
-export default PdfViewer;
+export default PdfViewerInBox;

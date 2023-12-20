@@ -1,6 +1,12 @@
 import { lazy } from 'react';
-import VeriUploadPage from '../pages/Apps/Invoice/VeriUploadPage';
 import BeyannameSorgula from '../pages/Apps/Invoice/BeyannameSorgula';
+import MukelleflerList from '../pages/Apps/Invoice/Mukellefler';
+import PdfViewerInBox from '../components/Pdf/PdfViewerInBox';
+import PdfViewerOutBox from '../components/Pdf/PdfViewerOutBox';
+import GelenList from '../pages/Apps/Invoice/GelenList';
+import GidenList from '../pages/Apps/Invoice/GidenList';
+import GelenDetail from '../pages/Apps/Invoice/GelenDetail';
+import GidenDetail from '../pages/Apps/Invoice/GidenDetail';
 const Index = lazy(() => import('../pages/Index'));
 const Finance = lazy(() => import('../pages/Finance'));
 const Crypto = lazy(() => import('../pages/Crypto'));
@@ -26,10 +32,6 @@ const ERROR404 = lazy(() => import('../pages/Pages/Error404'));
 const ERROR500 = lazy(() => import('../pages/Pages/Error500'));
 const ERROR503 = lazy(() => import('../pages/Pages/Error503'));
 const Maintenence = lazy(() => import('../pages/Pages/Maintenence'));
-const LoginBoxed = lazy(() => import('../pages/Authentication/LoginBoxed'));
-const RegisterBoxed = lazy(() => import('../pages/Authentication/RegisterBoxed'));
-const UnlockBoxed = lazy(() => import('../pages/Authentication/UnlockBox'));
-const RecoverIdBoxed = lazy(() => import('../pages/Authentication/RecoverIdBox'));
 const LoginCover = lazy(() => import('../pages/Authentication/LoginCover'));
 const RegisterCover = lazy(() => import('../pages/Authentication/RegisterCover'));
 const RecoverIdCover = lazy(() => import('../pages/Authentication/RecoverIdCover'));
@@ -48,43 +50,71 @@ const routes = [
         path: '/finance',
         element: <Finance />,
     },
-    // crypto page
+    
     {
-        path: '/crypto',
-        element: <Crypto />,
-    },
-  
-    {
-        path: '/apps/notes',
+        path: '/notlar',
         element: <Notes />,
     },
     {
-        path: '/apps/contacts',
+        path: '/mukellefler',
         element: <Contacts />,
     },
     {
-        path: '/apps/mailbox',
-        element: <Mailbox />,
-    },
-    {
-        path: '/apps/invoice/list',
+        path: '/fatura/list',
         element: <List />,
     },
+    // {
+    //     path: '/apps/invoice/veri-yukleme',
+    //     element: <VeriUploadPage />,
+    // },
     {
-        path: '/apps/invoice/veri-yukleme',
-        element: <VeriUploadPage />,
-    },
-    {
-        path: '/apps/invoice/beyanname-sorgula',
+        path: '/ithalat/beyanname-sorgula',
         element: <BeyannameSorgula />,
     },
     {
-        path: '/apps/banka/list',
+        path: '/ihracat/beyanname-sorgula',
+        element: <BeyannameSorgula />,
+    },
+    {
+        path: '/fatura/veri-yukleme',
+        element: <MukelleflerList />,
+    },
+    {
+        path: 'fatura/veri-yukleme/gelen/:mukellefid',
+        element: <PdfViewerInBox />,
+    },
+    {
+        path: 'fatura/veri-yukleme/giden/:mukellefid',
+        element: <PdfViewerOutBox />,
+    },
+    {
+        path: 'fatura/gelen-fatura',
+        element: <GelenList />,
+    },
+    {
+        path: 'fatura/giden-fatura',
+        element: <GidenList />,
+    },
+    {
+        path: 'fatura/gelen-fatura/:id',
+        element: <GelenDetail />,
+    },
+    {
+        path: 'fatura/giden-fatura/:id',
+        element: <GidenDetail />,
+    },
+    
+    // {
+    //     path: '/fatura/beyanname-sorgula',
+    //     element: <BeyannameSorgula />,
+    // },
+    {
+        path: '/banka-entegrasyonu/liste',
         element: <List />,
     },
     // Apps page
     {
-        path: '/apps/gelen-dokumanlar',
+        path: '/gelen-dokumanlar',
         element: <Chat />,
     },
     {
@@ -101,7 +131,7 @@ const routes = [
         element: <Preview />,
     },
     {
-        path: '/apps/invoice/add',
+        path: '/fatura/ekle',
         element: <Add />,
     },
     {
@@ -109,15 +139,20 @@ const routes = [
         element: <Edit />,
     },
     {
-        path: '/apps/bank/preview',
+        path: '/banka-entegrasyonu',
         element: <Preview />,
     },
     {
-        path: '/apps/bank/add',
-        element: <Add />,
+        path: '/banka-entegrasyonu/ekstreler',
+        element: <Edit />,
     },
     {
-        path: '/apps/bank/edit',
+        path: '/banka-entegrasyonu/yeni-ekle',
+        element: <Add />,
+    },
+    
+    {
+        path: '/banka-entegrasyonu/bilgileri-guncelle',
         element: <Edit />,
     },
     // components page
@@ -125,11 +160,11 @@ const routes = [
 
     // Users page
     {
-        path: '/users/profile',
+        path: '/profil',
         element: <Profile />,
     },
     {
-        path: '/users/user-account-settings',
+        path: '/hesap-ayarlari',
         element: <AccountSetting />,
     },
     // pages
@@ -183,42 +218,22 @@ const routes = [
     },
     //Authentication
     {
-        path: '/auth/boxed-signin',
-        element: <LoginBoxed />,
-        layout: 'blank',
-    },
-    {
-        path: '/auth/boxed-signup',
-        element: <RegisterBoxed />,
-        layout: 'blank',
-    },
-    {
-        path: '/auth/boxed-lockscreen',
-        element: <UnlockBoxed />,
-        layout: 'blank',
-    },
-    {
-        path: '/auth/boxed-password-reset',
-        element: <RecoverIdBoxed />,
-        layout: 'blank',
-    },
-    {
-        path: '/auth/cover-login',
+        path: '/auth/giris-yap',
         element: <LoginCover />,
         layout: 'blank',
     },
     {
-        path: '/auth/cover-register',
+        path: '/auth/kayit-ol',
         element: <RegisterCover />,
         layout: 'blank',
     },
     {
-        path: '/auth/cover-lockscreen',
+        path: '/auth/kilit-ac',
         element: <UnlockCover />,
         layout: 'blank',
     },
     {
-        path: '/auth/cover-password-reset',
+        path: '/auth/sifremi-unuttum',
         element: <RecoverIdCover />,
         layout: 'blank',
     },
@@ -234,5 +249,6 @@ const routes = [
         layout: 'blank',
     },
 ];
+
 
 export { routes };

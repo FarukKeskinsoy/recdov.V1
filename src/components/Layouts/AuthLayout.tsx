@@ -10,7 +10,7 @@ import Sidebar from './Sidebar';
 import Portals from '../../components/Portals';
 import { useAuth } from '../../context/authentication.context';
 
-const DefaultLayout = ({ children }: PropsWithChildren) => {
+const AuthLayout = ({ children }: PropsWithChildren) => {
     const themeConfig = useSelector((state: IRootState) => state.themeConfig);
     const dispatch = useDispatch();
     const {isAuthenticated} =useAuth()
@@ -66,28 +66,13 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
                         </svg>
                     </div>
                 )}
-                <div className="fixed bottom-6 ltr:right-6 rtl:left-6 z-50">
-                    {showTopButton && (
-                        <button type="button" className="btn btn-outline-primary rounded-full p-2 animate-pulse bg-[#fafafa] dark:bg-[#060818] dark:hover:bg-primary" onClick={goToTop}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7l4-4m0 0l4 4m-4-4v18" />
-                            </svg>
-                        </button>
-                    )}
-                </div>
 
-                {/* BEGIN APP SETTING LAUNCHER */}
-                <Setting />
-                {/* END APP SETTING LAUNCHER */}
 
                 <div className={`${themeConfig.navbar} main-container text-black dark:text-white-dark min-h-screen`}>
                     {/* BEGIN SIDEBAR */}
-                    <Sidebar />
                     {/* END SIDEBAR */}
 
-                    <div className="main-content flex flex-col min-h-screen">
                         {/* BEGIN TOP NAVBAR */}
-                        <Header />
                         {/* END TOP NAVBAR */}
 
                         {/* BEGIN CONTENT AREA */}
@@ -99,12 +84,10 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
                         {/* BEGIN FOOTER */}
                         <Footer />
                         {/* END FOOTER */}
-                        <Portals />
                     </div>
                 </div>
-            </div>
         </App>
     );
 };
 
-export default DefaultLayout;
+export default AuthLayout;

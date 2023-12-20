@@ -1,7 +1,7 @@
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { toggleSidebar } from '../../store/themeConfigSlice';
 import AnimateHeight from 'react-animate-height';
 import { IRootState } from '../../store';
@@ -19,6 +19,8 @@ import IconMenuUsers from '../Icon/Menu/IconMenuUsers';
 import IconMenuPages from '../Icon/Menu/IconMenuPages';
 import IconMenuAuthentication from '../Icon/Menu/IconMenuAuthentication';
 import IconMenuDocumentation from '../Icon/Menu/IconMenuDocumentation';
+import { AccountBalance, CardTravel, Contacts, Facebook, ImportExportRounded, Inventory, Mail, Phone, ReceiptLong } from '@mui/icons-material';
+
 
 const Sidebar = () => {
     const [currentMenu, setCurrentMenu] = useState<string>('');
@@ -101,43 +103,17 @@ const Sidebar = () => {
                             <li className="nav-item">
                                 <ul>
                                     <li className="nav-item">
-                                        <NavLink to="/apps/gelen-dokumanlar" className="group">
+                                        <NavLink to="/gelen-dokumanlar" className="group">
                                             <div className="flex items-center">
                                             <IconMenuTodo className="group-hover:!text-primary shrink-0" />
                                                 <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Gelen Dökümanlar</span>
                                             </div>
                                         </NavLink>
                                     </li>
-                                    
-                                    <li className="nav-item">
-                                        <NavLink to="/apps/mailbox" className="group">
-                                            <div className="flex items-center">
-                                                <IconMenuMailbox className="group-hover:!text-primary shrink-0" />
-                                                <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">E-Posta</span>
-                                            </div>
-                                        </NavLink>
-                                    </li>
-                                    <li className="nav-item">
-                                        <NavLink to="/apps/notes" className="group">
-                                            <div className="flex items-center">
-                                                <IconMenuNotes className="group-hover:!text-primary shrink-0" />
-                                                <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Notlar</span>
-                                            </div>
-                                        </NavLink>
-                                    </li>
-                                    <li className="nav-item">
-                                        <NavLink to="/apps/contacts" className="group">
-                                            <div className="flex items-center">
-                                                <IconMenuContacts className="group-hover:!text-primary shrink-0" />
-                                                <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Mükellefler</span>
-                                            </div>
-                                        </NavLink>
-                                    </li>
-
                                     <li className="menu nav-item">
                                         <button type="button" className={`${currentMenu === 'invoice' ? 'active' : ''} nav-link group w-full`} onClick={() => toggleMenu('invoice')}>
                                             <div className="flex items-center">
-                                                <IconMenuInvoice className="group-hover:!text-primary shrink-0" />
+                                                <ReceiptLong className="group-hover:!text-primary shrink-0" />
                                                 <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Faturalar</span>
                                             </div>
 
@@ -149,25 +125,49 @@ const Sidebar = () => {
                                         <AnimateHeight duration={300} height={currentMenu === 'invoice' ? 'auto' : 0}>
                                             <ul className="sub-menu text-gray-500">
                                                 <li>
-                                                    <NavLink to="/apps/invoice/list">Fatura Listesi</NavLink>
+                                                    <NavLink to="/fatura/list">Fatura Listesi</NavLink>
                                                 </li>
                                                 <li>
-                                                    <NavLink to="/apps/invoice/veri-yukleme">Veri Aktarımı</NavLink>
+                                                    <NavLink to="/fatura/gelen-fatura">Gelen Fatura</NavLink>
                                                 </li>
                                                 <li>
-                                                    <NavLink to="/apps/invoice/beyanname-sorgula">Beyanname Sorgula</NavLink>
+                                                    <NavLink to="/fatura/giden-fatura">Giden Fatura</NavLink>
                                                 </li>
                                                 <li>
-                                                    <NavLink to="/apps/invoice/add">Yeni Oluştur</NavLink>
+                                                    <NavLink to="/fatura/veri-yukleme">Veri Aktarımı</NavLink>
+                                                </li>
+                                                {/* <li>
+                                                    <NavLink to="/fatura/beyanname-sorgula">Beyanname Sorgula</NavLink>
+                                                </li> */}
+                                                <li>
+                                                    <NavLink to="/fatura/ekle">Yeni Oluştur</NavLink>
                                                 </li>
 
                                             </ul>
                                         </AnimateHeight>
                                     </li>
+                                    <li className="nav-item">
+                                        <NavLink to="/notlar" className="group">
+                                            <div className="flex items-center">
+                                                <IconMenuNotes className="group-hover:!text-primary shrink-0" />
+                                                <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Notlar</span>
+                                            </div>
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink to="/mukellefler" className="group">
+                                            <div className="flex items-center">
+                                                <Contacts className="group-hover:!text-primary shrink-0" />
+                                                <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Mükellefler</span>
+                                            </div>
+                                        </NavLink>
+                                    </li>
+
+
                                     <li className="menu nav-item">
                                         <button type="button" className={`${currentMenu === 'banka' ? 'active' : ''} nav-link group w-full`} onClick={() => toggleMenu('banka')}>
                                             <div className="flex items-center">
-                                                <IconMenuInvoice className="group-hover:!text-primary shrink-0" />
+                                                <AccountBalance className="group-hover:!text-primary shrink-0" />
                                                 <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Banka Entegrasyonu</span>
                                             </div>
 
@@ -179,16 +179,16 @@ const Sidebar = () => {
                                         <AnimateHeight duration={300} height={currentMenu === 'banka' ? 'auto' : 0}>
                                             <ul className="sub-menu text-gray-500">
                                                 <li>
-                                                    <NavLink to="/apps/invoice/list">Liste</NavLink>
+                                                    <NavLink to="/banka-entegrasyonu">Bilgiler</NavLink>
                                                 </li>
                                                 <li>
-                                                    <NavLink to="/apps/invoice/list">Veri Aktarımı</NavLink>
+                                                    <NavLink to="/banka-entegrasyonu/ekstreler">Ekstreler</NavLink>
                                                 </li>
-                                                {/* <li>
-                                                    <NavLink to="/apps/invoice/preview">{t('preview')}</NavLink>
-                                                </li> */}
                                                 <li>
-                                                    <NavLink to="/apps/invoice/add">Yeni Oluştur</NavLink>
+                                                    <NavLink to="/banka-entegrasyonu/bilgileri-guncelle">Güncelleme</NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="/banka-entegrasyonu/yeni-ekle">Yeni Oluştur</NavLink>
                                                 </li>
 
                                             </ul>
@@ -201,14 +201,60 @@ const Sidebar = () => {
 
                             <h2 className="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
                                 <IconMinus className="w-4 h-5 flex-none hidden" />
-                                <span>{t('user_and_pages')}</span>
+                                <span>İthalat ve İhracat</span>
+                            </h2>
+
+                            <li className="menu nav-item">
+                                <button type="button" className={`${currentMenu === 'ithalat' ? 'active' : ''} nav-link group w-full`} onClick={() => toggleMenu('ithalat')}>
+                                    <div className="flex items-center">
+                                        <Inventory className="group-hover:!text-primary shrink-0" />
+                                        <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">İthalat</span>
+                                    </div>
+
+                                    <div className={currentMenu !== 'ithalat' ? 'rtl:rotate-90 -rotate-90' : ''}>
+                                        <IconCaretDown />
+                                    </div>
+                                </button>
+
+                                <AnimateHeight duration={300} height={currentMenu === 'ithalat' ? 'auto' : 0}>
+                                    <ul className="sub-menu text-gray-500">
+                                        <li>
+                                            <NavLink to="/ithalat/beyanname-sorgula">Beyanname Sorgulama</NavLink>
+                                        </li>
+                                    </ul>
+                                </AnimateHeight>
+                            </li>
+                            <li className="menu nav-item">
+                                <button type="button" className={`${currentMenu === 'ihracat' ? 'active' : ''} nav-link group w-full`} onClick={() => toggleMenu('ihracat')}>
+                                    <div className="flex items-center">
+                                        <CardTravel className="group-hover:!text-primary shrink-0" />
+                                        <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">İhracat</span>
+                                    </div>
+
+                                    <div className={currentMenu !== 'ihracat' ? 'rtl:rotate-90 -rotate-90' : ''}>
+                                        <IconCaretDown />
+                                    </div>
+                                </button>
+
+                                <AnimateHeight duration={300} height={currentMenu === 'ihracat' ? 'auto' : 0}>
+                                    <ul className="sub-menu text-gray-500">
+                                        <li>
+                                            <NavLink to="/ihracat/beyanname-sorgula">Beyanname Sorgulama</NavLink>
+                                        </li>
+                                    </ul>
+                                </AnimateHeight>
+                            </li>
+                            
+                            <h2 className="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
+                                <IconMinus className="w-4 h-5 flex-none hidden" />
+                                <span>Profil ve Sayfalar</span>
                             </h2>
 
                             <li className="menu nav-item">
                                 <button type="button" className={`${currentMenu === 'users' ? 'active' : ''} nav-link group w-full`} onClick={() => toggleMenu('users')}>
                                     <div className="flex items-center">
                                         <IconMenuUsers className="group-hover:!text-primary shrink-0" />
-                                        <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{t('users')}</span>
+                                        <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Profil</span>
                                     </div>
 
                                     <div className={currentMenu !== 'users' ? 'rtl:rotate-90 -rotate-90' : ''}>
@@ -219,10 +265,10 @@ const Sidebar = () => {
                                 <AnimateHeight duration={300} height={currentMenu === 'users' ? 'auto' : 0}>
                                     <ul className="sub-menu text-gray-500">
                                         <li>
-                                            <NavLink to="/users/profile">{t('Profil')}</NavLink>
+                                            <NavLink to="/profil">Profil</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="/users/user-account-settings">{t('account_settings')}</NavLink>
+                                            <NavLink to="/hesap-ayarlari">Hesap Ayarları</NavLink>
                                         </li>
                                     </ul>
                                 </AnimateHeight>
@@ -311,7 +357,7 @@ const Sidebar = () => {
                                 </AnimateHeight>
                             </li>
 
-                            <li className="menu nav-item">
+                            {/* <li className="menu nav-item">
                                 <button type="button" className={`${currentMenu === 'auth' ? 'active' : ''} nav-link group w-full`} onClick={() => toggleMenu('auth')}>
                                     <div className="flex items-center">
                                         <IconMenuAuthentication className="group-hover:!text-primary shrink-0" />
@@ -326,54 +372,66 @@ const Sidebar = () => {
                                 <AnimateHeight duration={300} height={currentMenu === 'auth' ? 'auto' : 0}>
                                     <ul className="sub-menu text-gray-500">
                                         <li>
-                                            <NavLink to="/auth/boxed-signin" target="_blank">
-                                                {t('login_boxed')}
+                                            <NavLink to="/auth/giris-yap">
+                                                Giriş Yap
                                             </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="/auth/boxed-signup" target="_blank">
-                                                {t('register_boxed')}
+                                            <NavLink to="/auth/kayit-ol">
+                                                Kayıt Ol
                                             </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="/auth/boxed-lockscreen" target="_blank">
-                                                {t('unlock_boxed')}
+                                            <NavLink to="/auth/kilit-ac">
+                                                Kilit Kaldır
                                             </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="/auth/boxed-password-reset" target="_blank">
-                                                {t('recover_id_boxed')}
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to="/auth/cover-login" target="_blank">
-                                                {t('login_cover')}
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to="/auth/cover-register" target="_blank">
-                                                {t('register_cover')}
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to="/auth/cover-lockscreen" target="_blank">
-                                                {t('unlock_cover')}
-                                            </NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to="/auth/cover-password-reset" target="_blank">
-                                                {t('recover_id_cover')}
+                                            <NavLink to="/auth/sifremi-unuttum">
+                                                Şifremi Unuttum
                                             </NavLink>
                                         </li>
                                     </ul>
                                 </AnimateHeight>
-                            </li>
+                            </li> */}
 
                             <h2 className="py-3 px-7 flex items-center uppercase font-extrabold bg-white-light/30 dark:bg-dark dark:bg-opacity-[0.08] -mx-4 mb-1">
                                 <IconMinus className="w-4 h-5 flex-none hidden" />
                                 <span>Destek</span>
                             </h2>
 
+                                <a
+                                className="py-3 px-7 flex items-center text-center website"
+                                    href='https://www.ustunbilgisayar.net/iletisim.html'
+                                    target="_blank"
+                                >Üstün Bilgi İşlem San. Ve Tic.Ltd.Şti.
+                                
+                                </a>
+                                <div
+                                    className='footer-buttons'
+                                >
+                                    <a
+                                        href='mailto:ustun@ustunbilgisayar.net'
+                                    >
+                                        <Mail
+                                            color="error"
+                                        />
+                                    </a>
+                                    <a href="tel:+90(362)4350176">
+                                        <Phone
+                                            color="warning"
+                                        />
+                                    </a>
+                                    <a 
+                                        target="_blank"
+                                        href="https://m.facebook.com/ustunbilgisayar.net"
+                                    >
+                                        <Facebook
+                                        color="primary"
+                                        />
+                                    </a>
+
+                                </div>
                             </ul>
                     </PerfectScrollbar>
                 </div>

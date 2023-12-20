@@ -23,7 +23,6 @@ const TextConverter = ({result}:documentProps) => {
 
 // Remove the first and last elements
 
-    console.log("c",result.Cari_Adı)
 
     
   return (

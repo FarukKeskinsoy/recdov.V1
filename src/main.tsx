@@ -17,14 +17,18 @@ import router from './router/index';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store/index';
+import { AuthProvider } from './context/authentication.context';
+import ApplicationHolder from './pages/ApplicationHolder';
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <Suspense>
-            <Provider store={store}>
-                <RouterProvider router={router} />
-            </Provider>
+            <AuthProvider>
+                <Provider store={store}>
+                        <ApplicationHolder/>
+                </Provider>
+            </AuthProvider>
         </Suspense>
     </React.StrictMode>
 );

@@ -1,6 +1,6 @@
 export const mukellefList = [
     {
-        id: 1,
+        id: "1",
         adi:"",
         soyadi:"",
         unvani:"AKKURT GIDA BESİCİLİK",
@@ -34,7 +34,7 @@ export const mukellefList = [
         basitOnayTc:"",
     },
     {
-        id: 2,
+        id: "2",
         adi:"",
         soyadi:"",
         unvani:"CODEAD YAZILIM",

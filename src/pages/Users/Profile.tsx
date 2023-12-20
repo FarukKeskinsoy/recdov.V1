@@ -12,12 +12,17 @@ import IconPhone from '../../components/Icon/IconPhone';
 import IconTwitter from '../../components/Icon/IconTwitter';
 import IconDribbble from '../../components/Icon/IconDribbble';
 import IconGithub from '../../components/Icon/IconGithub';
+import { auth } from '../../firebase/firebase';
+import { useAuth } from '../../context/authentication.context';
+import IconUser from '../../components/Icon/IconUser';
 
 const Profile = () => {
+    const {userData} =useAuth()
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setPageTitle('Profile'));
+        dispatch(setPageTitle(`${userData?.email?.charAt(0).toUpperCase()+userData?.email?.charAt(1).toUpperCase()||"Profil"}`));
     });
+
     const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
     return (
         <div>
@@ -36,58 +41,45 @@ const Profile = () => {
                     <div className="panel">
                         <div className="flex items-center justify-between mb-5">
                             <h5 className="font-semibold text-lg dark:text-white-light">Profil</h5>
-                            <Link to="/users/user-account-settings" className="ltr:ml-auto rtl:mr-auto btn btn-primary p-2 rounded-full">
+                            <Link to="/hesap-ayarlari" className="ltr:ml-auto rtl:mr-auto btn btn-primary p-2 rounded-full">
                                 <IconPencilPaper />
                             </Link>
                         </div>
                         <div className="mb-5">
                             <div className="flex flex-col justify-center items-center">
-                                <img src="/assets/images/profile-34.jpeg" alt="img" className="w-24 h-24 rounded-full object-cover  mb-5" />
-                                <p className="font-semibold text-primary text-xl">Faruk KESKİNSOY</p>
+                            {auth.currentUser?.photoURL?<img className="w-9 h-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="/assets/images/user-profile.jpeg" alt="userProfile" />:
+                                <div className="border border-gray-300 dark:border-gray-800 rounded-full p-2 ltr:mr-2 rtl:ml-2">
+                                <IconUser className="w-4.5 h-4.5" />
+                                </div>}
+                                <p className="font-semibold text-primary text-xl">{userData?.uName?userData?.uName:<small><i>kullanıcı adı belirtilmemiş</i></small>} {userData.uLname}</p>
                             </div>
-                            <ul className="mt-5 flex flex-col max-w-[160px] m-auto space-y-4 font-semibold text-white-dark">
+                            <ul className="mt-5 flex flex-col m-auto space-y-4 font-semibold text-white-dark">
                                 <li className="flex items-center gap-2">
                                     <IconCoffee className="shrink-0" />
-                                    Web Developer
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <IconCalendar className="shrink-0" />
-                                    OCA 17, 1989
+                                    {userData?.field?userData?.field:<small><i>çalışma alanı belirtilmemiş</i></small>}
                                 </li>
                                 <li className="flex items-center gap-2">
                                     <IconMapPin className="shrink-0" />
-                                    BURSA, TR
+                                    {userData?.region?userData?.region:<small><i>ilçe blirtilmemiş</i></small>}
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <IconMapPin className="shrink-0" />
+                                    {userData?.city?userData?.city:<small><i>il blirtilmemiş</i></small>}
                                 </li>
                                 <li>
                                     <button className="flex items-center gap-2">
                                         <IconMail className="w-5 h-5 shrink-0" />
-                                        <span className="text-primary truncate">farukkeskinsoy88@gmail.com</span>
+                                        <span className="text-primary truncate">{userData?.email}</span>
                                     </button>
                                 </li>
                                 <li className="flex items-center gap-2">
                                     <IconPhone />
                                     <span className="whitespace-nowrap" dir="ltr">
-                                        +1 (530) 5308652100
+                                        {userData?.phone?userData?.phone:<small><i>telefon belirtilmemiş</i></small>}
                                     </span>
                                 </li>
                             </ul>
-                            <ul className="mt-7 flex items-center justify-center gap-2">
-                                <li>
-                                    <button className="btn btn-info flex items-center justify-center rounded-full w-10 h-10 p-0">
-                                        <IconTwitter className="w-5 h-5" />
-                                    </button>
-                                </li>
-                                <li>
-                                    <button className="btn btn-danger flex items-center justify-center rounded-full w-10 h-10 p-0">
-                                        <IconDribbble />
-                                    </button>
-                                </li>
-                                <li>
-                                    <button className="btn btn-dark flex items-center justify-center rounded-full w-10 h-10 p-0">
-                                        <IconGithub />
-                                    </button>
-                                </li>
-                            </ul>
+                            
                         </div>
                     </div>
                     <div className="panel lg:col-span-2 xl:col-span-3">

@@ -11,7 +11,7 @@ const defaultState = {
     rtlClass: 'ltr',
     animation: '',
     navbar: 'navbar-sticky',
-    locale: 'en',
+    locale: 'tr',
     sidebar: false,
     pageTitle: '',
     languageList: [

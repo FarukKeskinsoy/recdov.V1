@@ -22,7 +22,7 @@ import IconX from '../../components/Icon/IconX';
 const Notes = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setPageTitle('Notes'));
+        dispatch(setPageTitle('Notlar'));
     });
     const [notesList, setNoteList] = useState([
         {

@@ -1,0 +1,38 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+
+//colors
+$red: #E1332D;
+$white: #fff;
+.auth-buttons{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1em;
+    text-align: center; 
+    
+  }
+  
+.loading-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  overflow: hidden !important;
+  .loading-circle {
+    color: white;
+    &.big {
+      position: absolute;
+      color: rgba($color: $red, $alpha: .2) ;
+    }
+    &.large {
+      color:rgba($color: #4261ee, $alpha: .3);
+    }
+    &.small {
+      color: rgba($color: #ffc115, $alpha: .3);
+    }
+  }
+}
