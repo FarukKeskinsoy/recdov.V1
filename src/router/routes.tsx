@@ -7,6 +7,7 @@ import GelenList from '../pages/Apps/Invoice/GelenList';
 import GidenList from '../pages/Apps/Invoice/GidenList';
 import GelenDetail from '../pages/Apps/Invoice/GelenDetail';
 import GidenDetail from '../pages/Apps/Invoice/GidenDetail';
+import ContactDetail from '../pages/Apps/ContactDetail';
 const Index = lazy(() => import('../pages/Index'));
 const Finance = lazy(() => import('../pages/Finance'));
 const Crypto = lazy(() => import('../pages/Crypto'));
@@ -58,6 +59,10 @@ const routes = [
     {
         path: '/mukellefler',
         element: <Contacts />,
+    },
+    {
+        path: '/mukellefler/:vktc',
+        element: <ContactDetail />,
     },
     {
         path: '/fatura/list',

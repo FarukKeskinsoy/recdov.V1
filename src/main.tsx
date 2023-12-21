@@ -19,15 +19,18 @@ import { Provider } from 'react-redux';
 import store from './store/index';
 import { AuthProvider } from './context/authentication.context';
 import ApplicationHolder from './pages/ApplicationHolder';
+import { MukellefProvider } from './context/mukellef.context';
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <Suspense>
             <AuthProvider>
-                <Provider store={store}>
-                        <ApplicationHolder/>
-                </Provider>
+                <MukellefProvider>
+                    <Provider store={store}>
+                            <ApplicationHolder/>
+                    </Provider>
+                </MukellefProvider>
             </AuthProvider>
         </Suspense>
     </React.StrictMode>

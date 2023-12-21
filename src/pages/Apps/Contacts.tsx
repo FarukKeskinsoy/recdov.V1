@@ -14,14 +14,64 @@ import IconLinkedin from '../../components/Icon/IconLinkedin';
 import IconTwitter from '../../components/Icon/IconTwitter';
 import IconX from '../../components/Icon/IconX';
 import {mukellefExtraInfo , iller , mukellefList} from "../../rawData/mukellefs.js"
+import { useMukellef } from '../../context/mukellef.context';
+import { nacelist } from '../../rawData/nace';
+import { vergidaireleri } from '../../rawData/vergiDaireleri';
+import { illers } from '../../rawData/iller';
+import { CircularProgress } from '@mui/material';
+import { CollectionReference, collection, doc, getDocs } from 'firebase/firestore';
+import { auth, db } from '../../firebase/firebase';
+import { useNavigate } from 'react-router-dom';
+import { Launch } from '@mui/icons-material';
 
+interface Mukellef {
+    // Assuming that adresler is an array of Address objects
+    id?:string;
+    yetkilismsmmm?: string;
+    smsmmmsozlesmetarihi?:string;
+    smsmmmsozlesmeno?:string;
+    yetkiliymm?:string;
+    tckimlikno?:string;
+    kurulustarihi?:string;
+    kapanıstarihi?:string;
+    faaliyetkodu?:string;
+    faaliyetadi?:string;
+    soyadiunvani?:string;
+    adi?:string;
+    vergidairesikodu?:string;
+    vergidairesi?:string;
+    vergidairesiililce?:string;
+    vergikimlikno?:string;
+    ticaretsicilno?:string;
+    tesciltarihi?:string;
+    tescilkurulusyeri?:string;
+    kdvmukellefiyeti?:string;
+    kdvvergidairesikodu?:string;
+    kdvvergidairesi?:string;
+    kdvvergidairesiililce?:string;
+    mersisno?:string;
+    taahhutedilensermaye?:string;
+    odenmissermaye?:string;
+    baglıoldugusosyalguvenlikkurumu?:string;
+    sosyalguvenlikkurumunumarasi?:string;
+    baglıoldugumeslekitesekkul?:string;
+    meslekitesekkulnumarasi?:string;
+    basitusul?:string;
+    basitusulfaaliyetkodu?:string;
+    odatemsilcisibilgileri?:object;
+    eposta?:string;
+    phone?:string;
+}
   
 const Contacts = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setPageTitle('Contacts'));
+        dispatch(setPageTitle('Mükellefler'));
     });
+    const {newMukellef,adding,handleAddNewMukellef,changed,handleNewMukellefFormChange, handleNewMukellefFormInnerChange} = useMukellef()
     const [addContactModal, setAddContactModal] = useState<any>(false);
+
+  
 
     const [value, setValue] = useState<any>('list');
     const [defaultParams] = useState({
@@ -62,318 +112,63 @@ const Contacts = () => {
         phone:"",
         email:""
     });
-
+    const [mymukellefs, setMyMukellefs] = useState<any>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    useEffect(() => {
+        let controller = new AbortController();
+    
+        const fetchData = async () => {
+            const thisCred=auth.currentUser;
+            const userDocPath = thisCred?.uid ? `Users/${thisCred.uid}/Mukellefler` : '';
+            const refUser: CollectionReference = collection(db, userDocPath);
+    
+          try {
+            const logQuerySnapshot = await getDocs(refUser);
+    
+            var list:object[]= [];
+            logQuerySnapshot.forEach((doc) => {
+              list.unshift({ ...doc.data(), id: doc.id } as Mukellef);
+            });
+    
+            setMyMukellefs(list);
+            setFilteredItems(list)
+            setLoading(false);
+          } catch (error) {
+            setLoading(false);
+            alert("An error occurred");
+            console.error("Error fetching user data:", error);
+          }
+        };
+    
+        fetchData();
+    
+        return () => controller?.abort();
+      }, [changed]); // Dependency array includes userid and updating to trigger the effect when they change
+    
     const [params, setParams] = useState<any>(JSON.parse(JSON.stringify(defaultParams)));
 
-    const changeValue = (e: any) => {
-        const { value, id } = e.target;
-        setParams({ ...params, [id]: value });
-    };
-
-    const userIdToExtraInfo:{} = mukellefExtraInfo.reduce((map:any, extraInfo:any) => {
-        map[extraInfo.id] = extraInfo;
-        return map;
-    }, {});
     
     // Combine the arrays based on userId
-    const combinedArray = mukellefList.map((mukellef:any) => ({
+    const combinedArray = mymukellefs.map((mukellef:any) => ({
         ...mukellef,
         //...userIdToExtraInfo[mukellef.id] || {},
     }));
     const [search, setSearch] = useState<any>('');
-    const [contactList] = useState<any>([
-        {
-            id: 1,
-            path: 'profile-35.png',
-            name: 'Faruk Keskin',
-            role: 'Web Developer',
-            email: 'alan@mail.com',
-            location: 'Bursa, TURKİYE',
-            phone: '+1 202 555 0197',
-            posts: 25,
-            followers: '5K',
-            following: 500,
-        },
-        {
-            id: 2,
-            path: 'profile-35.png',
-            name: 'Linda Nelson',
-            role: 'Web Designer',
-            email: 'linda@mail.com',
-            location: 'Sydney, Australia',
-            phone: '+1 202 555 0170',
-            posts: 25,
-            followers: '21.5K',
-            following: 350,
-        },
-        {
-            id: 3,
-            path: 'profile-35.png',
-            name: 'Lila Perry',
-            role: 'UX/UI Designer',
-            email: 'lila@mail.com',
-            location: 'Miami, USA',
-            phone: '+1 202 555 0105',
-            posts: 20,
-            followers: '21.5K',
-            following: 350,
-        },
-        {
-            id: 4,
-            path: 'profile-35.png',
-            name: 'Andy King',
-            role: 'Project Lead',
-            email: 'andy@mail.com',
-            location: 'Tokyo, Japan',
-            phone: '+1 202 555 0194',
-            posts: 25,
-            followers: '21.5K',
-            following: 300,
-        },
-        {
-            id: 5,
-            path: 'profile-35.png',
-            name: 'Jesse Cory',
-            role: 'Web Developer',
-            email: 'jesse@mail.com',
-            location: 'Edinburgh, UK',
-            phone: '+1 202 555 0161',
-            posts: 30,
-            followers: '20K',
-            following: 350,
-        },
-        {
-            id: 6,
-            path: 'profile-35.png',
-            name: 'Xavier',
-            role: 'UX/UI Designer',
-            email: 'xavier@mail.com',
-            location: 'New York, USA',
-            phone: '+1 202 555 0155',
-            posts: 25,
-            followers: '21.5K',
-            following: 350,
-        },
-        {
-            id: 7,
-            path: 'profile-35.png',
-            name: 'Susan',
-            role: 'Project Manager',
-            email: 'susan@mail.com',
-            location: 'Miami, USA',
-            phone: '+1 202 555 0118',
-            posts: 40,
-            followers: '21.5K',
-            following: 350,
-        },
-        {
-            id: 8,
-            path: 'profile-35.png',
-            name: 'Raci Lopez',
-            role: 'Web Developer',
-            email: 'traci@mail.com',
-            location: 'Edinburgh, UK',
-            phone: '+1 202 555 0135',
-            posts: 25,
-            followers: '21.5K',
-            following: 350,
-        },
-        {
-            id: 9,
-            path: 'profile-35.png',
-            name: 'Steven Mendoza',
-            role: 'HR',
-            email: 'sokol@verizon.net',
-            location: 'Monrovia, US',
-            phone: '+1 202 555 0100',
-            posts: 40,
-            followers: '21.8K',
-            following: 300,
-        },
-        {
-            id: 10,
-            path: 'profile-35.png',
-            name: 'James Cantrell',
-            role: 'Web Developer',
-            email: 'sravani@comcast.net',
-            location: 'Michigan, US',
-            phone: '+1 202 555 0134',
-            posts: 100,
-            followers: '28K',
-            following: 520,
-        },
-        {
-            id: 11,
-            path: 'profile-35.png',
-            name: 'Reginald Brown',
-            role: 'Web Designer',
-            email: 'drhyde@gmail.com',
-            location: 'Entrimo, Spain',
-            phone: '+1 202 555 0153',
-            posts: 35,
-            followers: '25K',
-            following: 500,
-        },
-        {
-            id: 12,
-            path: 'profile-35.png',
-            name: 'Stacey Smith',
-            role: 'Chief technology officer',
-            email: 'maikelnai@optonline.net',
-            location: 'Lublin, Poland',
-            phone: '+1 202 555 0115',
-            posts: 21,
-            followers: '5K',
-            following: 200,
-        },
-    ]);
+    
 
-    const [filteredItems, setFilteredItems] = useState<any>(combinedArray);
+    const [filteredItems, setFilteredItems] = useState<any>(mymukellefs);
 
     useEffect(() => {
         setFilteredItems(() => {
-            return combinedArray.filter((item: any) => {
-                return String(item.unvani).toLowerCase().includes(search.toLowerCase());
+            return mymukellefs.filter((item: any) => {
+                return String(item.soyadiunvani).toLowerCase().includes(search.toLowerCase());
             });
         });
     }, [search]);
 
-    const saveUser = () => {
-        if (!params.adi) {
-            showMessage('İsim girmek zorunludur.', 'error');
-            return true;
-        }
-        if (!params.phone) {
-            showMessage('Telefon numarası zorunludur.', 'error');
-            return true;
-        }
-        if (!params.tc && !params.vergiKimlikNo) {
-            showMessage('TC veya VkN gereklidir', 'error');
-            return true;
-        }
-        if (!params.vergiililce) {
-            showMessage('Vergi Dairesi için şehir seçimi zorunludur', 'error');
-            return true;
-        }
 
-        if (params.id) {
-            //update user
-            let user: any = filteredItems.find((d: any) => d.id === params.id);
-            user.adi = params.adi;
-            user.soyadi = params.soyadi;
-            user.email = params.email;
-            user.phone = params.phone;
-            user.unvani=params.unvani;
-            user.yetkili=params.yetkili;
-            user.tc=params.tc;
-            user.kurulusTarihi=params.kurulusTarihi;
-            user.kapanısTarihi=params.kapanısTarihi;
-            user.faaliyetKodu=params.faaliyetKodu;
-            user.faaliyetAdi=params.faaliyetAdi;
-            user.vergiDairesiKodu=params.vergiDairesiKodu;
-            user.vergiDairesi=params.vergiDairesi;
-            user.vergiililce=params.vergiililce;
-            user.vergiKimlikNo=params.vergiKimlikNo;
-            user.ticSicilNo=params.ticSicilNo;
-            user.tescilTarihi=params.tescilTarihi;
-            user.tescilYeri=params.tescilYeri;
-            user.kdvMukellefi=params.kdvMukellefi;
-            user.kdvVergiDairesiKodu=params.kdvVergiDairesiKodu;
-            user.kdvVergiDairesi=params.kdvVergiDairesi;
-            user.kdvVergiDairesiililce=params.kdvVergiDairesiililce;
-            user.mersisNo=params.mersisNo;
-            user.taahhütEdilensermaye=params.taahhütEdilensermaye;
-            user.odenmisSermaye=params.odenmisSermaye;
-            user.bagliSosyalGuvKur=params.bagliSosyalGuvKur;
-            user.sosGuvKurNo=params.sosGuvKurNo;
-            user.bagliMesTes=params.bagliMesTes;
-            user.mesTesNo=params.mesTesNo;
-            user.basitUsulFaaliyetKodu=params.basitUsulFaaliyetKodu;
-            user.basitOnayAdi=params.basitOnayAdi;
-            user.basitOnaySoyadi=params.basitOnaySoyadi;
-            user.basitOnayTc=params.basitOnayTc;
-            user.isim=params.isim;
-            user.soyisim=params.soyisim;
-        } else {
-            //add user
-            let maxUserId = filteredItems.length ? filteredItems.reduce((max: any, character: any) => (character.id > max ? character.id : max), filteredItems[0].id) : 0;
+let navigate=useNavigate()
 
-            let user = {
-                id: maxUserId + 1,
-                adi: params.name,
-                email: params.email,
-                phone: params.phone,
-                soyadi : params.soyadi,
-                unvani:params.unvani,
-                yetkili:params.yetkili,
-                tc:params.tc,
-                kurulusTarihi:params.kurulusTarihi,
-                kapanısTarihi:params.kapanısTarihi,
-                faaliyetKodu:params.faaliyetKodu,
-                faaliyetAdi:params.faaliyetAdi,
-                vergiDairesiKodu:params.vergiDairesiKodu,
-                vergiDairesi:params.vergiDairesi,
-                vergiililce:params.vergiililce,
-                vergiKimlikNo:params.vergiKimlikNo,
-                ticSicilNo:params.ticSicilNo,
-                tescilTarihi:params.tescilTarihi,
-                tescilYeri:params.tescilYeri,
-                kdvMukellefi:params.kdvMukellefi,
-                kdvVergiDairesiKodu:params.kdvVergiDairesiKodu,
-                kdvVergiDairesi:params.kdvVergiDairesi,
-                kdvVergiDairesiililce:params.kdvVergiDairesiililce,
-                mersisNo:params.mersisNo,
-                taahhütEdilensermaye:params.taahhütEdilensermaye,
-                odenmisSermaye:params.odenmisSermaye,
-                bagliSosyalGuvKur:params.bagliSosyalGuvKur,
-                sosGuvKurNo:params.sosGuvKurNo,
-                bagliMesTes:params.bagliMesTes,
-                mesTesNo:params.mesTesNo,
-                basitUsulFaaliyetKodu:params.basitUsulFaaliyetKodu,
-                basitOnayAdi:params.basitOnayAdi,
-                basitOnaySoyadi:params.basitOnaySoyadi,
-                basitOnayTc:params.basitOnayTc,
-                isim:params.isim,
-                soyisim:params.soyisim,
-                
-            };
-            filteredItems.splice(0, 0, user);
-            //   searchContacts();
-        }
-
-        showMessage('Kullanıcı başarıyla kaydedildi.');
-        setAddContactModal(false);
-    };
-
-    const editUser = (user: any = null) => {
-        const json = JSON.parse(JSON.stringify(defaultParams));
-        setParams(json);
-        if (user) {
-            let json1 = JSON.parse(JSON.stringify(user));
-            setParams(json1);
-        }
-        setAddContactModal(true);
-    };
-
-    const deleteUser = (user: any = null) => {
-        setFilteredItems(filteredItems.filter((d: any) => d.id !== user.id));
-        showMessage('Kullanıcı başarıyla silindi.');
-    };
-
-    const showMessage = (msg = '', type = 'success') => {
-        const toast: any = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000,
-            customClass: { container: 'toast' },
-        });
-        toast.fire({
-            icon: type,
-            title: msg,
-            padding: '10px 20px',
-        });
-    };
 
     return (
         <div>
@@ -382,7 +177,7 @@ const Contacts = () => {
                 <div className="flex sm:flex-row flex-col sm:items-center sm:gap-3 gap-4 w-full sm:w-auto">
                     <div className="flex gap-3">
                         <div>
-                            <button type="button" className="btn btn-primary" onClick={() => editUser()}>
+                            <button type="button" className="btn btn-primary" onClick={() => setAddContactModal(true)}>
                                 <IconUserPlus className="ltr:mr-2 rtl:ml-2" />
                                 Mükellef Ekle
                             </button>
@@ -392,11 +187,11 @@ const Contacts = () => {
                                 <IconListCheck />
                             </button>
                         </div>
-                        <div>
+                        {/* <div>
                             <button type="button" className={`btn btn-outline-primary p-2 ${value === 'grid' && 'bg-primary text-white'}`} onClick={() => setValue('grid')}>
                                 <IconLayoutGrid />
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="relative">
                         <input type="text" placeholder="mükellef ara" className="form-input py-2 ltr:pr-11 rtl:pl-11 peer" value={search} onChange={(e) => setSearch(e.target.value)} />
@@ -420,36 +215,29 @@ const Contacts = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredItems.map((contact: any) => {
+                                {filteredItems.map((contact: Mukellef,idx:number) => {
                                     return (
-                                        <tr key={contact.id}>
+                                        <tr key={idx}>
                                             <td>
                                                 <div className="flex items-center w-max">
-                                                    {contact.path && (
-                                                        <div className="w-max">
-                                                            <img src={`/assets/images/${contact.path}`} className="h-8 w-8 rounded-full object-cover ltr:mr-2 rtl:ml-2" alt="avatar" />
-                                                        </div>
-                                                    )}
-                                                    {!contact.path && contact.name && (
-                                                        <div className="grid place-content-center h-8 w-8 ltr:mr-2 rtl:ml-2 rounded-full bg-primary text-white text-sm font-semibold"></div>
-                                                    )}
-                                                    {!contact.path && !contact.name && (
                                                         <div className="border border-gray-300 dark:border-gray-800 rounded-full p-2 ltr:mr-2 rtl:ml-2">
                                                             <IconUser className="w-4.5 h-4.5" />
                                                         </div>
-                                                    )}
-                                                    <div>{contact.adi||contact.unvani}</div>
+                                                    
+                                                    <div>{contact.soyadiunvani || contact.adi}</div>
                                                 </div>
                                             </td>
-                                            <td>{contact.email}</td>
-                                            <td className="whitespace-nowrap">{contact.vergiililce}</td>
+                                            <td>{contact.eposta}</td>
+                                            <td className="whitespace-nowrap">{contact.vergidairesiililce}</td>
                                             <td className="whitespace-nowrap">{contact.phone}</td>
                                             <td>
                                                 <div className="flex gap-4 items-center justify-center">
-                                                    <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => editUser(contact)}>
-                                                        Düzenle
+                                                    <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => navigate(`${contact.id}`)}>
+                                                        <Launch
+                                                        style={{fontSize:16}}
+                                                        />
                                                     </button>
-                                                    <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => deleteUser(contact)}>
+                                                    <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => console.log("first")}>
                                                         Sil
                                                     </button>
                                                 </div>
@@ -463,7 +251,7 @@ const Contacts = () => {
                 </div>
             )}
 
-            {value === 'grid' && (
+            {/* {value === 'grid' && (
                 <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 mt-5 w-full">
                     {filteredItems.map((contact: any) => {
                         return (
@@ -539,11 +327,11 @@ const Contacts = () => {
                                         </div>
                                     </div>
                                     <div className="mt-6 flex gap-4 absolute bottom-0 w-full ltr:left-0 rtl:right-0 p-6">
-                                        <button type="button" className="btn btn-outline-primary w-1/2" onClick={() => editUser(contact)}>
-                                            Edit
+                                        <button type="button" className="btn btn-outline-primary w-1/2" onClick={() => console.log("first")}>
+                                            Düzenle
                                         </button>
-                                        <button type="button" className="btn btn-outline-danger w-1/2" onClick={() => deleteUser(contact)}>
-                                            Delete
+                                        <button type="button" className="btn btn-outline-danger w-1/2" onClick={() => "deleteUser(contact)"}>
+                                            Sil
                                         </button>
                                     </div>
                                 </div>
@@ -551,14 +339,15 @@ const Contacts = () => {
                         );
                     })}
                 </div>
-            )}
+            )} */}
 
             <Transition appear show={addContactModal} as={Fragment}>
                 <Dialog as="div" open={addContactModal} onClose={() => setAddContactModal(false)} className="relative z-[51]">
                     <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
                         <div className="fixed inset-0 bg-[black]/60" />
                     </Transition.Child>
-                    <div className="fixed inset-0 overflow-y-auto">
+                    <div className="fixed inset-0 overflow-y-auto rd">
+                        
                         <div className="flex min-h-full items-center justify-center px-4 py-8">
                             <Transition.Child
                                 as={Fragment}
@@ -581,62 +370,534 @@ const Contacts = () => {
                                         {params.id ? 'Düzenle' : 'Mükellef Ekle'}
                                     </div>
                                     <div className="p-5">
-                                        <form>
+                                        <form
+                                        
+                                        >
+
+                                            {adding&&<div className="uploading">
+                                            <CircularProgress
+                                                className='proggress'
+                                            />
+                                        </div>}
                                             <div className="mb-5">
-                                                <label htmlFor="name">İsim</label>
-                                                <input 
-                                                    id="adi"
+                                                <label htmlFor="soyadiunvani">Soyadı / Ünvanı</label>
+                                                <input
+                                                    id="soyadiunvani"
                                                     type="text"
-                                                    placeholder="İsim giriniz"
+                                                    name="soyadiunvani"
+                                                    placeholder="Ünvan / Soyad giriniz"
                                                     className="form-input"
-                                                    value={params.adi}
-                                                    onChange={(e) => changeValue(e)}
+                                                    required
+                                                    value={newMukellef?.soyadiunvani}
+                                                    onChange={handleNewMukellefFormChange}
                                                 />
                                             </div>
                                             <div className="mb-5">
-                                                <label htmlFor="name">TC Kimlik Numarası</label>
-                                                <input id="tc" type="text" placeholder="TC giriniz" className="form-input" value={params.tc} onChange={(e) => changeValue(e)} />
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="name">VKN</label>
-                                                <input id="vergiKimlikNo" type="text" placeholder="VKN giriniz" className="form-input" value={params.vergiKimlikNo} onChange={(e) => changeValue(e)} />
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="email">E-Posta</label>
-                                                <input id="email" type="email" placeholder="E-Posta giriniz" className="form-input" value={params.email} onChange={(e) => changeValue(e)} />
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="number">Telefon</label>
-                                                <input id="phone" type="text" placeholder="telefon numarası" className="form-input" value={params.phone} onChange={(e) => changeValue(e)} />
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="occupation">Çalışma Alanı</label>
-                                                <input id="faaliyetAdi" type="text" placeholder="Alan" className="form-input" value={params.faaliyetAdi} onChange={(e) => changeValue(e)} />
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="address">Vergi Dairesi İl</label>
-                                                <select
-                                                    id="vergiililce"
-                                                    placeholder="adres giriniz"
+                                                <label htmlFor="adi">Adı</label>
+                                                <input
+                                                    id="adi"
+                                                    type="text"
+                                                    name="adi"
+                                                    placeholder="İsim giriniz"
                                                     className="form-input"
-                                                    value={params.vergiililce}
-                                                    onChange={(e) => changeValue(e)}
+                                                    value={newMukellef?.adi}
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+
+                                            <div className="mb-5">
+                                                <label htmlFor="vergidairesi">Vergi Dairesi</label>
+                                                <select
+                                                    id="vergidairesi"
+                                                    placeholder="vergi dairesi"
+                                                    className="form-input"
+                                                    name='vergidairesi'
+                                                    required
+                                                    value={newMukellef?.vergidairesi}
+                                                    onChange={handleNewMukellefFormChange}
                                                 >
-                                                       <option value="" disabled selected>Şehir Seçiniz</option>
-                                                       {iller.map((i,idx)=>{
+                                                       <option value="" disabled >Vergi Dairesi</option>
+                                                       {vergidaireleri.map((i,idx)=>{
                                                         return(
-                                                            <option key={idx} value={i}>{i}</option>
+                                                            <option key={idx} value={i.VERGİ_DAİRESİ_ADI}>{i.VERGİ_DAİRESİ_ADI}</option>
                                                         )
                                                        })}
-
- 
                                                 </select>
                                             </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="vergidairesikodu">Vergi Dairesi Kodu</label>
+                                                <select
+                                                    id="vergidairesikodu"
+                                                    placeholder="vergi dairesi kodu"
+                                                    className="form-input"
+                                                    name='vergidairesikodu'
+                                                    required
+                                                    value={newMukellef?.vergidairesikodu}
+                                                    onChange={handleNewMukellefFormChange}
+                                                >
+                                                       <option value="" disabled>Vergi Dairesi Kodu</option>
+                                                       {vergidaireleri.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.VD_KODU}>{i.VD_KODU}</option>
+                                                        )
+                                                       })}
+                                                </select>
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="vergidairesiililce">Vergi Dairesi İl/ İlçe</label>
+                                                <select
+                                                    id="vergidairesiililce"
+                                                    placeholder="vergi dairesi il ilçe"
+                                                    className="form-input"
+                                                    name='vergidairesiililce'
+                                                    value={newMukellef?.vergidairesiililce}
+                                                    onChange={handleNewMukellefFormChange}
+                                                >
+                                                       <option value="" disabled>Vergi Dairesi İl İlçe</option>
+                                                       {vergidaireleri.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.İLİ}>{i.İLİ}</option>
+                                                        )
+                                                       })}
+                                                </select>
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="vergiKimlikNo">Vergi Kimlik Numarası</label>
+                                                <input 
+                                                    id="vergiKimlikNo"
+                                                    type="text"
+                                                    required
+                                                    placeholder="VKN giriniz"
+                                                    className="form-input" 
+                                                    name='vergikimlikno'
+                                                    value={newMukellef?.vergikimlikno} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="faaliyetkodu">Faaliyet Kodu</label>
+                                                <select
+                                                    name="faaliyetkodu"
+                                                    id='region'
+                                                    className="form-input"
+                                                    placeholder='faaliyet kodu'
+                                                    onChange={handleNewMukellefFormChange}
+                                                    //defaultValue={ne?.region}
+                                                    value={newMukellef?.faaliyetkodu}
+                                                >
+                                                    <option value="" disabled>faaliyet kodu</option>
+
+                                                    {nacelist.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.dc_NACE_KODU}>{i?.dc_NACE_KODU.replace(/\./g, "")}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                                
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="faaliyetadi">Faaliyet Adı</label>
+                                                <select
+                                                    name="faaliyetadi"
+                                                    id='region'
+                                                    className="form-input"
+                                                    placeholder='faaliyet adi'
+                                                    onChange={handleNewMukellefFormChange}
+                                                    //defaultValue={ne?.region}
+                                                    value={newMukellef?.faaliyetadi}
+                                                >
+                                                    <option value="" disabled>faaliyet adı</option>
+
+                                                    {nacelist.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.dc_NACE_BASLIK}>{i?.dc_NACE_BASLIK}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                                
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="baglıoldugumeslekitesekkul">Bağlı Olduğu Mesleki Teşekkül</label>
+                                                <select
+                                                    disabled
+                                                    id="baglıoldugumeslekitesekkul"
+                                                    placeholder="mesleki teşekkül"
+                                                    className="form-input"
+                                                    name='baglıoldugumeslekitesekkul'
+                                                    value={newMukellef?.baglıoldugumeslekitesekkul}
+                                                    onChange={handleNewMukellefFormChange}
+                                                >
+                                                       <option value="" disabled>Mesleki Teşekkül</option>
+                                                       {nacelist.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.dc_MESLEK_GRUBU_ADI}>{i?.dc_MESLEK_GRUBU_ADI}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="meslekitesekkulnumarasi">Mesleki Teşekkül Numarası</label>
+                                                <select
+                                                    disabled
+                                                    id="meslekitesekkulnumarasi"
+                                                    placeholder="mesleki teşekkül no"
+                                                    className="form-input"
+                                                    name='meslekitesekkulnumarasi'
+                                                    value={newMukellef?.meslekitesekkulnumarasi}
+                                                    onChange={handleNewMukellefFormChange}
+                                                >
+                                                       <option value="" disabled>Mesleki teşekkül numarası</option>
+                                                       {nacelist.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.dc_MESLEK_GRUBU}>{i?.dc_MESLEK_GRUBU}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="basitusul">Basit Usül</label>
+                                                <select
+                                                    name="basitusul"
+                                                    id='basitusul'
+                                                    className="form-input"
+                                                    placeholder='seçiniz'
+                                                    onChange={handleNewMukellefFormChange}
+                                                    value={newMukellef?.basitusul}
+                                                >
+
+                                                    <option value="Hayır">Hayır</option>
+                                                    <option value="Evet">Evet</option>
+
+                                                </select>
+                                            </div>
+                                            {newMukellef?.basitusul==="Evet"&&<div className="mb-5">
+                                                <label htmlFor="basitusulfaaliyetkodu">Basit Üsul Faaliyet Kodu</label>
+                                                <select
+                                                    disabled
+                                                    id="basitusulfaaliyetkodu"
+                                                    placeholder="vergi dairesi kodu"
+                                                    className="form-input"
+                                                    name='basitusulfaaliyetkodu'
+                                                    value={newMukellef?.basitusulfaaliyetkodu}
+                                                    onChange={handleNewMukellefFormChange}
+                                                >
+                                                       <option value="" disabled>Basit Üsul Faaliyet Kodu</option>
+                                                       {nacelist.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.dc_NACE_KODU}>{i?.dc_NACE_KODU}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>}
+                                            <div className="mb-5">
+                                                <label htmlFor="tckimlikno">TC Kimlik Numarası</label>
+                                                <input 
+                                                    id="tckimlikno"
+                                                    type="tel"
+                                                    placeholder="Mükellef TC giriniz" 
+                                                    className="form-input"
+                                                    name='tckimlikno'
+                                                    value={newMukellef?.tckimlikno} 
+                                                    onChange={handleNewMukellefFormChange} />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="mersisno">MERSIS No</label>
+                                                <input 
+                                                    id="mersisno"
+                                                    type="tel"
+                                                    placeholder="MERSİS no" 
+                                                    className="form-input"
+                                                    name='mersisno'
+                                                    value={newMukellef?.mersisno} 
+                                                    onChange={handleNewMukellefFormChange} />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="ticaretsicilno">Ticaret Sicil No</label>
+                                                <input 
+                                                    id="ticaretsicilno"
+                                                    type="tel"
+                                                    placeholder="Ticaret sicil no" 
+                                                    className="form-input"
+                                                    name='ticaretsicilno'
+                                                    value={newMukellef?.ticaretsicilno} 
+                                                    onChange={handleNewMukellefFormChange} />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="tesciltarihi">Tescil Tarihi</label>
+                                                <input 
+                                                    id="tesciltarihi"
+                                                    type="date"
+                                                    placeholder="Tescil tarihi" 
+                                                    className="form-input"
+                                                    name='tesciltarihi'
+                                                    value={newMukellef?.tesciltarihi} 
+                                                    onChange={handleNewMukellefFormChange} />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="tescilkurulusyeri">Tescil Kuruluş Yeri</label>
+                                                <select
+                                                    name="tescilkurulusyeri"
+                                                    id='tescilkurulusyeri'
+                                                    className="form-input"
+                                                    placeholder='il seçiniz'
+                                                    onChange={handleNewMukellefFormChange}
+                                                    value={newMukellef?.tescilkurulusyeri}
+                                                >
+                                                <option value="" disabled>il seçiniz</option>
+
+                                                    {illers.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.il}>{i?.il}</option>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="kdvmukellefiyeti">KDV Mükellefiyeti</label>
+                                                <select
+                                                    name="kdvmukellefiyeti"
+                                                    id='kdvmukellefiyeti'
+                                                    className="form-input"
+                                                    placeholder='seçiniz'
+                                                    onChange={handleNewMukellefFormChange}
+                                                    value={newMukellef?.kdvmukellefiyeti}
+                                                >
+
+                                                    <option value="" disabled>-</option>
+                                                    <option value="Var">Var</option>
+                                                    <option value="Yok">Yok</option>
+
+                                                </select>
+                                            </div>
+                                            
+                                            <div className="mb-5">
+                                                <label htmlFor="kdvvergidairesi">KDV Vergi Dairesi</label>
+                                                <select
+                                                    id="kdvvergidairesi"
+                                                    placeholder="vergi dairesi"
+                                                    className="form-input"
+                                                    name='kdvvergidairesi'
+                                                    required
+                                                    value={newMukellef?.kdvvergidairesi}
+                                                    onChange={handleNewMukellefFormChange}
+                                                >
+                                                       <option value="" disabled>KDV Vergi Dairesi</option>
+                                                       {vergidaireleri.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.VERGİ_DAİRESİ_ADI}>{i.VERGİ_DAİRESİ_ADI}</option>
+                                                        )
+                                                       })}
+                                                </select>
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="kdvvergidairesikodu">KDV Vergi Dairesi Kodu</label>
+                                                <select
+                                                    id="kdvvergidairesikodu"
+                                                    placeholder="vergi dairesi kodu"
+                                                    className="form-input"
+                                                    name='kdvvergidairesikodu'
+                                                    required
+                                                    value={newMukellef?.kdvvergidairesikodu}
+                                                    onChange={handleNewMukellefFormChange}
+                                                >
+                                                       <option value="" disabled>KDV Vergi Dairesi Kodu</option>
+                                                       {vergidaireleri.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.VD_KODU}>{i.VD_KODU}</option>
+                                                        )
+                                                       })}
+                                                </select>
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="kdvvergidairesiililce">KDV Vergi Dairesi İl/ İlçe</label>
+                                                <select
+                                                    id="kdvvergidairesiililce"
+                                                    placeholder="vergi dairesi il ilçe"
+                                                    className="form-input"
+                                                    name='kdvvergidairesiililce'
+                                                    value={newMukellef?.kdvvergidairesiililce}
+                                                    onChange={handleNewMukellefFormChange}
+                                                >
+                                                       <option value="" disabled>KDV Vergi Dairesi İl İlçe</option>
+                                                       {vergidaireleri.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.İLİ}>{i.İLİ}</option>
+                                                        )
+                                                       })}
+                                                </select>
+                                            </div>
+                                            
+                                            <div className="mb-5">
+                                                <label htmlFor="taahhutedilensermaye">Taahhüt Edilen Sermaye</label>
+                                                <input 
+                                                    id="taahhutedilensermaye" 
+                                                    type="text" 
+                                                    placeholder="Taahhüt edilen sermaye"
+                                                    className="form-input"
+                                                    name='taahhutedilensermaye'
+                                                    value={newMukellef?.taahhutedilensermaye} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="odenmissermaye">Ödenmiş Sermaye</label>
+                                                <input 
+                                                    id="odenmissermaye" 
+                                                    type="text" 
+                                                    placeholder="Ödenmiş sermaye"
+                                                    className="form-input"
+                                                    name='odenmissermaye'
+                                                    value={newMukellef?.odenmissermaye} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="baglıoldugusosyalguvenlikkurumu">Bağlı Olduğu Sosyal Güvenlik Kurumu</label>
+                                                <input 
+                                                    id="baglıoldugusosyalguvenlikkurumu" 
+                                                    type="text" 
+                                                    placeholder="Sosyal Güvenlik Kurumu"
+                                                    className="form-input"
+                                                    name='baglıoldugusosyalguvenlikkurumu'
+                                                    value={newMukellef?.baglıoldugusosyalguvenlikkurumu} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="sosyalguvenlikkurumunumarasi">Sosyal Güvenlik Kurumu Numarası</label>
+                                                <input 
+                                                    id="sosyalguvenlikkurumunumarasi" 
+                                                    type="text" 
+                                                    placeholder="Bağlı olduğu sgk numarası"
+                                                    className="form-input"
+                                                    name='sosyalguvenlikkurumunumarasi'
+                                                    value={newMukellef?.sosyalguvenlikkurumunumarasi} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            
+                                            
+                                            <h6 className='my-5'>Oda Temsilcisi Bilgileri</h6>
+                                            <div className="mb-5">
+                                                <label htmlFor="odatemsilcisibilgileri">Temsilci Adı</label>
+                                                <input 
+                                                    id="odatemsilcisibilgileri" 
+                                                    type="text" 
+                                                    placeholder="isim giriniz"
+                                                    className="form-input"
+                                                    name='adi'
+                                                    value={newMukellef?.odatemsilcisibilgileri?.adi} 
+                                                    onChange={handleNewMukellefFormInnerChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="soyadi">Temsilci Soyadı</label>
+                                                <input 
+                                                    id="soyadi" 
+                                                    type="text" 
+                                                    placeholder="soyisim giriniz"
+                                                    className="form-input"
+                                                    name='soyadi'
+                                                    value={newMukellef?.odatemsilcisibilgileri?.soyadi} 
+                                                    onChange={handleNewMukellefFormInnerChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="odatemsilcisiadi">Temsilci TC Numarası</label>
+                                                <input 
+                                                    id="odatemsilcisiadi" 
+                                                    type="text" 
+                                                    placeholder="TC giriniz"
+                                                    className="form-input"
+                                                    name='tckimlikno'
+                                                    value={newMukellef?.odatemsilcisibilgileri?.tckimlikno} 
+                                                    onChange={handleNewMukellefFormInnerChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="email">Mükellef E-Posta</label>
+                                                <input 
+                                                    id="email" 
+                                                    type="email" 
+                                                    placeholder="E-Posta giriniz"
+                                                    className="form-input"
+                                                    name='eposta'
+                                                    value={newMukellef?.eposta} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="phone">Mükellef Telefon</label>
+                                                <input 
+                                                    id="phone"
+                                                    type="tel"
+                                                    placeholder="telefon numarası"
+                                                    className="form-input"
+                                                    name='phone'
+                                                    value={newMukellef?.phone} 
+                                                    onChange={handleNewMukellefFormChange} 
+                                                />
+                                            </div>
+                                            <h6 className='my-5'>Muhasebe Bilgileri</h6>
+
+
+                                            <div className="mb-5">
+                                                <label htmlFor="yetkilismsmmm">Yetkili SM/SMMM</label>
+                                                <input 
+                                                    id="yetkilismsmmm" 
+                                                    type="text" 
+                                                    placeholder="Yetkili SM/SMMM"
+                                                    className="form-input"
+                                                    name='yetkilismsmmm'
+                                                    value={newMukellef?.yetkilismsmmm} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="smsmmmsozlesmetarihi">SM/SMMM Sözleşme Tarihi</label>
+                                                <input 
+                                                    id="smsmmmsozlesmetarihi" 
+                                                    type="date" 
+                                                    placeholder="sözleşme tarihi"
+                                                    className="form-input"
+                                                    name='smsmmmsozlesmetarihi'
+                                                    value={newMukellef?.smsmmmsozlesmetarihi} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="smsmmmsozlesmeno">SM/SMMM Sözleşme No</label>
+                                                <input 
+                                                    id="smsmmmsozlesmeno" 
+                                                    type="text" 
+                                                    placeholder="sözleşme no"
+                                                    className="form-input"
+                                                    name='smsmmmsozlesmeno'
+                                                    value={newMukellef?.smsmmmsozlesmeno} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="yetkiliymm">Yetkili YMM</label>
+                                                <input 
+                                                    id="yetkiliymm" 
+                                                    type="text" 
+                                                    placeholder="Yetkili YMM"
+                                                    className="form-input"
+                                                    name='yetkiliymm'
+                                                    value={newMukellef?.yetkiliymm} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            
                                             <div className="flex justify-end items-center mt-8">
                                                 <button type="button" className="btn btn-outline-danger" onClick={() => setAddContactModal(false)}>
                                                     İptal
                                                 </button>
-                                                <button type="button" className="btn btn-primary ltr:ml-4 rtl:mr-4" onClick={saveUser}>
+                                                <button 
+                                                
+                                                    type="button" 
+                                                className="btn btn-primary ltr:ml-4 rtl:mr-4" onClick={()=>handleAddNewMukellef(()=>setAddContactModal(false))}>
                                                     {params.id ? 'Güncelle' : 'Kaydet'}
                                                 </button>
                                             </div>

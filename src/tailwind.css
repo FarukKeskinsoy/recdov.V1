@@ -719,3 +719,18 @@ pre.hljs {
     gap: .5rem;
     padding: 0 1rem;
 }
+
+.uploading{
+    width: 100%;
+    height: 100%;
+    background-color:rgba(255, 255, 255, .3);
+    position: fixed;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    
+}
+.proggress{
+    position: absolute;
+    bottom: 20%
+}
