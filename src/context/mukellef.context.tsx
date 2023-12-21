@@ -69,6 +69,24 @@ export const MukellefProvider: React.FC<MukellefProviderProps> = ({ children }) 
   const [changed, setChanged] = useState<boolean>(false);
 
   const handleNewMukellefFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === "vergikimlikno") {
+      const inputValue = e.target.value;
+      
+      // Update the styling based on the length of the entered value
+      const isTenDigits = inputValue.length > 0&&inputValue.length === 10;
+  
+      // Add a CSS class to style the input accordingly
+      e.target.classList.toggle("error", !isTenDigits);
+    }
+    if (e.target.name === "tckimlikno") {
+      const inputValue = e.target.value;
+      
+      // Update the styling based on the length of the entered value
+      const isTenDigits = inputValue.length > 0&&inputValue.length === 11;
+  
+      // Add a CSS class to style the input accordingly
+      e.target.classList.toggle("error", !isTenDigits);
+    }
     if(e.target.name==="faaliyetkodu"){
         var selected=nacelist.find((i)=>i.dc_NACE_KODU===e.target.value)
         var faaliyetadi=selected?.dc_NACE_BASLIK;

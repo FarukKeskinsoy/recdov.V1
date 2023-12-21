@@ -15,7 +15,7 @@ import { useAuth } from '../../context/authentication.context';
 import { Button, IconButton } from '@mui/material';
 import { iller } from '../../rawData/mukellefs';
 import { illers } from '../../rawData/iller';
-import { CopyAll, Facebook, FacebookOutlined, Instagram, LinkedIn, RemoveCircle, Twitter, Web, WebStories } from '@mui/icons-material';
+import { CopyAll, Details, Facebook, FacebookOutlined, Instagram, LinkedIn, Notes, RemoveCircle, Twitter, Web, WebStories } from '@mui/icons-material';
 import IconXCircle from '../../components/Icon/IconXCircle';
 import { Dialog, Transition } from '@headlessui/react';
 import IconX from '../../components/Icon/IconX';
@@ -84,7 +84,7 @@ const ContactDetail = () => {
     meslekitesekkulnumarasi?:string;
     basitusul?:string;
     basitusulfaaliyetkodu?:string;
-    odatemsilcisibilgileri?:object;
+    odatemsilcisibilgileri?:any;
     eposta?:string;
     phone?:string;
       }
@@ -152,12 +152,18 @@ const ContactDetail = () => {
         <div>
             <ul className="flex space-x-2 rtl:space-x-reverse">
                 <li>
-                    <Link to="#" className="text-primary hover:underline">
-                        Kullanıcılar
+                    <Link 
+                        to={'..'}
+                        onClick={(e) => {
+                        e.preventDefault();
+                        navigate(-1);
+                        }} 
+                        className="text-primary hover:underline">
+                        Mükellefler
                     </Link>
                 </li>
                 <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
-                    <span>Hesap Ayarları</span>
+                    <span>{thisUser.soyadiunvani}</span>
                 </li>
             </ul>
             <div className="pt-5">
@@ -172,7 +178,7 @@ const ContactDetail = () => {
                                 className={`flex gap-2 p-4 border-b border-transparent hover:border-primary hover:text-primary ${tabs === 'home' ? '!border-primary text-primary' : ''}`}
                             >
                                 <IconHome />
-                                Anasayfa
+                                Genel Bilgiler
                             </button>
                         </li>
                         <li className="inline-block">
@@ -180,8 +186,8 @@ const ContactDetail = () => {
                                 onClick={() => toggleTabs('payment-details')}
                                 className={`flex gap-2 p-4 border-b border-transparent hover:border-primary hover:text-primary ${tabs === 'payment-details' ? '!border-primary text-primary' : ''}`}
                             >
-                                <IconDollarSignCircle />
-                                Ödeme Detayları
+                                <Details style={{fontSize:16}} />
+                                Detay Bilgiler
                             </button>
                         </li>
                         <li className="inline-block">
@@ -190,18 +196,10 @@ const ContactDetail = () => {
                                 className={`flex gap-2 p-4 border-b border-transparent hover:border-primary hover:text-primary ${tabs === 'preferences' ? '!border-primary text-primary' : ''}`}
                             >
                                 <IconUser className="w-5 h-5" />
-                                Tercihler
+                                Sorumlu Bilgileri
                             </button>
                         </li>
-                        <li className="inline-block">
-                            <button
-                                onClick={() => toggleTabs('danger-zone')}
-                                className={`flex gap-2 p-4 border-b border-transparent hover:border-primary hover:text-primary ${tabs === 'danger-zone' ? '!border-primary text-primary' : ''}`}
-                            >
-                                <IconPhone />
-                                Güvenlik
-                            </button>
-                        </li>
+                        
                     </ul>
                 </div>
                 {tabs === 'home' ? (
@@ -209,51 +207,102 @@ const ContactDetail = () => {
                         <form className="border border-[#ebedf2] dark:border-[#191e3a] rounded-md p-4 mb-5 bg-white dark:bg-black">
                             <h6 className="text-lg font-bold mb-5">Genel Bilgiler</h6>
                             <div className="flex flex-col sm:flex-row">
-                                <div className="ltr:sm:mr-4 rtl:sm:ml-4 w-full sm:w-2/12 mb-5">
-                                {auth.currentUser?.photoURL?<img className="w-9 h-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="/assets/images/user-profile.jpeg" alt="userProfile" />:
-                                <div className="border border-gray-300 dark:border-gray-800 rounded-full p-2 ltr:mr-2 rtl:ml-2">
-                                <IconUser className="w-9 h-9" />
-                                </div>}                                </div>
                                 <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div>
-                                        <label htmlFor="uName">Soyadı / Ünvanı </label>
+
+                                        <label htmlFor="soyadiunvani">Soyadı / Ünvanı </label>
                                         <input 
-                                            name="uName" 
-                                            id="uName" 
+                                            name="soyadiunvani" 
+                                            id="soyadiunvani" 
                                             type="text"
                                             //defaultValue={userData?.uName}
-                                            placeholder="ad" 
+                                            placeholder="soyadi ünvanı" 
                                             className="form-input"
                                             defaultValue={thisUser?.soyadiunvani}
                                             //value={editForm?.soyadiunvani}
                                             onChange={handleProfileFormChange}
                                         />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="uLname">Adı</label>
+                                        </div>
+                                        <div>
+                                            <label htmlFor="adi">Adı</label>
+                                            <input 
+                                                name="adi"
+                                                id="adi"
+                                                type="text"
+                                                placeholder="adı"
+                                                className="form-input"
+                                                defaultValue={thisUser?.adi}
+                                                //value={editForm?.adi}
+                                                onChange={handleProfileFormChange}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="phone">Telefon Numarası</label>
+                                            <input 
+                                                name="phone"
+                                                id="phone"
+                                                type="text"
+                                                placeholder="telefon numarası"
+                                                className="form-input"
+                                                defaultValue={thisUser?.phone}
+                                                //value={editForm?.adi}
+                                                onChange={handleProfileFormChange}
+                                            />
+                                        </div>
+                                        <div>
+                                        <label htmlFor="eposta">E-Posta Adresi</label>
                                         <input 
-                                            name="uLname"
-                                            id="uLname"
+                                            name="eposta"
+                                            id="eposta"
                                             type="text"
-                                            placeholder="soyad"
+                                            placeholder="telefon numarası"
                                             className="form-input"
-                                            defaultValue={thisUser?.adi}
+                                            defaultValue={thisUser?.eposta}
                                             //value={editForm?.adi}
                                             onChange={handleProfileFormChange}
                                         />
+                                        </div>
+                                        
+                                        
+                                    
+                                    
+                                    <div>
+                                        <label htmlFor="faaliyetadi">Faaliyet Adı</label>
+                                        <select
+                                            name="faaliyetadi"
+                                            id='faaliyetadi'
+                                            className="form-input"
+                                            placeholder='faaliyet adi'
+                                            onChange={handleProfileFormChange}
+                                            defaultValue={thisUser?.faaliyetadi}
+                                        >
+                                                <option value="" disabled>seçiniz</option>
+
+                                            {nacelist.map((i,idx)=>{
+                                                return(
+                                                    <option key={idx} value={i.dc_NACE_BASLIK}>{i?.dc_NACE_BASLIK}</option>
+                                                )
+                                            })}
+                                        </select>
                                     </div>
                                     <div>
-                                        <label htmlFor="field">Faaliyet Adı</label>
-                                        <input 
-                                            name="field"
-                                            id="field"
-                                            type="text"
-                                            placeholder="muhasebe uzmanı"
+                                        <label htmlFor="faaliyetkodu">Faaliyet Kodu</label>
+                                        <select
+                                            name="faaliyetkodu"
+                                            id='faaliyetkodu'
                                             className="form-input"
-                                            defaultValue={thisUser?.faaliyetadi}
-                                            //value={editForm?.faaliyetadi}
+                                            placeholder='faaliyet kodu'
                                             onChange={handleProfileFormChange}
-                                        />
+                                            defaultValue={thisUser?.faaliyetkodu}
+                                        >
+                                                <option value="" disabled>seçiniz</option>
+
+                                            {nacelist.map((i,idx)=>{
+                                                return(
+                                                    <option key={idx} value={i.dc_NACE_KODU}>{i?.dc_NACE_KODU}</option>
+                                                )
+                                            })}
+                                        </select>
                                     </div>
                                     <div>
                                         <label htmlFor="vergidairesi">Vergi Dairesi</label>
@@ -277,52 +326,84 @@ const ContactDetail = () => {
                                         
                                     </div>
                                     <div>
-                                        <label htmlFor="region">İlçe</label>
+                                        <label htmlFor="vergidairesiililce">Vergi Dairesi İl / İlçe</label>
                                         <select
-                                            name="region"
-                                            id='region'
+                                            name="vergidairesiililce"
+                                            id='vergidairesiililce'
                                             className="form-input"
-                                            placeholder='ilçe seçiniz'
+                                            placeholder='il/ilçe seçiniz'
                                             onChange={handleProfileFormChange}
-                                            defaultValue={userData?.region}
-                                            value={editForm?.region}
+                                            defaultValue={thisUser?.vergidairesiililce}
                                         >
-                                                <option value="" disabled >ilçe seçiniz</option>
+                                                <option value="" disabled >il/ilçe seçiniz</option>
 
-                                                {illers.find((il) => il.il === editForm?.city)?.ilceleri?.map((ilce, ilcedx) => (
-                                                    <option key={ilcedx} value={ilce}>
-                                                    {ilce}
+                                                {illers.map((ilce, ilcedx) => (
+                                                    <option key={ilcedx} value={ilce.il}>
+                                                    {ilce.il}
                                                     </option>
                                                 ))}
                                         </select>
                                         
                                     </div>
                                     <div>
-                                        <label htmlFor="phone">Telefon</label>
-                                        <input 
-                                            name="phone"
-                                            id="phone"
-                                            type="text"
-                                            placeholder="+9 (500) ..."
+                                        <label htmlFor="vergidairesikodu">Vergi Dairesi Kodu</label>
+                                        <select
+                                            name="vergidairesikodu"
+                                            id='vergidairesikodu'
                                             className="form-input"
-                                            defaultValue={userData?.phone}
-                                            value={editForm?.phone}
-                                            onChange={handleProfileFormChange}    
-                                        />
+                                            placeholder='kodu seçiniz'
+                                            onChange={handleProfileFormChange}
+                                            defaultValue={thisUser?.vergidairesikodu}
+                                        >
+                                                <option value="" disabled >kodu seçiniz</option>
+
+                                                {vergidaireleri.map((vd, vdex) => (
+                                                    <option key={vdex} value={vd.VD_KODU}>
+                                                    {vd.VD_KODU}
+                                                    </option>
+                                                ))}
+                                        </select>
+                                        
                                     </div>
-                                    <div>
-                                        <label htmlFor="email">E-Posta</label>
-                                        <input
-                                            disabled
-                                            name="email"
-                                            id="email"
-                                            type="email"
-                                            placeholder="abc@gmail.com"
-                                            className="form-input"
-                                            defaultValue={userData?.email}
-                                            onChange={handleProfileFormChange}    
-                                        />
-                                    </div>
+                                        <div>
+                                            <label htmlFor="vergikimlikno">Vergi Kimlik Numarası</label>
+                                            <input 
+                                                name="vergikimlikno"
+                                                id="vergikimlikno"
+                                                type="text"
+                                                placeholder="Vergi kimlik numarası"
+                                                className="form-input"
+                                                defaultValue={thisUser?.vergikimlikno}
+                                                //value={editForm?.adi}
+                                                onChange={handleProfileFormChange}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="tckimlikno">TC Kimlik Numarası</label>
+                                            <input 
+                                                name="tckimlikno"
+                                                id="tckimlikno"
+                                                type="text"
+                                                placeholder="TC kimlik numarası"
+                                                className="form-input"
+                                                defaultValue={thisUser?.tckimlikno}
+                                                //value={editForm?.adi}
+                                                onChange={handleProfileFormChange}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="ticaretsicilno">Ticaret Sicil Numarası</label>
+                                            <input 
+                                                name="ticaretsicilno"
+                                                id="ticaretsicilno"
+                                                type="text"
+                                                placeholder="Ticaret kimlik numarası"
+                                                className="form-input"
+                                                defaultValue={thisUser?.ticaretsicilno}
+                                                //value={editForm?.adi}
+                                                onChange={handleProfileFormChange}
+                                            />
+                                        </div>
                                     {/* <div className="sm:col-span-2 mt-3">
                                         <Button
                                             variant='contained'
@@ -335,62 +416,6 @@ const ContactDetail = () => {
                                 </div>
                             </div>
                         </form>
-                        <form className="border border-[#ebedf2] dark:border-[#191e3a] rounded-md p-4 bg-white dark:bg-black">
-                            <h6 className="text-lg font-bold mb-5">Sosyal Ağ</h6>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                <div className="flex">
-                                    <div className="bg-[#eee] flex justify-center items-center rounded px-3 font-semibold dark:bg-[#1b2e4b] ltr:mr-2 rtl:ml-2">
-                                        <LinkedIn className="w-5 h-5" />
-                                    </div>
-                                    <input
-                                        id='LinURL' 
-                                        name='LinURL'
-                                        value={editForm?.LinURL}
-                                        defaultValue={userData?.LinURL}
-                                        onChange={handleProfileFormChange}
-                                        type="text"
-                                        placeholder="linkedin profil URL"
-                                        className="form-input"
-                                    />
-                                </div>
-                                <div className="flex">
-                                    <div className="bg-[#eee] flex justify-center items-center rounded px-3 font-semibold dark:bg-[#1b2e4b] ltr:mr-2 rtl:ml-2">
-                                        <Twitter className="w-5 h-5" />
-                                    </div>
-                                    <input 
-                                        id='XURL' 
-                                        name='XURL'
-                                        value={editForm?.XURL}
-                                        defaultValue={userData?.XURL}
-                                        onChange={handleProfileFormChange}
-                                        type="text" placeholder="X profil URL" className="form-input" />
-                                </div>
-                                <div className="flex">
-                                    <div className="bg-[#eee] flex justify-center items-center rounded px-3 font-semibold dark:bg-[#1b2e4b] ltr:mr-2 rtl:ml-2">
-                                        <Instagram className="w-5 h-5" />
-                                    </div>
-                                    <input 
-                                        id='insURL' 
-                                        name='insURL'
-                                        value={editForm?.insURL}
-                                        defaultValue={userData?.insURL}
-                                        onChange={handleProfileFormChange}
-                                        type="text" placeholder="instagram profil URL" className="form-input" />
-                                </div>
-                                <div className="flex">
-                                    <div className="bg-[#eee] flex justify-center items-center rounded px-3 font-semibold dark:bg-[#1b2e4b] ltr:mr-2 rtl:ml-2">
-                                        <Web/>
-                                    </div>
-                                    <input 
-                                        id='webURL' 
-                                        name='webURL'
-                                        value={editForm?.webURL}
-                                        defaultValue={userData?.webURL}
-                                        onChange={handleProfileFormChange}
-                                        type="text" placeholder="web site URL" className="form-input" />
-                                </div>
-                            </div>
-                        </form>
                         
                     </div>
                 ) : (
@@ -398,354 +423,272 @@ const ContactDetail = () => {
                 )}
                 {tabs === 'payment-details' ? (
                     <div>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-                            <div className="panel">
-                                <div className="mb-5">
-                                    <h5 className="font-semibold text-lg mb-4">Fatura Adresi</h5>
-                                    <p>
-                                        <span className="text-primary">Fatura</span> bilgilerinizde yapılacak değişiklikler, planlı ödeme tarihinden itibaren geçerli olacak ve bir sonraki faturanıza yansıtılacaktır.
-                                    </p>
-                                </div>
-                                
-                                {/* <button 
-                                onClick={(e)=>setAddAddressModal(true)}
-                                className="btn btn-primary">Adres Ekle</button> */}
-                            </div>
-                            <div className="panel">
-                                <div className="mb-5">
-                                    <h5 className="font-semibold text-lg mb-4">Fatura Adresi Ekle</h5>
-                                    <p>
-                                        Yeni <span className="text-primary">Fatura</span> adresi bilginizi belirler.
-                                    </p>
-                                </div>
-                                <div className="mb-5">
-                                    <form>
-                                        <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label htmlFor="billingName">İsim Syisim</label>
-                                                <input 
-                                                    name='bName'
-                                                    id="bName" 
-                                                    type="text" 
-                                                    placeholder="İsim soyisim giriniz" 
-                                                    className="form-input"
-                                                    value={newBillAddress?.bName}
-                                                    onChange={handleNewBillingAddressChange}
-                                                />
-                                            </div>
-                                            <div>
-                                                <label htmlFor="bEmail">E-Posta</label>
-                                                <input 
-                                                    id="bEmail"
-                                                    name="bEmail"
-                                                    type="email"
-                                                    placeholder="E-Posta giriniz"
-                                                    className="form-input"
-                                                    value={newBillAddress?.bEmail}
-                                                    onChange={handleNewBillingAddressChange}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="mb-5">
-                                            <label htmlFor="bAddress">Adres</label>
-                                            <input 
-                                                id="bAddress" 
-                                                name="bAddress" 
-                                                type="text" 
-                                                placeholder="Adres girin" 
-                                                className="form-input"
-                                                value={newBillAddress?.bAddress}
-                                                onChange={handleNewBillingAddressChange}
-                                            />
-                                        </div>
-                                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-5">
-                                            <div className="md:col-span-2">
-                                                <label htmlFor="bCity">Şehir</label>
-                                                <select
-                                                    name="bCity"
-                                                    id='bCity'
-                                                    className="form-input"
-                                                    placeholder='il seçiniz'
-                                                    onChange={handleNewBillingAddressChange}
-                                                    value={newBillAddress?.bCity}
-                                                >
-                                                    <option value="" disabled >il seçiniz</option>
+                    <form className="border border-[#ebedf2] dark:border-[#191e3a] rounded-md p-4 mb-5 bg-white dark:bg-black">
+                        <h6 className="text-lg font-bold mb-5">Detay Bilgiler</h6>
+                        <div className="flex flex-col sm:flex-row">
+                            <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
 
-                                                    {illers.map((i,idx)=>{
-                                                        return(
-                                                            <option key={idx} value={i.il}>{i?.il}</option>
-                                                        )
-                                                    })}
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label htmlFor="bRegion">İlçe</label>
-                                                <select
-                                                    name="bRegion"
-                                                    id='bRegion'
-                                                    className="form-input"
-                                                    placeholder='il seçiniz'
-                                                    onChange={handleNewBillingAddressChange}
-                                                    value={newBillAddress?.bRegion}
-                                                >
-                                                    <option value="" disabled >ilçe seçiniz</option>
-
-                                                    {illers.find((il) => il.il === newBillAddress?.city)?.ilceleri?.map((ilce, ilcedx) => (
-                                                        <option key={ilcedx} value={ilce}>
-                                                        {ilce}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label htmlFor="bZip">Posta Kodu</label>
-                                                <input 
-                                                    id="bZip"
-                                                    name="bZip"
-                                                    type="text"
-                                                    placeholder="Posta kodu"
-                                                    className="form-input"
-                                                    value={newAddress?.bZip}
-                                                    onChange={handleNewBillingAddressChange}
-                                                />
-                                            </div>
-                                        </div>
-                                        {/* <button 
-                                            onClick={handleAddBillingAdress}
-                                            type="button" className="btn btn-primary">
-                                            Kaydet
-                                        </button> */}
-                                    </form>
-                                </div>
-                            </div>
-                            {/* <div className="panel">
-                                <div className="mb-5">
-                                    <h5 className="font-semibold text-lg mb-4">Ödeme Geçmişi</h5>
-                                    <p>
-                                        Changes to your <span className="text-primary">Payment Method</span> information will take effect starting with scheduled payment and will be refelected on your
-                                        next invoice.
-                                    </p>
-                                </div>
-                                <div className="mb-5">
-                                    <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
-                                        <div className="flex items-start justify-between py-3">
-                                            <div className="flex-none ltr:mr-4 rtl:ml-4">
-                                                <img src="/assets/images/card-americanexpress.svg" alt="img" />
-                                            </div>
-                                            <h6 className="text-[#515365] font-bold dark:text-white-dark text-[15px]">
-                                                Mastercard
-                                                <span className="block text-white-dark dark:text-white-light font-normal text-xs mt-1">XXXX XXXX XXXX 9704</span>
-                                            </h6>
-                                            <div className="flex items-start justify-between ltr:ml-auto rtl:mr-auto">
-                                                <button className="btn btn-dark">Edit</button>
-                                            </div>
-                                        </div>
+                                    <label htmlFor="mersisno">MERSIS Numarası</label>
+                                    <input 
+                                        name="mersisno" 
+                                        id="mersisno" 
+                                        type="text"
+                                        //defaultValue={userData?.uName}
+                                        placeholder="Mersis tarihi" 
+                                        className="form-input"
+                                        defaultValue={thisUser?.mersisno}
+                                        //value={editForm?.soyadiunvani}
+                                        onChange={handleProfileFormChange}
+                                    />
                                     </div>
-                                    <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
-                                        <div className="flex items-start justify-between py-3">
-                                            <div className="flex-none ltr:mr-4 rtl:ml-4">
-                                                <img src="/assets/images/card-mastercard.svg" alt="img" />
-                                            </div>
-                                            <h6 className="text-[#515365] font-bold dark:text-white-dark text-[15px]">
-                                                American Express
-                                                <span className="block text-white-dark dark:text-white-light font-normal text-xs mt-1">XXXX XXXX XXXX 310</span>
-                                            </h6>
-                                            <div className="flex items-start justify-between ltr:ml-auto rtl:mr-auto">
-                                                <button className="btn btn-dark">Edit</button>
-                                            </div>
-                                        </div>
+                                <div>
+
+                                    <label htmlFor="kurulustarihi">Kuruluş Tarihi </label>
+                                    <input 
+                                        name="kurulustarihi" 
+                                        id="kurulustarihi" 
+                                        type="date"
+                                        //defaultValue={userData?.uName}
+                                        placeholder="kuruluş tarihi" 
+                                        className="form-input"
+                                        defaultValue={thisUser?.kurulustarihi}
+                                        //value={editForm?.soyadiunvani}
+                                        onChange={handleProfileFormChange}
+                                    />
                                     </div>
                                     <div>
-                                        <div className="flex items-start justify-between py-3">
-                                            <div className="flex-none ltr:mr-4 rtl:ml-4">
-                                                <img src="/assets/images/card-visa.svg" alt="img" />
-                                            </div>
-                                            <h6 className="text-[#515365] font-bold dark:text-white-dark text-[15px]">
-                                                Visa
-                                                <span className="block text-white-dark dark:text-white-light font-normal text-xs mt-1">XXXX XXXX XXXX 5264</span>
-                                            </h6>
-                                            <div className="flex items-start justify-between ltr:ml-auto rtl:mr-auto">
-                                                <button className="btn btn-dark">Edit</button>
-                                            </div>
-                                        </div>
+                                        <label htmlFor="kapanıstarihi">Kapanış Tarihi</label>
+                                        <input 
+                                            name="kapanıstarihi"
+                                            id="kapanıstarihi"
+                                            type="date"
+                                            placeholder="kapanış tarihi"
+                                            className="form-input"
+                                            defaultValue={thisUser?.kapanıstarihi}
+                                            //value={editForm?.adi}
+                                            onChange={handleProfileFormChange}
+                                        />
                                     </div>
+                                    <div>
+                                        <label htmlFor="tesciltarihi">Tescil Tarihi</label>
+                                        <input 
+                                            name="tesciltarihi"
+                                            id="tesciltarihi"
+                                            type="date"
+                                            placeholder="tescil tarihi"
+                                            className="form-input"
+                                            defaultValue={thisUser?.tesciltarihi}
+                                            //value={editForm?.adi}
+                                            onChange={handleProfileFormChange}
+                                        />
+                                    </div>
+                                    <div>
+                                    <label htmlFor="tescilkurulusyeri">Tescil Kuruluş Yeri</label>
+                                    <input 
+                                        name="tescilkurulusyeri"
+                                        id="tescilkurulusyeri"
+                                        type="text"
+                                        placeholder="tescil yeri"
+                                        className="form-input"
+                                        defaultValue={thisUser?.tescilkurulusyeri}
+                                        //value={editForm?.adi}
+                                        onChange={handleProfileFormChange}
+                                    />
+                                    </div>
+                                    
+                                    
+                                
+                                
+                                <div>
+                                    <label htmlFor="kdvmukellefiyeti">KDV Mükellefiyeti</label>
+                                    <select
+                                        name="kdvmukellefiyeti"
+                                        id='kdvmukellefiyeti'
+                                        className="form-input"
+                                        placeholder='Kdv mükellefiyeti'
+                                        onChange={handleProfileFormChange}
+                                        defaultValue={thisUser?.kdvmukellefiyeti}
+                                    >
+                                            <option value="" disabled>seçiniz</option>
+                                            <option value="Var" disabled>Var</option>
+                                            <option value="Yok" disabled>Yok</option>
+                                    </select>
                                 </div>
-                                <button className="btn btn-primary">Add Payment Method</button>
-                            </div> */}
-                        </div>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                            {/* <div className="panel">
-                                <div className="mb-5">
-                                    <h5 className="font-semibold text-lg mb-4">Fatura Adresi Ekle</h5>
-                                    <p>
-                                        Yeni <span className="text-primary">Fatura</span> adresi bilginizi belirler.
-                                    </p>
+                                
+                                <div>
+                                    <label htmlFor="kdvvergidairesi">KDV Vergi Dairesi</label>
+                                    <select
+                                        name="kdvvergidairesi"
+                                        id='kdvvergidairesi'
+                                        className="form-input"
+                                        placeholder='kdv vergi dairesi seçiniz'
+                                        onChange={handleProfileFormChange}
+                                        defaultValue={thisUser?.kdvvergidairesi}
+                                    >
+                                            <option value="" disabled>Vergi Dairesi</option>
+
+                                        {vergidaireleri.map((i,idx)=>{
+                                            return(
+                                                <option key={idx} value={i.VERGİ_DAİRESİ_ADI}>{i?.VERGİ_DAİRESİ_ADI}</option>
+                                            )
+                                        })}
+                                    </select>
+                                    
                                 </div>
-                                <div className="mb-5">
-                                    <form>
-                                        <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label htmlFor="billingName">İsim Syisim</label>
-                                                <input 
-                                                    name='billingName'
-                                                    id="billingName" 
-                                                    type="text" 
-                                                    placeholder="İsim soyisim giriniz" 
-                                                    className="form-input"
-                                                    onChange={handleProfileFormChange}
-                                                />
-                                            </div>
-                                            <div>
-                                                <label htmlFor="billingEmail">E-Posta</label>
-                                                <input 
-                                                    id="billingEmail"
-                                                    name="billingEmail"
-                                                    type="email"
-                                                    placeholder="E-Posta giriniz"
-                                                    className="form-input"
-                                                    onChange={handleProfileFormChange}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="mb-5">
-                                            <label htmlFor="billingAddress">Adres</label>
-                                            <input id="billingAddress" type="text" placeholder="Enter Address" className="form-input" />
-                                        </div>
-                                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-5">
-                                            <div className="md:col-span-2">
-                                                <label htmlFor="billingCity">City</label>
-                                                <input id="billingCity" type="text" placeholder="Enter City" className="form-input" />
-                                            </div>
-                                            <div>
-                                                <label htmlFor="billingState">State</label>
-                                                <select id="billingState" className="form-select text-white-dark">
-                                                    <option>Choose...</option>
-                                                    <option>...</option>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label htmlFor="billingZip">Zip</label>
-                                                <input id="billingZip" type="text" placeholder="Enter Zip" className="form-input" />
-                                            </div>
-                                        </div>
-                                        <button type="button" className="btn btn-primary">
-                                            Add
-                                        </button>
-                                    </form>
+                                <div>
+                                    <label htmlFor="kdvvergidairesiililce">KDV Vergi Dairesi İl / İlçe</label>
+                                    <select
+                                        name="kdvvergidairesiililce"
+                                        id='kdvvergidairesiililce'
+                                        className="form-input"
+                                        placeholder='il/ilçe seçiniz'
+                                        onChange={handleProfileFormChange}
+                                        defaultValue={thisUser?.kdvvergidairesiililce}
+                                    >
+                                            <option value="" disabled >il/ilçe seçiniz</option>
+
+                                            {illers.map((ilce, ilcedx) => (
+                                                <option key={ilcedx} value={ilce.il}>
+                                                {ilce.il}
+                                                </option>
+                                            ))}
+                                    </select>
+                                    
                                 </div>
+                                <div>
+                                        <label htmlFor="kdvvergidairesikodu">KDV Vergi Dairesi Kodu</label>
+                                        <select
+                                            name="kdvvergidairesikodu"
+                                            id='kdvvergidairesikodu'
+                                            className="form-input"
+                                            placeholder='kodu seçiniz'
+                                            onChange={handleProfileFormChange}
+                                            defaultValue={thisUser?.kdvvergidairesikodu}
+                                        >
+                                                <option value="" disabled >kodu seçiniz</option>
+
+                                                {vergidaireleri.map((vd, vdex) => (
+                                                    <option key={vdex} value={vd.VD_KODU}>
+                                                    {vd.VD_KODU}
+                                                    </option>
+                                                ))}
+                                        </select>
+                                        
+                                    </div>
+                                    <div>
+                                        <label htmlFor="taahhutedilensermaye">Taahhüt Edilen Sermaye</label>
+                                        <input 
+                                            name="taahhutedilensermaye"
+                                            id="taahhutedilensermaye"
+                                            type="text"
+                                            placeholder="Taahhüt edilen sermaye"
+                                            className="form-input"
+                                            defaultValue={thisUser?.taahhutedilensermaye}
+                                            //value={editForm?.adi}
+                                            onChange={handleProfileFormChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="odenmissermaye">Ödenmiş Sermaye</label>
+                                        <input 
+                                            name="odenmissermaye"
+                                            id="odenmissermaye"
+                                            type="text"
+                                            placeholder="Ödenmiş sermaye"
+                                            className="form-input"
+                                            defaultValue={thisUser?.odenmissermaye}
+                                            //value={editForm?.adi}
+                                            onChange={handleProfileFormChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="baglıoldugusosyalguvenlikkurumu">Bağlı Olduğu SGK</label>
+                                        <input 
+                                            name="baglıoldugusosyalguvenlikkurumu"
+                                            id="baglıoldugusosyalguvenlikkurumu"
+                                            type="text"
+                                            placeholder="Bağlı olduğu SGK"
+                                            className="form-input"
+                                            defaultValue={thisUser?.baglıoldugusosyalguvenlikkurumu}
+                                            //value={editForm?.adi}
+                                            onChange={handleProfileFormChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="baglıoldugumeslekitesekkul">Bağlı Olduğu Mesleki Teşekkül</label>
+                                        <input 
+                                            name="baglıoldugumeslekitesekkul"
+                                            id="baglıoldugumeslekitesekkul"
+                                            type="text"
+                                            placeholder="Bağlı olduğu mesleki teşekkül"
+                                            className="form-input"
+                                            defaultValue={thisUser?.baglıoldugumeslekitesekkul}
+                                            //value={editForm?.adi}
+                                            onChange={handleProfileFormChange}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="meslekitesekkulnumarasi">Mesleki Teşekkül Numarası</label>
+                                        <input 
+                                            name="meslekitesekkulnumarasi"
+                                            id="meslekitesekkulnumarasi"
+                                            type="text"
+                                            placeholder="Mesleki teşekkül numarası"
+                                            className="form-input"
+                                            defaultValue={thisUser?.meslekitesekkulnumarasi}
+                                            //value={editForm?.adi}
+                                            onChange={handleProfileFormChange}
+                                        />
+                                    </div>
+                                    <div>
+                                    <label htmlFor="basitusul">Basit Usül</label>
+                                    <select
+                                        name="basitusul"
+                                        id='basitusul'
+                                        className="form-input"
+                                        placeholder='Basit usül'
+                                        onChange={handleProfileFormChange}
+                                        defaultValue={thisUser?.basitusul}
+                                    >
+                                            <option value="" disabled>seçiniz</option>
+                                            <option value="Evet" disabled>Evet</option>
+                                            <option value="Hayır" disabled>Hayır</option>
+                                    </select>
+                                </div>
+                                {(thisUser.basitusul==="Evet" || editForm?.basitusul==="Evet")&&
+                                <div>
+                                <label htmlFor="basitusulfaaliyetkodu">Basit Usül Faaliyet Kodu</label>
+                                <input 
+                                    name="basitusulfaaliyetkodu"
+                                    id="basitusulfaaliyetkodu"
+                                    type="text"
+                                    placeholder="Basit usül faaliyet kodu"
+                                    className="form-input"
+                                    defaultValue={thisUser?.basitusulfaaliyetkodu}
+                                    //value={editForm?.adi}
+                                    onChange={handleProfileFormChange}
+                                />
                             </div>
-                            <div className="panel">
-                                <div className="mb-5">
-                                    <h5 className="font-semibold text-lg mb-4">Fatura Adresi Ekle</h5>
-                                    <p>
-                                        Yeni <span className="text-primary">Fatura</span> adresi bilginizi belirler.
-                                    </p>
-                                </div>
-                                <div className="mb-5">
-                                    <form>
-                                        <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label htmlFor="billingName">İsim Syisim</label>
-                                                <input 
-                                                    name='billingName'
-                                                    id="billingName" 
-                                                    type="text" 
-                                                    placeholder="İsim soyisim giriniz" 
-                                                    className="form-input"
-                                                    onChange={handleProfileFormChange}
-                                                />
-                                            </div>
-                                            <div>
-                                                <label htmlFor="billingEmail">E-Posta</label>
-                                                <input 
-                                                    id="billingEmail"
-                                                    name="billingEmail"
-                                                    type="email"
-                                                    placeholder="E-Posta giriniz"
-                                                    className="form-input"
-                                                    onChange={handleProfileFormChange}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="mb-5">
-                                            <label htmlFor="billingAddress">Adres</label>
-                                            <input id="billingAddress" type="text" placeholder="Enter Address" className="form-input" />
-                                        </div>
-                                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-5">
-                                            <div className="md:col-span-2">
-                                                <label htmlFor="billingCity">City</label>
-                                                <input id="billingCity" type="text" placeholder="Enter City" className="form-input" />
-                                            </div>
-                                            <div>
-                                                <label htmlFor="billingState">State</label>
-                                                <select id="billingState" className="form-select text-white-dark">
-                                                    <option>Choose...</option>
-                                                    <option>...</option>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label htmlFor="billingZip">Zip</label>
-                                                <input id="billingZip" type="text" placeholder="Enter Zip" className="form-input" />
-                                            </div>
-                                        </div>
-                                        <button type="button" className="btn btn-primary">
-                                            Add
-                                        </button>
-                                    </form>
-                                </div>
-                            </div> */}
-                            {/* <div className="panel">
-                                <div className="mb-5">
-                                    <h5 className="font-semibold text-lg mb-4">Add Payment Method</h5>
-                                    <p>
-                                        Changes your New <span className="text-primary">Payment Method </span>
-                                        Information.
-                                    </p>
-                                </div>
-                                <div className="mb-5">
-                                    <form>
-                                        <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label htmlFor="payBrand">Card Brand</label>
-                                                <select id="payBrand" className="form-select text-white-dark">
-                                                    <option value="Mastercard">Mastercard</option>
-                                                    <option value="American Express">American Express</option>
-                                                    <option value="Visa">Visa</option>
-                                                    <option value="Discover">Discover</option>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label htmlFor="payNumber">Card Number</label>
-                                                <input id="payNumber" type="text" placeholder="Card Number" className="form-input" />
-                                            </div>
-                                        </div>
-                                        <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label htmlFor="payHolder">Holder Name</label>
-                                                <input id="payHolder" type="text" placeholder="Holder Name" className="form-input" />
-                                            </div>
-                                            <div>
-                                                <label htmlFor="payCvv">CVV/CVV2</label>
-                                                <input id="payCvv" type="text" placeholder="CVV" className="form-input" />
-                                            </div>
-                                        </div>
-                                        <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label htmlFor="payExp">Card Expiry</label>
-                                                <input id="payExp" type="text" placeholder="Card Expiry" className="form-input" />
-                                            </div>
-                                        </div>
-                                        <button type="button" className="btn btn-primary">
-                                            Add
-                                        </button>
-                                    </form>
-                                </div>
-                            </div> */}
+                                }
+                                {/* <div className="sm:col-span-2 mt-3">
+                                    <Button
+                                        variant='contained'
+                                        disabled={updating}
+                                        onClick={handleSubmitProfileUpdate}
+                                        type="button" className="btn btn-primary">
+                                        Kaydet
+                                    </Button>
+                                </div> */}
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                    
+                </div>
                 ) : (
                     ''
                 )}
+               
                 <Transition appear show={addAddressModal} as={Fragment}>
                 <Dialog as="div" open={addAddressModal} onClose={() => setAddAddressModal(false)} className="relative z-[51]">
                     <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
@@ -1045,150 +988,121 @@ const ContactDetail = () => {
                     </div>
                 </Dialog>
                 </Transition>
-                {/* {tabs === 'preferences' ? (
-                    <div className="switch">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
-                            <div className="panel space-y-5">
-                                <h5 className="font-semibold text-lg mb-4">Tema Seç</h5>
-                                <div className="flex justify-around">
-                                    <div className="flex">
-                                        <label className="inline-flex cursor-pointer">
-                                            <input 
-                                            onClick={() => {
-                                                dispatch(toggleTheme('light'));
-                                            }}
-                                            className="form-radio ltr:mr-4 rtl:ml-4 cursor-pointer" type="radio" name="flexRadioDefault" defaultChecked={themeConfig.theme === 'light'?true:false} />
-                                            <span>
-                                                <img className="ms-3" width="100" height="68" alt="settings-dark" src="/assets/images/settings-light.svg" />
-                                            </span>
-                                        </label>
-                                    </div>
+                {tabs === 'preferences' ? (
+                   <div>
+                   <form className="border border-[#ebedf2] dark:border-[#191e3a] rounded-md p-4 mb-5 bg-white dark:bg-black">
+                       <h6 className="text-lg font-bold mb-5">Sorumlu Bilgileri</h6>
+                       <div className="flex flex-col sm:flex-row">
+                           <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                               <div>
 
-                                    <label className="inline-flex cursor-pointer">
-                                        <input 
-                                        onClick={() => {
-                                            dispatch(toggleTheme('dark'));
-                                        }}
-                                        className="form-radio ltr:mr-4 rtl:ml-4 cursor-pointer" type="radio" name="flexRadioDefault"
-                                        defaultChecked={themeConfig.theme === 'dark'?true:false}
-                                        />
-                                        <span>
-                                            <img className="ms-3" width="100" height="68" alt="settings-light" src="/assets/images/settings-dark.svg" />
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="panel space-y-5">
-                                <h5 className="font-semibold text-lg mb-4">İşlem Verileri</h5>
-                                <p>İşlem Özetinizi İndirin</p>
-                                <button type="button" className="btn btn-primary">
-                                    İndir
-                                </button>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            <div className="panel space-y-5">
-                                <h5 className="font-semibold text-lg mb-4">Profili Gizle</h5>
-                                <p>
-                                    <span className="text-primary">Profiliniz</span> {`${thisUser?.private?"ağdaki hiç kimse tarafından görüntülenemez..":"ağdaki herkes tarafından görüntülenebilir."}`}
-                                </p>
-                                <label className="w-12 h-6 relative">
-                                    <input 
-                                        type="checkbox"
-                                        className="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer" 
-                                        id="custom_switch_checkbox1"
-                                        name='private'
-                                        defaultChecked={thisUser?.private || false}
-                                        onChange={handlePreferencesChange}
-                                    />
-                                    <span className="bg-[#ebedf2] dark:bg-dark block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:bg-primary before:transition-all before:duration-300"></span>
-                                </label>
-                            </div>
-                            <div className="panel space-y-5">
-                                <h5 className="font-semibold text-lg mb-4">E-Postamı gizle</h5>
-                                <p>
-                                    <span className="text-primary">E-Postanız</span> {`${thisUser?.privateEmail?"ağdaki hiç kimse tarafından görüntülenemez..":"ağdaki herkes tarafından görüntülenebilir."}`}
-                                </p>
-                                <label className="w-12 h-6 relative">
-                                    <input 
-                                        type="checkbox" 
-                                        className="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer" 
-                                        id="custom_switch_checkbox2"
-                                        name='privateEmail'
-                                        defaultChecked={thisUser?.privateEmail || false}
-                                        onChange={handlePreferencesChange}
-                                    />
-                                    <span className="bg-[#ebedf2] dark:bg-dark block h-full rounded-full before:absolute before:left-1 before:bg-white  dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:bg-primary before:transition-all before:duration-300"></span>
-                                </label>
-                            </div>
-                            
-                            <div className="panel space-y-5">
-                                <h5 className="font-semibold text-lg mb-4">Reklamları Gizle</h5>
-                                <p>
-                                    <span className="text-primary">Reklamlar</span> {`${thisUser?.hideAds?"panelinizde gösterilmez":"panelinizde gösterilir"}`}
-                                </p>
-                                <label className="w-12 h-6 relative">
-                                    <input 
-                                        type="checkbox"
-                                        className="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
-                                        id="custom_switch_checkbox5"
-                                        name='hideAds'
-                                        defaultChecked={thisUser?.hideAds || false}
-                                        onChange={handlePreferencesChange}
-                                    />
-                                    <span 
-                                        className="bg-[#ebedf2] dark:bg-dark block h-full rounded-full before:absolute before:left-1 before:bg-white  dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:bg-primary before:transition-all before:duration-300"></span>
-                                </label>
-                            </div>
-                            <div className="panel space-y-5">
-                                <h5 className="font-semibold text-lg mb-4">Sosyal Ağ Profilini Gizle</h5>
-                                <p>
-                                    <span className="text-primary">Sosyal Medya</span> {`${thisUser?.hideSoc?"ağdaki hiç kimse tarafından görüntülenemez..":"ağdaki herkes tarafından görüntülenebilir"}`}
-                                </p>
-                                <label className="w-12 h-6 relative">
-                                    <input 
-                                        type="checkbox"
-                                        className="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer"
-                                        id="custom_switch_checkbox6"
-                                        name='hideSoc'
-                                        defaultChecked={thisUser?.hideSoc || false}
-                                        onChange={handlePreferencesChange}
-                                    />
-                                    <span className="bg-[#ebedf2] dark:bg-dark block h-full rounded-full before:absolute before:left-1 before:bg-white  dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:bg-primary before:transition-all before:duration-300"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                                   <label htmlFor="yetkilismsmmm">Yetkili SM/SMMM</label>
+                                   <input 
+                                       name="yetkilismsmmm" 
+                                       id="yetkilismsmmm" 
+                                       type="text"
+                                       //defaultValue={userData?.uName}
+                                       placeholder="Yetkili SM/SMMM" 
+                                       className="form-input"
+                                       defaultValue={thisUser?.yetkilismsmmm}
+                                       //value={editForm?.soyadiunvani}
+                                       onChange={handleProfileFormChange}
+                                   />
+                                   </div>
+                                   <div>
+                                       <label htmlFor="smsmmmsozlesmetarihi">SM/SMMM Sözleşme Tarihi</label>
+                                       <input 
+                                           name="smsmmmsozlesmetarihi"
+                                           id="smsmmmsozlesmetarihi"
+                                           type="date"
+                                           placeholder="sözleşme tarihi"
+                                           className="form-input"
+                                           defaultValue={thisUser?.smsmmmsozlesmetarihi}
+                                           //value={editForm?.adi}
+                                           onChange={handleProfileFormChange}
+                                       />
+                                   </div>
+                                   <div>
+                                       <label htmlFor="smsmmmsozlesmeno">SM/SMMM Sözleşme No</label>
+                                       <input 
+                                           name="smsmmmsozlesmeno"
+                                           id="smsmmmsozlesmeno"
+                                           type="text"
+                                           placeholder="sözleşme numarası"
+                                           className="form-input"
+                                           defaultValue={thisUser?.smsmmmsozlesmeno}
+                                           //value={editForm?.adi}
+                                           onChange={handleProfileFormChange}
+                                       />
+                                   </div>
+                                   <div>
+                                   <label htmlFor="yetkiliymm">Yetkili YMM</label>
+                                   <input 
+                                       name="yetkiliymm"
+                                       id="yetkiliymm"
+                                       type="text"
+                                       placeholder="Yetkili YMM"
+                                       className="form-input"
+                                       defaultValue={thisUser?.yetkiliymm}
+                                       //value={editForm?.adi}
+                                       onChange={handleProfileFormChange}
+                                   />
+                                   </div>
+                                   <div>
+                                   <h5 className='mb-3'>Oda Temsilcisi Bilgileri</h5>
+                                   <label htmlFor="odatemsilcisibilgileri">Adı</label>
+                                   <input 
+                                       name="adi"
+                                       id="odatemsilcisibilgileri"
+                                       type="text"
+                                       placeholder="Adı"
+                                       className="form-input mb-2"
+                                       defaultValue={thisUser?.odatemsilcisibilgileri?.adi}
+                                       //value={editForm?.adi}
+                                       onChange={handleProfileFormChange}
+                                   />
+                                   <label htmlFor="odatemsilcisibilgilerisoyadi">Soyadı</label>
+                                   <input 
+                                       name="soyadi"
+                                       id="odatemsilcisibilgilerisoyadi"
+                                       type="text"
+                                       placeholder="Soyadı"
+                                       className="form-input mb-2"
+                                       defaultValue={thisUser?.odatemsilcisibilgileri?.soyadi}
+                                       //value={editForm?.adi}
+                                       onChange={handleProfileFormChange}
+                                   />
+                                   <label htmlFor="odatemsilcisibilgileriTC">TC Kimlik Numarası</label>
+                                   <input 
+                                       name="tckimlikno"
+                                       id="odatemsilcisibilgileriTC"
+                                       type="text"
+                                       placeholder="TC Kimlik numarası"
+                                       className="form-input mb-2"
+                                       defaultValue={thisUser?.odatemsilcisibilgileri?.tckimlikno}
+                                       //value={editForm?.adi}
+                                       onChange={handleProfileFormChange}
+                                   />
+                                   
+                                   </div>
+                               {/* <div className="sm:col-span-2 mt-3">
+                                   <Button
+                                       variant='contained'
+                                       disabled={updating}
+                                       onClick={handleSubmitProfileUpdate}
+                                       type="button" className="btn btn-primary">
+                                       Kaydet
+                                   </Button>
+                               </div> */}
+                           </div>
+                       </div>
+                   </form>
+                   
+               </div>
                 ) : (
                     ''
                 )}
-                {tabs === 'danger-zone' ? (
-                    <div className="switch">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                            
-                            <div className="panel space-y-5">
-                                <h5 className="font-semibold text-lg mb-4">Hesabımı Dondur</h5>
-                                <p>24 saate kadar mesaj, bildirim alamayacaksınız.</p>
-                                <label className="w-12 h-6 relative">
-                                    <input 
-                                    type="checkbox" 
-                                    onChange={()=>deactivateMyAccount(navigateToSuccessPage)}
-                                    className="custom_switch absolute w-full h-full opacity-0 z-10 cursor-pointer peer" id="custom_switch_checkbox7"
-                                    defaultChecked={thisUser?.active}
-                                    />
-                                    <span className="bg-[#ebedf2] dark:bg-dark block h-full rounded-full before:absolute before:left-1 before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:bg-primary before:transition-all before:duration-300"></span>
-                                </label>
-                            </div>
-                            <div className="panel space-y-5">
-                                <h5 className="font-semibold text-lg mb-4">Hesabımı Sil</h5>
-                                <p>Hesabı silme işlemi geri alınamaz. Lütfen emin olun.</p>
-                                <button className="btn btn-danger btn-delete-account">Hesabımı Sil</button>
-                            </div>
-                        </div>
-                    </div>
-                ) : (
-                    ''
-                )} */}
+               
             </div>
         </div>
     );

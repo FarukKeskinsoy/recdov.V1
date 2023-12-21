@@ -734,3 +734,6 @@ pre.hljs {
     position: absolute;
     bottom: 20%
 }
+.error{
+    border: 1px solid red;
+}
