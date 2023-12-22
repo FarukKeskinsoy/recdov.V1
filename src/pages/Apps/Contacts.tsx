@@ -68,7 +68,7 @@ const Contacts = () => {
     useEffect(() => {
         dispatch(setPageTitle('Mükellefler'));
     });
-    const {newMukellef,adding,handleAddNewMukellef,changed,handleNewMukellefFormChange, handleNewMukellefFormInnerChange} = useMukellef()
+    const {newMukellef,adding,handleAddNewMukellef,changed,handleNewMukellefFormChange, handleNewMukellefFormInnerChange,handleDeleteMukellef,deleting} = useMukellef()
     const [addContactModal, setAddContactModal] = useState<any>(false);
 
   
@@ -112,6 +112,7 @@ const Contacts = () => {
         phone:"",
         email:""
     });
+
     const [mymukellefs, setMyMukellefs] = useState<any>([]);
     const [loading, setLoading] = useState<boolean>(true);
     useEffect(() => {
@@ -168,6 +169,45 @@ const Contacts = () => {
 
 
 let navigate=useNavigate()
+
+type MessageType = 'success' | 'error' | 'warning' | 'info' | 'question';
+
+
+const showConfirmMessage = (
+  msg: string = '',
+  type: MessageType = 'success',
+  confirmCallback?: () => void
+) => {
+  if (confirmCallback) {
+    // Confirmation
+    Swal.fire({
+      icon: type,
+      title: msg,
+      padding: '10px 20px',
+      showCancelButton: true,
+      confirmButtonText: 'Evet',
+      cancelButtonText: 'Hayır',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        confirmCallback();
+      }
+    });
+  } else {
+    // Toast
+    const toast: any = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 3000,
+      customClass: { container: 'toast' },
+    });
+    toast.fire({
+      icon: type,
+      title: msg,
+      padding: '10px 20px',
+    });
+  }
+};
 
 
     return (
@@ -237,7 +277,14 @@ let navigate=useNavigate()
                                                         style={{fontSize:16}}
                                                         />
                                                     </button>
-                                                    <button type="button" className="btn btn-sm btn-outline-danger" onClick={() => console.log("first")}>
+                                                    <button
+                                                    disabled={deleting}
+                                                    type="button" 
+                                                    className="btn btn-sm btn-outline-danger" 
+                                                    onClick={() => showConfirmMessage(`Mükellefi (${contact.soyadiunvani||""}) silmek istediğinizden emin misiniz?`,'question',() => {
+                                                        contact.id&&handleDeleteMukellef(contact.id);}
+                                                    )}
+                                                    >
                                                         Sil
                                                     </button>
                                                 </div>

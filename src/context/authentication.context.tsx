@@ -428,7 +428,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         uid: a?.user.uid,
         email:a?.user.email,
         uName:regForm.userName,
-        apps:[],
+        apps:["invoice"],
         uLname:"",// user lastName
         phone: "",// user phone number
         field: "",// user job field
@@ -447,7 +447,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         updAt: "",// user updated him/herself time
         adresler:[],
         active:true,
-        
+        pfb:false,
+        pfbe:false,
+        rfr:100
       })
       setLogining(false);
       setErrorMessage(null);

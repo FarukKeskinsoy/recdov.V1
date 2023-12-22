@@ -16,10 +16,13 @@ import IconX from '../../../components/Icon/IconX';
 import {mukellefExtraInfo , iller , mukellefList} from "../../../rawData/mukellefs.js"
 import { MoveToInbox, Outbox } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
+import { useMukellef } from '../../../context/mukellef.context';
 
   
 const MukelleflerList = () => {
    
+    const { mymukellefs } = useMukellef();
+
     const [addContactModal, setAddContactModal] = useState<boolean>(false);
 
     const [defaultParams] = useState({
@@ -255,29 +258,17 @@ const MukelleflerList = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredItems.map((contact: any) => {
+                                {mymukellefs.map((contact: any) => {
                                     return (
                                         <tr key={contact.id}>
                                             <td>
                                                 <div className="flex items-center w-max">
-                                                    {contact.path && (
-                                                        <div className="w-max">
-                                                            <img src={`/assets/images/${contact.path}`} className="h-8 w-8 rounded-full object-cover ltr:mr-2 rtl:ml-2" alt="avatar" />
-                                                        </div>
-                                                    )}
-                                                    {!contact.path && contact.name && (
-                                                        <div className="grid place-content-center h-8 w-8 ltr:mr-2 rtl:ml-2 rounded-full bg-primary text-white text-sm font-semibold"></div>
-                                                    )}
-                                                    {!contact.path && !contact.name && (
-                                                        <div className="border border-gray-300 dark:border-gray-800 rounded-full p-2 ltr:mr-2 rtl:ml-2">
-                                                            <IconUser className="w-4.5 h-4.5" />
-                                                        </div>
-                                                    )}
-                                                    <div>{contact.adi||contact.unvani}</div>
+                                                    
+                                                    <div>{contact?.soyadiunvani||contact.adi}</div>
                                                 </div>
                                             </td>
-                                            <td>{contact.email}</td>
-                                            <td className="whitespace-nowrap">{contact.vergiililce}</td>
+                                            <td>{contact.eposta}</td>
+                                            <td className="whitespace-nowrap">{contact.vergidairesiililce}</td>
                                             <td className="whitespace-nowrap">{contact.phone}</td>
                                             <td>
                                                 <div className="flex gap-4 items-center justify-center">

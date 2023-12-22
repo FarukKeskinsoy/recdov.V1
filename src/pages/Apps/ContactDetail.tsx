@@ -24,6 +24,8 @@ import themeConfig from '../../theme.config';
 import { useCopyToClipboard } from 'usehooks-ts'
 import { nacelist } from '../../rawData/nace';
 import { vergidaireleri } from '../../rawData/vergiDaireleri';
+import { useMukellef } from '../../context/mukellef.context';
+import Swal from 'sweetalert2';
 
 
 const ContactDetail = () => {
@@ -54,39 +56,39 @@ const ContactDetail = () => {
     interface User {
         // Assuming that adresler is an array of Address objects
         yetkilismsmmm?: string;
-    smsmmmsozlesmetarihi?:string;
-    smsmmmsozlesmeno?:string;
-    yetkiliymm?:string;
-    tckimlikno?:string;
-    kurulustarihi?:string;
-    kapanıstarihi?:string;
-    faaliyetkodu?:string;
-    faaliyetadi?:string;
-    soyadiunvani?:string;
-    adi?:string;
-    vergidairesikodu?:string;
-    vergidairesi?:string;
-    vergidairesiililce?:string;
-    vergikimlikno?:string;
-    ticaretsicilno?:string;
-    tesciltarihi?:string;
-    tescilkurulusyeri?:string;
-    kdvmukellefiyeti?:string;
-    kdvvergidairesikodu?:string;
-    kdvvergidairesi?:string;
-    kdvvergidairesiililce?:string;
-    mersisno?:string;
-    taahhutedilensermaye?:string;
-    odenmissermaye?:string;
-    baglıoldugusosyalguvenlikkurumu?:string;
-    sosyalguvenlikkurumunumarasi?:string;
-    baglıoldugumeslekitesekkul?:string;
-    meslekitesekkulnumarasi?:string;
-    basitusul?:string;
-    basitusulfaaliyetkodu?:string;
-    odatemsilcisibilgileri?:any;
-    eposta?:string;
-    phone?:string;
+        smsmmmsozlesmetarihi?:string;
+        smsmmmsozlesmeno?:string;
+        yetkiliymm?:string;
+        tckimlikno?:string;
+        kurulustarihi?:string;
+        kapanıstarihi?:string;
+        faaliyetkodu?:string;
+        faaliyetadi?:string;
+        soyadiunvani?:string;
+        adi?:string;
+        vergidairesikodu?:string;
+        vergidairesi?:string;
+        vergidairesiililce?:string;
+        vergikimlikno?:string;
+        ticaretsicilno?:string;
+        tesciltarihi?:string;
+        tescilkurulusyeri?:string;
+        kdvmukellefiyeti?:string;
+        kdvvergidairesikodu?:string;
+        kdvvergidairesi?:string;
+        kdvvergidairesiililce?:string;
+        mersisno?:string;
+        taahhutedilensermaye?:string;
+        odenmissermaye?:string;
+        baglıoldugusosyalguvenlikkurumu?:string;
+        sosyalguvenlikkurumunumarasi?:string;
+        baglıoldugumeslekitesekkul?:string;
+        meslekitesekkulnumarasi?:string;
+        basitusul?:string;
+        basitusulfaaliyetkodu?:string;
+        odatemsilcisibilgileri?:any;
+        eposta?:string;
+        phone?:string;
       }
       const h6Ref = useRef(null);
 
@@ -97,29 +99,17 @@ const ContactDetail = () => {
 
     console.log(vktc)
     const {
-        deactivateMyAccount,
-        editForm,
-        handleProfileFormChange,
-        handleNewBillingAddressChange,
-        handleNewAddressChange,
-        handleAccountSettingsChange,
-        handleSubmitProfileUpdate,
-        handleAddNewaddress,
-        updating,
-        handlePreferencesChange,
-        newBillAddress,
-        newAddress,
-        accountSettings,
-        preferences,
-        userData,
-        handleSelectAddress,
-        oldAddress,
-        handleClearAddress,
-        handleUpdateAddress,
-        handleAddBillingAdress,
+        editFormFirst,
+        editFormSecond,
+        editFormThird,
+        handleMukellefChangeFirst,
+        handleMukellefChangeSecond,
+        handleMukellefChangeThird,
+        handleSubmitMukellefUpdate,
         updated,
-        handleDeleteAddress
-    } = useAuth();
+        updating,
+        handleMukellefChangeThirdInner,
+    }=useMukellef();
 
     const copyToClipboard= (item:any)=>{
         var address = document.getElementById("individualAddress");
@@ -129,6 +119,7 @@ const ContactDetail = () => {
             console.log(value)
         }
     }
+
 
     useEffect(()=>{
         const thisCred=auth.currentUser;
@@ -146,7 +137,10 @@ const ContactDetail = () => {
     
 
 
-  console.log(thisUser)
+  //console.log(thisUser)
+  console.log(editFormFirst)
+  console.log("second",editFormSecond)
+  console.log("third",editFormThird)
 
     return (
         <div>
@@ -167,9 +161,9 @@ const ContactDetail = () => {
                 </li>
             </ul>
             <div className="pt-5">
-                <div className="flex items-center justify-between mb-5">
+                {/* <div className="flex items-center justify-between mb-5">
                     <h5 className="font-semibold text-lg dark:text-white-light">Ayarlar</h5>
-                </div>
+                </div> */}
                 <div>
                     <ul className="sm:flex font-semibold border-b border-[#ebedf2] dark:border-[#191e3a] mb-5 whitespace-nowrap overflow-y-auto">
                         <li className="inline-block">
@@ -220,7 +214,7 @@ const ContactDetail = () => {
                                             className="form-input"
                                             defaultValue={thisUser?.soyadiunvani}
                                             //value={editForm?.soyadiunvani}
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeFirst}
                                         />
                                         </div>
                                         <div>
@@ -233,7 +227,7 @@ const ContactDetail = () => {
                                                 className="form-input"
                                                 defaultValue={thisUser?.adi}
                                                 //value={editForm?.adi}
-                                                onChange={handleProfileFormChange}
+                                                onChange={handleMukellefChangeFirst}
                                             />
                                         </div>
                                         <div>
@@ -246,7 +240,7 @@ const ContactDetail = () => {
                                                 className="form-input"
                                                 defaultValue={thisUser?.phone}
                                                 //value={editForm?.adi}
-                                                onChange={handleProfileFormChange}
+                                                onChange={handleMukellefChangeFirst}
                                             />
                                         </div>
                                         <div>
@@ -259,7 +253,7 @@ const ContactDetail = () => {
                                             className="form-input"
                                             defaultValue={thisUser?.eposta}
                                             //value={editForm?.adi}
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeFirst}
                                         />
                                         </div>
                                         
@@ -273,7 +267,7 @@ const ContactDetail = () => {
                                             id='faaliyetadi'
                                             className="form-input"
                                             placeholder='faaliyet adi'
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeFirst}
                                             defaultValue={thisUser?.faaliyetadi}
                                         >
                                                 <option value="" disabled>seçiniz</option>
@@ -292,7 +286,7 @@ const ContactDetail = () => {
                                             id='faaliyetkodu'
                                             className="form-input"
                                             placeholder='faaliyet kodu'
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeFirst}
                                             defaultValue={thisUser?.faaliyetkodu}
                                         >
                                                 <option value="" disabled>seçiniz</option>
@@ -311,9 +305,9 @@ const ContactDetail = () => {
                                             id='vergidairesi'
                                             className="form-input"
                                             placeholder='il seçiniz'
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeFirst}
                                             defaultValue={thisUser?.vergidairesi}
-                                            value={editForm?.vergidairesi}
+                                            value={editFormFirst?.vergidairesi}
                                         >
                                                 <option value="" disabled>Vergi Dairesi</option>
 
@@ -332,7 +326,7 @@ const ContactDetail = () => {
                                             id='vergidairesiililce'
                                             className="form-input"
                                             placeholder='il/ilçe seçiniz'
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeFirst}
                                             defaultValue={thisUser?.vergidairesiililce}
                                         >
                                                 <option value="" disabled >il/ilçe seçiniz</option>
@@ -352,7 +346,7 @@ const ContactDetail = () => {
                                             id='vergidairesikodu'
                                             className="form-input"
                                             placeholder='kodu seçiniz'
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeFirst}
                                             defaultValue={thisUser?.vergidairesikodu}
                                         >
                                                 <option value="" disabled >kodu seçiniz</option>
@@ -375,7 +369,7 @@ const ContactDetail = () => {
                                                 className="form-input"
                                                 defaultValue={thisUser?.vergikimlikno}
                                                 //value={editForm?.adi}
-                                                onChange={handleProfileFormChange}
+                                                onChange={handleMukellefChangeFirst}
                                             />
                                         </div>
                                         <div>
@@ -388,7 +382,7 @@ const ContactDetail = () => {
                                                 className="form-input"
                                                 defaultValue={thisUser?.tckimlikno}
                                                 //value={editForm?.adi}
-                                                onChange={handleProfileFormChange}
+                                                onChange={handleMukellefChangeFirst}
                                             />
                                         </div>
                                         <div>
@@ -401,18 +395,18 @@ const ContactDetail = () => {
                                                 className="form-input"
                                                 defaultValue={thisUser?.ticaretsicilno}
                                                 //value={editForm?.adi}
-                                                onChange={handleProfileFormChange}
+                                                onChange={handleMukellefChangeFirst}
                                             />
                                         </div>
-                                    {/* <div className="sm:col-span-2 mt-3">
+                                    <div className="sm:col-span-2 mt-3">
                                         <Button
                                             variant='contained'
                                             disabled={updating}
-                                            onClick={handleSubmitProfileUpdate}
+                                            onClick={()=>vktc && handleSubmitMukellefUpdate(vktc,editFormFirst)}
                                             type="button" className="btn btn-primary">
                                             Kaydet
                                         </Button>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -439,7 +433,7 @@ const ContactDetail = () => {
                                         className="form-input"
                                         defaultValue={thisUser?.mersisno}
                                         //value={editForm?.soyadiunvani}
-                                        onChange={handleProfileFormChange}
+                                        onChange={handleMukellefChangeSecond}
                                     />
                                     </div>
                                 <div>
@@ -454,7 +448,7 @@ const ContactDetail = () => {
                                         className="form-input"
                                         defaultValue={thisUser?.kurulustarihi}
                                         //value={editForm?.soyadiunvani}
-                                        onChange={handleProfileFormChange}
+                                        onChange={handleMukellefChangeSecond}
                                     />
                                     </div>
                                     <div>
@@ -467,7 +461,7 @@ const ContactDetail = () => {
                                             className="form-input"
                                             defaultValue={thisUser?.kapanıstarihi}
                                             //value={editForm?.adi}
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeSecond}
                                         />
                                     </div>
                                     <div>
@@ -480,7 +474,7 @@ const ContactDetail = () => {
                                             className="form-input"
                                             defaultValue={thisUser?.tesciltarihi}
                                             //value={editForm?.adi}
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeSecond}
                                         />
                                     </div>
                                     <div>
@@ -493,7 +487,7 @@ const ContactDetail = () => {
                                         className="form-input"
                                         defaultValue={thisUser?.tescilkurulusyeri}
                                         //value={editForm?.adi}
-                                        onChange={handleProfileFormChange}
+                                        onChange={handleMukellefChangeSecond}
                                     />
                                     </div>
                                     
@@ -507,7 +501,7 @@ const ContactDetail = () => {
                                         id='kdvmukellefiyeti'
                                         className="form-input"
                                         placeholder='Kdv mükellefiyeti'
-                                        onChange={handleProfileFormChange}
+                                        onChange={handleMukellefChangeSecond}
                                         defaultValue={thisUser?.kdvmukellefiyeti}
                                     >
                                             <option value="" disabled>seçiniz</option>
@@ -523,7 +517,7 @@ const ContactDetail = () => {
                                         id='kdvvergidairesi'
                                         className="form-input"
                                         placeholder='kdv vergi dairesi seçiniz'
-                                        onChange={handleProfileFormChange}
+                                        onChange={handleMukellefChangeSecond}
                                         defaultValue={thisUser?.kdvvergidairesi}
                                     >
                                             <option value="" disabled>Vergi Dairesi</option>
@@ -543,7 +537,7 @@ const ContactDetail = () => {
                                         id='kdvvergidairesiililce'
                                         className="form-input"
                                         placeholder='il/ilçe seçiniz'
-                                        onChange={handleProfileFormChange}
+                                        onChange={handleMukellefChangeSecond}
                                         defaultValue={thisUser?.kdvvergidairesiililce}
                                     >
                                             <option value="" disabled >il/ilçe seçiniz</option>
@@ -563,7 +557,7 @@ const ContactDetail = () => {
                                             id='kdvvergidairesikodu'
                                             className="form-input"
                                             placeholder='kodu seçiniz'
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeSecond}
                                             defaultValue={thisUser?.kdvvergidairesikodu}
                                         >
                                                 <option value="" disabled >kodu seçiniz</option>
@@ -586,7 +580,7 @@ const ContactDetail = () => {
                                             className="form-input"
                                             defaultValue={thisUser?.taahhutedilensermaye}
                                             //value={editForm?.adi}
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeSecond}
                                         />
                                     </div>
                                     <div>
@@ -599,7 +593,7 @@ const ContactDetail = () => {
                                             className="form-input"
                                             defaultValue={thisUser?.odenmissermaye}
                                             //value={editForm?.adi}
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeSecond}
                                         />
                                     </div>
                                     <div>
@@ -612,7 +606,7 @@ const ContactDetail = () => {
                                             className="form-input"
                                             defaultValue={thisUser?.baglıoldugusosyalguvenlikkurumu}
                                             //value={editForm?.adi}
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeSecond}
                                         />
                                     </div>
                                     <div>
@@ -625,7 +619,7 @@ const ContactDetail = () => {
                                             className="form-input"
                                             defaultValue={thisUser?.baglıoldugumeslekitesekkul}
                                             //value={editForm?.adi}
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeSecond}
                                         />
                                     </div>
                                     <div>
@@ -638,7 +632,7 @@ const ContactDetail = () => {
                                             className="form-input"
                                             defaultValue={thisUser?.meslekitesekkulnumarasi}
                                             //value={editForm?.adi}
-                                            onChange={handleProfileFormChange}
+                                            onChange={handleMukellefChangeSecond}
                                         />
                                     </div>
                                     <div>
@@ -648,7 +642,7 @@ const ContactDetail = () => {
                                         id='basitusul'
                                         className="form-input"
                                         placeholder='Basit usül'
-                                        onChange={handleProfileFormChange}
+                                        onChange={handleMukellefChangeSecond}
                                         defaultValue={thisUser?.basitusul}
                                     >
                                             <option value="" disabled>seçiniz</option>
@@ -656,7 +650,7 @@ const ContactDetail = () => {
                                             <option value="Hayır" disabled>Hayır</option>
                                     </select>
                                 </div>
-                                {(thisUser.basitusul==="Evet" || editForm?.basitusul==="Evet")&&
+                                {(thisUser.basitusul==="Evet" || editFormSecond?.basitusul==="Evet")&&
                                 <div>
                                 <label htmlFor="basitusulfaaliyetkodu">Basit Usül Faaliyet Kodu</label>
                                 <input 
@@ -667,19 +661,19 @@ const ContactDetail = () => {
                                     className="form-input"
                                     defaultValue={thisUser?.basitusulfaaliyetkodu}
                                     //value={editForm?.adi}
-                                    onChange={handleProfileFormChange}
+                                    onChange={handleMukellefChangeSecond}
                                 />
                             </div>
                                 }
-                                {/* <div className="sm:col-span-2 mt-3">
+                                <div className="sm:col-span-2 mt-3">
                                     <Button
                                         variant='contained'
                                         disabled={updating}
-                                        onClick={handleSubmitProfileUpdate}
+                                        onClick={()=>vktc && handleSubmitMukellefUpdate(vktc,editFormSecond)}
                                         type="button" className="btn btn-primary">
                                         Kaydet
                                     </Button>
-                                </div> */}
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -689,305 +683,6 @@ const ContactDetail = () => {
                     ''
                 )}
                
-                <Transition appear show={addAddressModal} as={Fragment}>
-                <Dialog as="div" open={addAddressModal} onClose={() => setAddAddressModal(false)} className="relative z-[51]">
-                    <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-                        <div className="fixed inset-0 bg-[black]/60" />
-                    </Transition.Child>
-                    <div className="fixed inset-0 overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center px-4 py-8">
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 scale-95"
-                                enterTo="opacity-100 scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 scale-100"
-                                leaveTo="opacity-0 scale-95"
-                            >
-                                <Dialog.Panel className="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg text-black dark:text-white-dark">
-                                    <button
-                                        type="button"
-                                        onClick={() => setAddAddressModal(false)}
-                                        className="absolute top-4 ltr:right-4 rtl:left-4 text-gray-400 hover:text-gray-800 dark:hover:text-gray-600 outline-none"
-                                    >
-                                        <IconX />
-                                    </button>
-                                    <div className="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]">
-                                        Adres Ekle
-                                    </div>
-                                    <div className="p-5">
-                                        <form>
-                                            <div className="mb-5">
-                                                <label htmlFor="adresstitle">Adres Başlığı</label>
-                                                <input 
-                                                    id="adresstitle"
-                                                    name="title"
-                                                    type="text"
-                                                    placeholder="Adres başlığı giriniz" className="form-input"
-                                                    value={newAddress?.title} 
-                                                    onChange={handleNewAddressChange}
-                                                />
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="adressname">İsim Soyisim</label>
-                                                <input 
-                                                    id="adressname"
-                                                    name="name"
-                                                    type="text"
-                                                    placeholder="İsim soyisim giriniz" className="form-input"
-                                                    value={newAddress?.name} 
-                                                    onChange={handleNewAddressChange}
-                                                />
-                                            </div>
-                                            
-                                            <div className="mb-5">
-                                                <label htmlFor="adresscity">İl</label>
-                                                <select
-                                                    name="city"
-                                                    id='adresscity'
-                                                    className="form-input"
-                                                    placeholder='il seçiniz'
-                                                    onChange={handleNewAddressChange}
-                                                    value={newAddress?.city}
-                                                >
-                                                    <option value="" disabled >il seçiniz</option>
-
-                                                    {illers.map((i,idx)=>{
-                                                        return(
-                                                            <option key={idx} value={i.il}>{i?.il}</option>
-                                                        )
-                                                    })}
-                                                </select>
-                                                
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="adressregion">İlçe</label>
-                                                <select
-                                                    name="region"
-                                                    id='adressregion'
-                                                    className="form-input"
-                                                    placeholder='ilçe seçiniz'
-                                                    onChange={handleNewAddressChange}
-                                                    value={newAddress?.region}
-                                                >
-                                                <option value="" disabled >ilçe seçiniz</option>
-
-                                                {illers.find((il) => il.il === newAddress?.city)?.ilceleri?.map((ilce, ilcedx) => (
-                                                    <option key={ilcedx} value={ilce}>
-                                                    {ilce}
-                                                    </option>
-                                                ))}
-                                        </select>
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="adressText">Adres</label>
-                                                <input
-                                                    id="adressText"
-                                                    name='address'
-                                                    type="text"
-                                                    placeholder="Adresi giriniz"
-                                                    className="form-input"
-                                                    value={newAddress?.address}
-                                                    onChange={handleNewAddressChange}
-                                                />
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="adressPhone">Telefon</label>
-                                                <input
-                                                    id="adressPhone"
-                                                    name='phone'
-                                                    type="tel"
-                                                    placeholder="Telefonu giriniz"
-                                                    className="form-input"
-                                                    value={newAddress?.phone}
-                                                    onChange={handleNewAddressChange}
-                                                />
-                                            </div>
-                                            <div className="mb-5">
-                                            <label htmlFor="adressZip">Posta Kodu</label>
-                                                <input
-                                                    id="adressZip"
-                                                    name='zip'
-                                                    type="text"
-                                                    placeholder="Posta kodu"
-                                                    className="form-input"
-                                                    value={newAddress?.zip}
-                                                    onChange={handleNewAddressChange}
-                                                />
-                                            </div>
-                                            
-                                            <div className="flex justify-end items-center mt-8">
-                                                <button type="button" className="btn btn-outline-danger" onClick={() => {setAddAddressModal(false);
-                                                handleClearAddress()
-                                                }}>
-                                                    İptal
-                                                </button>
-                                                <Button
-                                                    variant='contained'
-                                                    type="button"
-                                                    className="btn btn-primary ltr:ml-4 rtl:mr-4" onClick={()=>handleAddNewaddress(()=>setAddAddressModal(false))}>
-                                                    Kaydet
-                                                </Button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </Dialog.Panel>
-                            </Transition.Child>
-                        </div>
-                    </div>
-                </Dialog>
-                </Transition>
-                <Transition appear show={editAddressModal} as={Fragment}>
-                <Dialog as="div" open={editAddressModal} onClose={() => setEditAddressModal(false)} className="relative z-[51]">
-                    <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-                        <div className="fixed inset-0 bg-[black]/60" />
-                    </Transition.Child>
-                    <div className="fixed inset-0 overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center px-4 py-8">
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 scale-95"
-                                enterTo="opacity-100 scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 scale-100"
-                                leaveTo="opacity-0 scale-95"
-                            >
-                                <Dialog.Panel className="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg text-black dark:text-white-dark">
-                                    <button
-                                        type="button"
-                                        onClick={() => setEditAddressModal(false)}
-                                        className="absolute top-4 ltr:right-4 rtl:left-4 text-gray-400 hover:text-gray-800 dark:hover:text-gray-600 outline-none"
-                                    >
-                                        <IconX />
-                                    </button>
-                                    <div className="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]">
-                                        Düzenle
-                                    </div>
-                                    <div className="p-5">
-                                        <form>
-                                            <div className="mb-5">
-                                                <label htmlFor="adresstitle">Adres Başlığı</label>
-                                                <input 
-                                                    id="adresstitle"
-                                                    name="title"
-                                                    type="text"
-                                                    placeholder="Adres başlığı giriniz" className="form-input"
-                                                    defaultValue={oldAddress?.title}
-                                                    value={newAddress?.title} 
-                                                    onChange={handleNewAddressChange}
-                                                />
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="adresscity">İl</label>
-                                                <select
-                                                    name="city"
-                                                    id='adresscity'
-                                                    className="form-input"
-                                                    placeholder='il seçiniz'
-                                                    defaultValue={oldAddress?.city}
-                                                    onChange={handleNewAddressChange}
-                                                    value={newAddress?.city}
-                                                >
-                                                    <option value="" disabled >il seçiniz</option>
-
-                                                    {illers.map((i,idx)=>{
-                                                        return(
-                                                            <option key={idx} value={i.il}>{i?.il}</option>
-                                                        )
-                                                    })}
-                                                </select>
-                                                
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="adressregion">İlçe</label>
-                                                <select
-                                                    name="region"
-                                                    id='adressregion'
-                                                    className="form-input"
-                                                    placeholder='ilçe seçiniz'
-                                                    defaultValue={oldAddress?.region}
-                                                    onChange={handleNewAddressChange}
-                                                    value={newAddress?.region}
-                                                >
-                                                <option value="" disabled >ilçe seçiniz</option>
-
-                                                {illers.find((il) => il.il === newAddress?.city)?.ilceleri?.map((ilce, ilcedx) => (
-                                                    <option key={ilcedx} value={ilce}>
-                                                    {ilce}
-                                                    </option>
-                                                ))}
-                                        </select>
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="adressText">Adres</label>
-                                                <input
-                                                    id="adressText"
-                                                    name='address'
-                                                    type="text"
-                                                    placeholder="Adresi giriniz"
-                                                    className="form-input"
-                                                    defaultValue={oldAddress?.address}
-                                                    value={newAddress?.address}
-                                                    onChange={handleNewAddressChange}
-                                                />
-                                            </div>
-                                            <div className="mb-5">
-                                                <label htmlFor="adressPhone">Telefon</label>
-                                                <input
-                                                    id="adressPhone"
-                                                    name='phone'
-                                                    type="tel"
-                                                    placeholder="Telefonu giriniz"
-                                                    className="form-input"
-                                                    defaultValue={oldAddress?.phone}
-                                                    value={newAddress?.phone}
-                                                    onChange={handleNewAddressChange}
-                                                />
-                                            </div>
-                                            <div className="mb-5">
-                                            <label htmlFor="adressZip">Posta Kodu</label>
-                                                <input
-                                                    id="adressZip"
-                                                    name='zip'
-                                                    type="text"
-                                                    placeholder="Posta kodu"
-                                                    className="form-input"
-                                                    defaultValue={oldAddress?.zip}
-                                                    value={newAddress?.zip}
-                                                    onChange={handleNewAddressChange}
-                                                />
-                                            </div>
-                                            
-                                            
-                                            <div className="flex justify-end items-center mt-8">
-                                                <button type="button" className="btn btn-outline-danger mr-4" 
-                                                onClick={()=>handleDeleteAddress(()=>setEditAddressModal(false))}
-                                                >
-                                                    Sil
-                                                </button>
-                                                <button type="button" className="btn btn-outline-danger" onClick={() => {setEditAddressModal(false);
-                                                handleClearAddress()
-                                                }}>
-                                                    İptal
-                                                </button>
-                                                <Button
-                                                    variant='contained'
-                                                    type="button"
-                                                    className="btn btn-primary ltr:ml-4 rtl:mr-4" onClick={()=>handleUpdateAddress(()=>setEditAddressModal(false))}
-                                                    >
-                                                    Kaydet
-                                                </Button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </Dialog.Panel>
-                            </Transition.Child>
-                        </div>
-                    </div>
-                </Dialog>
-                </Transition>
                 {tabs === 'preferences' ? (
                    <div>
                    <form className="border border-[#ebedf2] dark:border-[#191e3a] rounded-md p-4 mb-5 bg-white dark:bg-black">
@@ -1006,7 +701,7 @@ const ContactDetail = () => {
                                        className="form-input"
                                        defaultValue={thisUser?.yetkilismsmmm}
                                        //value={editForm?.soyadiunvani}
-                                       onChange={handleProfileFormChange}
+                                       onChange={handleMukellefChangeThird}
                                    />
                                    </div>
                                    <div>
@@ -1019,7 +714,7 @@ const ContactDetail = () => {
                                            className="form-input"
                                            defaultValue={thisUser?.smsmmmsozlesmetarihi}
                                            //value={editForm?.adi}
-                                           onChange={handleProfileFormChange}
+                                           onChange={handleMukellefChangeThird}
                                        />
                                    </div>
                                    <div>
@@ -1032,7 +727,7 @@ const ContactDetail = () => {
                                            className="form-input"
                                            defaultValue={thisUser?.smsmmmsozlesmeno}
                                            //value={editForm?.adi}
-                                           onChange={handleProfileFormChange}
+                                           onChange={handleMukellefChangeThird}
                                        />
                                    </div>
                                    <div>
@@ -1045,7 +740,7 @@ const ContactDetail = () => {
                                        className="form-input"
                                        defaultValue={thisUser?.yetkiliymm}
                                        //value={editForm?.adi}
-                                       onChange={handleProfileFormChange}
+                                       onChange={handleMukellefChangeThird}
                                    />
                                    </div>
                                    <div>
@@ -1059,7 +754,7 @@ const ContactDetail = () => {
                                        className="form-input mb-2"
                                        defaultValue={thisUser?.odatemsilcisibilgileri?.adi}
                                        //value={editForm?.adi}
-                                       onChange={handleProfileFormChange}
+                                       onChange={handleMukellefChangeThirdInner}
                                    />
                                    <label htmlFor="odatemsilcisibilgilerisoyadi">Soyadı</label>
                                    <input 
@@ -1070,7 +765,7 @@ const ContactDetail = () => {
                                        className="form-input mb-2"
                                        defaultValue={thisUser?.odatemsilcisibilgileri?.soyadi}
                                        //value={editForm?.adi}
-                                       onChange={handleProfileFormChange}
+                                       onChange={handleMukellefChangeThirdInner}
                                    />
                                    <label htmlFor="odatemsilcisibilgileriTC">TC Kimlik Numarası</label>
                                    <input 
@@ -1081,19 +776,19 @@ const ContactDetail = () => {
                                        className="form-input mb-2"
                                        defaultValue={thisUser?.odatemsilcisibilgileri?.tckimlikno}
                                        //value={editForm?.adi}
-                                       onChange={handleProfileFormChange}
+                                       onChange={handleMukellefChangeThirdInner}
                                    />
                                    
                                    </div>
-                               {/* <div className="sm:col-span-2 mt-3">
+                               <div className="sm:col-span-2 mt-3">
                                    <Button
                                        variant='contained'
                                        disabled={updating}
-                                       onClick={handleSubmitProfileUpdate}
+                                       onClick={()=>vktc && handleSubmitMukellefUpdate(vktc,editFormThird)}
                                        type="button" className="btn btn-primary">
                                        Kaydet
                                    </Button>
-                               </div> */}
+                               </div>
                            </div>
                        </div>
                    </form>
