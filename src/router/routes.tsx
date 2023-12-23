@@ -8,6 +8,8 @@ import GidenList from '../pages/Apps/Invoice/GidenList';
 import GelenDetail from '../pages/Apps/Invoice/GelenDetail';
 import GidenDetail from '../pages/Apps/Invoice/GidenDetail';
 import ContactDetail from '../pages/Apps/ContactDetail';
+import MukellefListBill from '../pages/Apps/Invoice/MukellefListBill';
+import FromEntegrator from '../pages/Apps/Invoice/FromEntegrator';
 const Index = lazy(() => import('../pages/Index'));
 const Finance = lazy(() => import('../pages/Finance'));
 const Crypto = lazy(() => import('../pages/Crypto'));
@@ -94,11 +96,19 @@ const routes = [
     },
     {
         path: 'fatura/gelen-fatura',
-        element: <GelenList />,
+        element: <MukellefListBill />,
+    },
+    {
+        path: 'fatura/gelen-fatura/:mukellef',
+        element: <FromEntegrator />,
     },
     {
         path: 'fatura/giden-fatura',
-        element: <GidenList />,
+        element: <MukellefListBill />,
+    },
+    {
+        path: 'fatura/giden-fatura/:mukellef',
+        element: <FromEntegrator />,
     },
     {
         path: 'fatura/gelen-fatura/:id',

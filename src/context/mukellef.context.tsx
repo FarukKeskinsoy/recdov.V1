@@ -405,6 +405,9 @@ export const MukellefProvider: React.FC<MukellefProviderProps> = ({ children }) 
         },
         eposta:"",//
         phone:"",//
+        entegrator:"",
+        enusername:"",
+        enpassword:""
       })
       setAdding(false)
       setChanged(pre=>!pre)

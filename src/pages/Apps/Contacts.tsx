@@ -23,6 +23,7 @@ import { CollectionReference, collection, doc, getDocs } from 'firebase/firestor
 import { auth, db } from '../../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 import { Launch } from '@mui/icons-material';
+import { entegratorler } from '../../rawData/entegratorList';
 
 interface Mukellef {
     // Assuming that adresler is an array of Address objects
@@ -61,6 +62,9 @@ interface Mukellef {
     odatemsilcisibilgileri?:object;
     eposta?:string;
     phone?:string;
+    entegrator?:string;
+    enusername?:string,
+    enpassword?:string
 }
   
 const Contacts = () => {
@@ -773,7 +777,51 @@ const showConfirmMessage = (
                                                        })}
                                                 </select>
                                             </div>
+                                            <h6 className='my-5'>GİB Entegratör Bilgileri</h6>
+
+                                            <div className="mb-5">
+                                                <label htmlFor="entegrator">Entegrator</label>
+                                                <select
+                                                    id="entegrator"
+                                                    placeholder="entegrator seçiniz"
+                                                    className="form-input"
+                                                    name='entegrator'
+                                                    value={newMukellef?.entegrator||""}
+                                                    onChange={handleNewMukellefFormChange}
+                                                >
+                                                       <option value="" disabled defaultChecked >Entegratorler</option>
+                                                       {entegratorler.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.entegrator}>{i.label}</option>
+                                                        )
+                                                       })}
+                                                </select>
+                                            </div>
                                             
+                                            <div className="mb-5">
+                                                <label htmlFor="enusername">Kullanıcı Adı</label>
+                                                <input 
+                                                    id="enusername" 
+                                                    type="text" 
+                                                    placeholder="Kullanıcı adı"
+                                                    className="form-input"
+                                                    name='enusername'
+                                                    value={newMukellef?.enusername} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
+                                            <div className="mb-5">
+                                                <label htmlFor="enpassword">Kullanıcı Şifresi</label>
+                                                <input 
+                                                    id="enpassword" 
+                                                    type="text" 
+                                                    placeholder="Kullanıcı şifresi"
+                                                    className="form-input"
+                                                    name='enpassword'
+                                                    value={newMukellef?.enpassword} 
+                                                    onChange={handleNewMukellefFormChange}
+                                                />
+                                            </div>
                                             <div className="mb-5">
                                                 <label htmlFor="taahhutedilensermaye">Taahhüt Edilen Sermaye</label>
                                                 <input 
