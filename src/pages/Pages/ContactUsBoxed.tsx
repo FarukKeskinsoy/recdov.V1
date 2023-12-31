@@ -97,25 +97,25 @@ const ContactUsBoxed = () => {
                             </div>
                             <form className="space-y-5" onSubmit={submitForm}>
                                 <div className="relative text-white-dark">
-                                    <input id="İsim" type="text" placeholder="Name" className="form-input ps-10 placeholder:text-white-dark" />
+                                    <input id="İsim" type="text" placeholder="İsim" className="form-input ps-10 placeholder:text-white-dark" />
                                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                                         <IconUser fill={true} />
                                     </span>
                                 </div>
                                 <div className="relative text-white-dark">
-                                    <input id="Email" type="email" placeholder="Email" className="form-input ps-10 placeholder:text-white-dark" />
+                                    <input id="Email" type="email" placeholder="E-Mail" className="form-input ps-10 placeholder:text-white-dark" />
                                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                                         <IconMail fill={true} />
                                     </span>
                                 </div>
                                 <div className="relative text-white-dark">
-                                    <input id="Telefon" type="text" placeholder="Phone" className="form-input ps-10 placeholder:text-white-dark" />
+                                    <input id="Telefon" type="text" placeholder="Telefon" className="form-input ps-10 placeholder:text-white-dark" />
                                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                                         <IconPhoneCall fill={true} />
                                     </span>
                                 </div>
                                 <div className="relative text-white-dark">
-                                    <input id="Konu" type="text" placeholder="Subject" className="form-input ps-10 placeholder:text-white-dark" />
+                                    <input id="Konu" type="text" placeholder="Konu" className="form-input ps-10 placeholder:text-white-dark" />
                                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                                         <IconPencil fill={true} />
                                     </span>
