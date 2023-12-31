@@ -7,7 +7,7 @@ import { IRootState } from '../../store';
 const Maintenence = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setPageTitle('Maintenance'));
+        dispatch(setPageTitle('Bakım'));
     });
     const isDark = useSelector((state: IRootState) => state.themeConfig.theme === 'dark' || state.themeConfig.isDarkMode);
 
@@ -21,17 +21,17 @@ const Maintenence = () => {
                         className="mx-auto -mt-10 w-full max-w-xs object-cover md:-mt-20 md:max-w-lg"
                     />
                     <div className="-mt-8 font-semibold dark:text-white">
-                        <h2 className="mb-5 text-3xl font-bold text-primary md:text-5xl">Under Maintenance</h2>
-                        <h4 className="mb-7 text-xl sm:text-2xl">Thank you for visiting us.</h4>
+                        <h2 className="mb-5 text-3xl font-bold text-primary md:text-5xl">Bakımdayız</h2>
+                        <h4 className="mb-7 text-xl sm:text-2xl">Bizi tercih ettiğiniz için teşekkürler.</h4>
                         <p className="text-base">
-                            We are currently working on making some improvements <br className="hidden sm:block" />
-                            to give you better user experience. <br />
+                            Şuan size daha iyi hizmet verebilmek için bir konu hakkında çalışıyoruz <br className="hidden sm:block" />
+                            
                             <br />
-                            Please visit us again shortly.
+                            Çok kısa sürede tamamlayacağız görüşmek üzere!
                         </p>
                     </div>
                     <Link to="/" className="btn btn-gradient mx-auto !mt-7 w-max border-0 uppercase shadow-none">
-                        Home
+                        Anasayfa
                     </Link>
                 </div>
             </div>

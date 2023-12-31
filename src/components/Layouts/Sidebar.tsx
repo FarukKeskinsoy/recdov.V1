@@ -294,11 +294,11 @@ const Sidebar = () => {
                                 <AnimateHeight duration={300} height={currentMenu === 'page' ? 'auto' : 0}>
                                     <ul className="sub-menu text-gray-500">
                                         <li>
-                                            <NavLink to="/pages/knowledge-base">{t('knowledge_base')}</NavLink>
+                                            <NavLink to="/pages/knowledge-base">{t('Bilgi Portalı')}</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to="/pages/contact-us-boxed" target="_blank">
-                                                {t('contact_us_boxed')}
+                                            <NavLink to="/pages/contact-us-boxed" target="Bize Ulaşın">
+                                                {t('Bize Ulaşın')}
                                             </NavLink>
                                         </li>
                                         <li>

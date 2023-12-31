@@ -798,8 +798,8 @@ const Header = () => {
                                 <NavLink to="/pages/knowledge-base">{t('knowledge_base')}</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/pages/contact-us-boxed" target="_blank">
-                                    {t('contact_us_boxed')}
+                                <NavLink to="/pages/contact-us-boxed" target="Bize Ulaşın">
+                                    {t('Bize Ulaşın')}
                                 </NavLink>
                             </li>
                             <li>

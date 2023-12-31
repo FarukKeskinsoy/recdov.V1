@@ -15,7 +15,7 @@ import IconMessageDots from '../../components/Icon/IconMessageDots';
 const ContactUsBoxed = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setPageTitle('Contact Us Boxed'));
+        dispatch(setPageTitle('Bize Ulaşın'));
     });
     const navigate = useNavigate();
 
@@ -92,12 +92,12 @@ const ContactUsBoxed = () => {
                         </div>
                         <div className="mx-auto w-full max-w-[440px]">
                             <div className="mb-10">
-                                <h1 className="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">Contact us</h1>
-                                <p className="text-base font-bold leading-normal text-white-dark">Submit your queries and we will get back to you as soon as possible.</p>
+                                <h1 className="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">BİZE ULAŞIN</h1>
+                                <p className="text-base font-bold leading-normal text-white-dark">Sorularınızı gönderin. Ekibimiz en kısa sürede size dönüş yapacaktır.</p>
                             </div>
                             <form className="space-y-5" onSubmit={submitForm}>
                                 <div className="relative text-white-dark">
-                                    <input id="Name" type="text" placeholder="Name" className="form-input ps-10 placeholder:text-white-dark" />
+                                    <input id="İsim" type="text" placeholder="Name" className="form-input ps-10 placeholder:text-white-dark" />
                                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                                         <IconUser fill={true} />
                                     </span>
@@ -109,25 +109,25 @@ const ContactUsBoxed = () => {
                                     </span>
                                 </div>
                                 <div className="relative text-white-dark">
-                                    <input id="Phone" type="text" placeholder="Phone" className="form-input ps-10 placeholder:text-white-dark" />
+                                    <input id="Telefon" type="text" placeholder="Phone" className="form-input ps-10 placeholder:text-white-dark" />
                                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                                         <IconPhoneCall fill={true} />
                                     </span>
                                 </div>
                                 <div className="relative text-white-dark">
-                                    <input id="Subject" type="text" placeholder="Subject" className="form-input ps-10 placeholder:text-white-dark" />
+                                    <input id="Konu" type="text" placeholder="Subject" className="form-input ps-10 placeholder:text-white-dark" />
                                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                                         <IconPencil fill={true} />
                                     </span>
                                 </div>
                                 <div className="relative text-white-dark">
-                                    <textarea id="Textarea" rows={4} className="form-textarea resize-none ps-10 placeholder:text-white-dark" placeholder="Message"></textarea>
+                                    <textarea id="Textarea" rows={4} className="form-textarea resize-none ps-10 placeholder:text-white-dark" placeholder="Mesaj"></textarea>
                                     <span className="absolute start-4 top-2.5">
                                         <IconMessageDots fill={true} />
                                     </span>
                                 </div>
                                 <button type="submit" className="btn btn-gradient !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
-                                    Submit
+                                    Gönder
                                 </button>
                             </form>
                         </div>

@@ -18,30 +18,30 @@ import IconX from '../../components/Icon/IconX';
 const KnowledgeBase = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setPageTitle('Bilgi Tabanı'));
+        dispatch(setPageTitle('Bilgi Portalı'));
     });
     const [activeTab, setActiveTab] = useState<String>('general');
     const [active1, setActive1] = useState<any>(1);
     const [active2, setActive2] = useState<any>(1);
-    const [modal, setModal] = useState(false);
-    const items = [
-        {
-            src: '/assets/images/knowledge/image-5.jpg',
-            title: 'Excessive sugar is harmful',
-        },
-        {
-            src: '/assets/images/knowledge/image-6.jpg',
-            title: 'Creative Photography',
-        },
-        {
-            src: '/assets/images/knowledge/image-7.jpg',
-            title: 'Plan your next trip',
-        },
-        {
-            src: '/assets/images/knowledge/image-8.jpg',
-            title: 'My latest Vlog',
-        },
-    ];
+    // const [modal, setModal] = useState(false);
+    // const items = [
+    //     {
+    //         src: '/assets/images/knowledge/image-5.jpg',
+    //         title: 'Excessive sugar is harmful',
+    //     },
+    //     {
+    //         src: '/assets/images/knowledge/image-6.jpg',
+    //         title: 'Creative Photography',
+    //     },
+    //     {
+    //         src: '/assets/images/knowledge/image-7.jpg',
+    //         title: 'Plan your next trip',
+    //     },
+    //     {
+    //         src: '/assets/images/knowledge/image-8.jpg',
+    //         title: 'My latest Vlog',
+    //     },
+    // ];
 
     return (
         <div>
@@ -162,16 +162,16 @@ const KnowledgeBase = () => {
                         </div>
                         <div className="mb-2 text-center text-2xl font-bold dark:text-white md:text-5xl">Bilgi Portalı</div>
                     </div>
-                    <p className="mb-9 text-center text-base font-semibold">cevapları ara & herkes tarafından sorulmuş sorular</p>
+                    <p className="mb-9 text-center text-base font-semibold">Sıkça Sorulan Sorular ve Cevapları</p>
                     <form action="" method="" className="mb-6">
                         <div className="relative mx-auto max-w-[580px]">
-                            <input type="text" placeholder="Ask a question" className="form-input py-3 ltr:pr-[100px] rtl:pl-[100px]" />
+                            <input type="text" placeholder="Soru sor..." className="form-input py-3 ltr:pr-[100px] rtl:pl-[100px]" />
                             <button type="button" className="btn btn-primary absolute top-1 shadow-none ltr:right-1 rtl:left-1">
                                 Ara
                             </button>
                         </div>
                     </form>
-                    <div className="flex flex-wrap items-center justify-center gap-2 font-semibold text-[#2196F3] sm:gap-5">
+                    {/* <div className="flex flex-wrap items-center justify-center gap-2 font-semibold text-[#2196F3] sm:gap-5">
                         <div className="whitespace-nowrap font-medium text-black dark:text-white">Popüler başlıklar :</div>
                         <div className="flex items-center justify-center gap-2 sm:gap-5">
                             <Link to="#" className="duration-300 hover:underline">
@@ -187,7 +187,7 @@ const KnowledgeBase = () => {
                                 Yazılı<main></main>
                             </Link>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className="mb-12 flex items-center rounded-b-md bg-[#DBE7FF] dark:bg-[#141F31]">
@@ -240,11 +240,11 @@ const KnowledgeBase = () => {
                 </ul>
             </div>
             <h3 className="mb-8 text-center text-xl font-semibold md:text-2xl">
-                Bazı genel <span className="text-primary">sorular</span>
+                Sıkça Sorulan <span className="text-primary">Sorular</span>
             </h3>
             <div className="mb-10 grid grid-cols-1 gap-10 md:grid-cols-2">
                 <div className="rounded-md bg-white dark:bg-black">
-                    <div className="border-b border-white-light p-6 text-[22px] font-bold dark:border-dark dark:text-white">General topics?</div>
+                    <div className="border-b border-white-light p-6 text-[22px] font-bold dark:border-dark dark:text-white">Ana Başlıklar</div>
                     <div className="divide-y divide-white-light px-6 py-4.5 dark:divide-dark">
                         <div>
                             <div
@@ -252,7 +252,7 @@ const KnowledgeBase = () => {
                             ${active1 === 1 ? 'bg-primary-light dark:bg-[#1B2E4B] !text-primary' : ''}`}
                                 onClick={() => setActive1(active1 === 1 ? null : 1)}
                             >
-                                <span>RECDOV nasıl elde edilir</span>
+                                <span>RecDo'yu nasıl kullanabilirim?</span>
                                 {active1 !== 1 ? (
                                     <span className="shrink-0">
                                         <IconPlusCircle duotone={false} />
@@ -266,10 +266,15 @@ const KnowledgeBase = () => {
                             <AnimateHeight duration={300} height={active1 === 1 ? 'auto' : 0}>
                                 <div className="px-1 py-3 font-semibold text-white-dark">
                                     <p>
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                        beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <strong>Giriş veya Üyelik:</strong> Öncelikle, RecDo platformuna giriş yapmanız veya üye olmanız gerekebilir. Bu adım, genellikle bir e-posta adresi ve şifreyle yapılır.
+                                <br />
+                                <strong>Kontür Seçimi:</strong> Kontür satın almadan önce, genellikle farklı kontür seçenekleri sunulur. Bu kontürler farklı fiyatlar, hizmet paketleri veya kullanım süreleri içerebilir. Kullanıcılar ihtiyaçlarına en uygun olanı seçebilir.
+                                <br />
+                                <strong>Ödeme Bilgileri:</strong> Kontür seçiminizi yaptıktan sonra, ödeme işlemi için gerekli bilgileri sağlamanız istenecektir. Bu genellikle kredi kartı bilgileri veya alternatif ödeme yöntemleriyle yapılabilir.
+                                <br />
+                                <strong>Ödeme Onayı ve İşlem:</strong> Ödeme bilgileri girildikten sonra, işlemi onaylamanız ve ödemenin gerçekleştirilmesi istenecektir. Bu adım, ödemenin işlenmesi ve kontörün hesabınıza yüklenmesiyle sonuçlanır.
+                                <br />
+                                <strong>Kontörün Kullanımı:</strong> Ödeme tamamlandıktan sonra, hesabınıza yüklenen kontör miktarıyla RecDo'nun sunulan hizmetlerini kullanmaya başlayabilirsiniz. Belgelerinizi işleyebilir, muhasebe verilerine dönüştürebilir veya diğer platform özelliklerinden faydalanabilirsiniz.
                                     </p>
                                 </div>
                             </AnimateHeight>
@@ -280,7 +285,7 @@ const KnowledgeBase = () => {
                             ${active1 === 2 ? 'bg-primary-light dark:bg-[#1B2E4B] !text-primary' : ''}`}
                                 onClick={() => setActive1(active1 === 2 ? null : 2)}
                             >
-                                <span> Where can I subscribe to your newsletter?</span>
+                                <span> RecDo'nun sistem gereksinimleri nelerdir?</span>
                                 {active1 !== 2 ? (
                                     <span className="shrink-0">
                                         <IconPlusCircle duotone={false} />
@@ -294,10 +299,11 @@ const KnowledgeBase = () => {
                             <AnimateHeight duration={300} height={active1 === 2 ? 'auto' : 0}>
                                 <div className="px-1 py-3 font-semibold text-white-dark">
                                     <p>
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                        beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    Kullanıcılar, RecDo gibi bir web uygulamasını kullanabilmek için genellikle şu gereksinimlere sahip olmalıdır:
+                                    <br />
+                                    <strong>İnternet Bağlantısı:</strong> Web tabanlı bir uygulama olan RecDo'nun kullanılabilmesi için internet bağlantısına ihtiyaç vardır. Stabil bir internet bağlantısı, uygulamanın düzgün bir şekilde çalışmasını sağlar.
+                                    <br />
+                                    <strong>Web Tarayıcısı:</strong> Kullanıcılar, RecDo'ya erişebilmek için modern bir web tarayıcısına sahip olmalıdır. Google Chrome, Mozilla Firefox, Safari veya Microsoft Edge gibi güncel tarayıcılar genellikle desteklenir.
                                     </p>
                                 </div>
                             </AnimateHeight>
@@ -308,7 +314,7 @@ const KnowledgeBase = () => {
                             ${active1 === 3 ? 'bg-primary-light dark:bg-[#1B2E4B] !text-primary' : ''}`}
                                 onClick={() => setActive1(active1 === 3 ? null : 3)}
                             >
-                                <span>How to install RECDOV Admin</span>
+                                <span>Şifremi unuttuğumda ne yapmalıyım?</span>
                                 {active1 !== 3 ? (
                                     <span className="shrink-0">
                                         <IconPlusCircle duotone={false} />
@@ -322,10 +328,15 @@ const KnowledgeBase = () => {
                             <AnimateHeight duration={300} height={active1 === 3 ? 'auto' : 0}>
                                 <div className="px-1 py-3 font-semibold text-white-dark">
                                     <p>
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                        beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    Şifrenizi sıfırlamak için genellikle aşağıdaki adımları takip edebilirsiniz:
+                                    <br />
+                                    <strong>Şifre Sıfırlama Bağlantısı:</strong> Giriş ekranında genellikle "Şifremi Unuttum" veya buna benzer bir seçenek bulunur. Bu seçeneği tıkladığınızda, genellikle "Şifre Sıfırlama" veya "Şifre Yenileme" sayfasına yönlendirilirsiniz.
+<br />
+<strong>E-posta veya Kullanıcı Adı Girme:</strong> Şifre sıfırlama sayfasında genellikle hesabınıza bağlı olan e-posta adresinizi veya kullanıcı adınızı girmeniz istenir. Bu bilgiyi girdikten sonra, şifrenizi sıfırlamak için talimatlar içeren bir e-posta alırsınız.
+<br />
+<strong>Şifre Sıfırlama Talimatları:</strong> Size gönderilen e-postadaki talimatları takip ederek şifrenizi sıfırlayabilirsiniz. Genellikle bir bağlantıya tıklamanız veya belirli adımları izlemeniz istenir.
+<br />
+<strong>Yeni Şifre Belirleme:</strong> E-postadaki talimatları takip ederek, şifre sıfırlama sayfasına yönlendirilirsiniz. Burada genellikle yeni bir şifre belirlemeniz istenir. Yeni şifrenizi belirledikten sonra, hesabınıza bu yeni şifre ile giriş yapabilirsiniz.
                                     </p>
                                 </div>
                             </AnimateHeight>
@@ -336,7 +347,7 @@ const KnowledgeBase = () => {
                             ${active1 === 5 ? 'bg-primary-light dark:bg-[#1B2E4B] !text-primary' : ''}`}
                                 onClick={() => setActive1(active1 === 5 ? null : 5)}
                             >
-                                <span>How to install RECDOV Admin</span>
+                                <span>RecDo'nun mobil cihazlarla uyumlu bir sürümü var mıdır?</span>
                                 {active1 !== 5 ? (
                                     <span className="shrink-0">
                                         <IconPlusCircle duotone={false} />
@@ -350,10 +361,9 @@ const KnowledgeBase = () => {
                             <AnimateHeight duration={300} height={active1 === 5 ? 'auto' : 0}>
                                 <div className="px-1 py-3 font-semibold text-white-dark">
                                     <p>
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                        beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    RecDo bir web tabanlı uygulama olduğu için tarayıcılar aracılığıyla erişilebilir ve bu nedenle mobil cihazlarla uyumludur. Mobil cihazlar, genellikle RecDo gibi web tabanlı uygulamalara tarayıcılarını kullanarak erişebilirler.
+
+RecDo'nun web tabanlı bir platform olarak tasarlanmış olması, kullanıcıların bir akıllı telefon veya tablet üzerinden tarayıcılarını açarak RecDo'ya erişebilmelerini sağlar. Bu şekilde, kullanıcılar mobil cihazlarından RecDo'ya giriş yapabilir, belgeleri yükleyebilir, muhasebe verilerini işleyebilir ve platformun sunduğu diğer özellikleri kullanabilir.
                                     </p>
                                 </div>
                             </AnimateHeight>
@@ -361,7 +371,7 @@ const KnowledgeBase = () => {
                     </div>
                 </div>
                 <div className="rounded-md bg-white dark:bg-black">
-                    <div className="border-b border-white-light p-6 text-[22px] font-bold dark:border-dark dark:text-white">Quick support & Free update</div>
+                    <div className="border-b border-white-light p-6 text-[22px] font-bold dark:border-dark dark:text-white">Güncellemeler ve Yenilikler</div>
                     <div className="divide-y divide-white-light px-6 py-4.5 dark:divide-dark">
                         <div>
                             <div
@@ -369,7 +379,7 @@ const KnowledgeBase = () => {
                             ${active2 === 1 ? 'bg-primary-light dark:bg-[#1B2E4B] !text-primary' : ''}`}
                                 onClick={() => setActive2(active2 === 1 ? null : 1)}
                             >
-                                <span>How to use Browser Sync</span>
+                                <span>Güncellemeler ne sıklıkla olacak?</span>
                                 {active2 !== 1 ? (
                                     <span className="shrink-0">
                                         <IconPlusCircle duotone={false} />
@@ -383,10 +393,7 @@ const KnowledgeBase = () => {
                             <AnimateHeight duration={300} height={active2 === 1 ? 'auto' : 0}>
                                 <div className="px-1 py-3 font-semibold text-white-dark">
                                     <p>
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                        beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    Muhasebe sektöründeki yasal düzenlemelerde veya muhasebe standartlarında yapılan değişiklikler, vergi politikalarında güncellemeler veya muhasebe süreçlerindeki yeni talepler, bir muhasebe yazılımının güncellenmesini gerektirebilir. Ayrıca, kullanıcı geri bildirimleri, yeni talepler ve sektördeki diğer teknolojik yenilikler de RecDo gibi bir platformun sürekli gelişmesine ve güncellemelerine katkıda bulunabilir.
                                     </p>
                                 </div>
                             </AnimateHeight>
@@ -397,7 +404,7 @@ const KnowledgeBase = () => {
                             ${active2 === 2 ? 'bg-primary-light dark:bg-[#1B2E4B] !text-primary' : ''}`}
                                 onClick={() => setActive2(active2 === 2 ? null : 2)}
                             >
-                                <span> Sidebar not rendering CSS</span>
+                                <span> RecDo uygulamasında kullanabileceğim temalar nelerdir?</span>
                                 {active2 !== 2 ? (
                                     <span className="shrink-0">
                                         <IconPlusCircle duotone={false} />
@@ -411,94 +418,40 @@ const KnowledgeBase = () => {
                             <AnimateHeight duration={300} height={active2 === 2 ? 'auto' : 0}>
                                 <div className="px-1 py-3 font-semibold text-white-dark">
                                     <p>
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                        beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    <strong>Varsayılan Tema:</strong> Platformun ilk yüklenmesiyle birlikte gelen ve genellikle aydınlık bir arka plana ve kullanıcı dostu renkler ve düzenlere sahip olan tema.
+                                    <br />
+                                    <strong>Gece Modu:</strong> Daha az ışık ve daha koyu renkler kullanarak göz yorgunluğunu azaltmaya yönelik tema. Bu mod genellikle kullanıcıların gece veya düşük ışıklı ortamlarda daha rahat bir deneyim yaşamalarını sağlar.
+                                    <br />
+                                    <strong>Gündüz Modu:</strong> Daha parlak renkler ve daha yüksek kontrast sunan tema. Bu mod genellikle günün daha aydınlık saatlerinde tercih edilir ve daha canlı bir kullanıcı deneyimi sunar.
                                     </p>
                                 </div>
                             </AnimateHeight>
                         </div>
-                        <div>
-                            <div
-                                className={`flex cursor-pointer items-center justify-between gap-10 px-2.5 py-2 text-base font-semibold hover:bg-primary-light hover:text-primary dark:text-white dark:hover:bg-[#1B2E4B] dark:hover:text-primary
-                            ${active2 === 3 ? 'bg-primary-light dark:bg-[#1B2E4B] !text-primary' : ''}`}
-                                onClick={() => setActive2(active2 === 3 ? null : 3)}
-                            >
-                                <span>Connect with us Personally</span>
-                                {active2 !== 3 ? (
-                                    <span className="shrink-0">
-                                        <IconPlusCircle duotone={false} />
-                                    </span>
-                                ) : (
-                                    <span className="shrink-0">
-                                        <IconMinusCircle fill={true} />
-                                    </span>
-                                )}
-                            </div>
-                            <AnimateHeight duration={300} height={active2 === 3 ? 'auto' : 0}>
-                                <div className="px-1 py-3 font-semibold text-white-dark">
-                                    <p>
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                        beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                    </p>
-                                </div>
-                            </AnimateHeight>
-                        </div>
-                        <div>
-                            <div
-                                className={`flex cursor-pointer items-center justify-between gap-10 px-2.5 py-2 text-base font-semibold hover:bg-primary-light hover:text-primary dark:text-white dark:hover:bg-[#1B2E4B] dark:hover:text-primary
-                            ${active2 === 5 ? 'bg-primary-light dark:bg-[#1B2E4B] !text-primary' : ''}`}
-                                onClick={() => setActive2(active2 === 5 ? null : 5)}
-                            >
-                                <span>Compilation Issue</span>
-                                {active2 !== 5 ? (
-                                    <span className="shrink-0">
-                                        <IconPlusCircle duotone={false} />
-                                    </span>
-                                ) : (
-                                    <span className="shrink-0">
-                                        <IconMinusCircle fill={true} />
-                                    </span>
-                                )}
-                            </div>
-                            <AnimateHeight duration={300} height={active2 === 5 ? 'auto' : 0}>
-                                <div className="px-1 py-3 font-semibold text-white-dark">
-                                    <p>
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                        Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
-                                        beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                    </p>
-                                </div>
-                            </AnimateHeight>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
             <div className="panel mt-10 text-center md:mt-20">
-                <h3 className="mb-2 text-xl font-bold dark:text-white md:text-2xl">Still need help?</h3>
+                <h3 className="mb-2 text-xl font-bold dark:text-white md:text-2xl">Ciddi bir probleme mi sahipsin?</h3>
                 <div className="text-lg font-medium text-white-dark">
-                    Our specialists are always happy to help. Contact us during standard business hours or email us24/7 and we'll get back to you.
+                Teknik destek ekibimiz, platformumuzu kullanırken karşılaşabileceğiniz önemli sorunlarınızda size kesintisiz yardım sağlamak için hazır ve erişilebilir durumdadır. Ekip, platformun kullanımıyla ilgili herhangi bir zorlukta size destek olacak, sorularınıza cevap verecek ve gerektiğinde eğitim sağlayacaktır. Müşteri memnuniyetini ön planda tutarak, sizin sorunlarınızı çözmek ve en iyi kullanıcı deneyimini sunmak için buradayız.
                 </div>
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6">
                     <button type="button" className="btn btn-primary">
-                        Contact Us
+                        Bizimle İletişime Geçin
                     </button>
-                    <button type="button" className="btn btn-primary">
+                    {/* <button type="button" className="btn btn-primary">
                         Visit our community
-                    </button>
+                    </button> */}
                 </div>
             </div>
             <div className="mt-10 flex flex-col-reverse items-center justify-between gap-5 rounded-md bg-gradient-to-tl from-[rgba(234,241,255,0.44)] to-[rgba(234,241,255,0.96)] px-6 py-2.5 dark:from-[rgba(14,23,38,0.44)] dark:to-[#0E1726] md:flex-row lg:mt-20 xl:px-16">
                 <div className="flex-1 py-3.5 text-center md:text-start">
-                    <h3 className="mb-2 text-xl font-bold dark:text-white md:text-2xl">Didn’t find any solutions?</h3>
-                    <div className="text-lg font-medium text-white-dark">Loaded with awesome features like documentation, knowledge base forum, domain transfer, affiliates etc.</div>
+                    <h3 className="mb-2 text-xl font-bold dark:text-white md:text-2xl">Çözüm bulamadın mı?</h3>
+                    <div className="text-lg font-medium text-white-dark">Teknik destek ekibimize herhangi bir sorunuz veya ihtiyacınız olduğunda e-posta yoluyla ulaşabilirsiniz.</div>
                     <div className="mt-8 flex justify-center md:justify-start lg:mt-16">
                         <button type="button" className="btn btn-primary">
-                            Raise support tickets
+                        Destek talepleri oluşturabilirsiniz.
                         </button>
                     </div>
                 </div>
@@ -506,8 +459,8 @@ const KnowledgeBase = () => {
                     <img src="/assets/images/knowledge/find-solution.svg" alt="find-solution" className="w-full object-cover rtl:rotate-y-180 dark:brightness-[2.59] dark:grayscale-[83%]" />
                 </div>
             </div>
-            <div className="mt-10">
-                <h3 className="mb-6 text-xl font-bold md:text-3xl">Popular Topics</h3>
+            {/* <div className="mt-10">
+                <h3 className="mb-6 text-xl font-bold md:text-3xl">Popüler Başlıklar</h3>
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
                     <div className="space-y-5 rounded-md border border-white-light bg-white p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20),0px_12px_24px_-4px_rgba(145,158,171,0.12)] dark:border-[#1B2E4B] dark:bg-black">
                         <div className="max-h-56 overflow-hidden rounded-md">
@@ -634,7 +587,7 @@ const KnowledgeBase = () => {
                         </div>
                     </Dialog>
                 </Transition>
-            </div>
+            </div> */}
         </div>
     );
 };

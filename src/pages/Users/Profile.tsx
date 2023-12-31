@@ -56,15 +56,15 @@ const Profile = () => {
                             <ul className="mt-5 flex flex-col m-auto space-y-4 font-semibold text-white-dark">
                                 <li className="flex items-center gap-2">
                                     <IconCoffee className="shrink-0" />
-                                    {userData?.field?userData?.field:<small><i>çalışma alanı belirtilmemiş</i></small>}
+                                    {userData?.field?userData?.field:<small><i>Çalışma Alanı Belirtilmemiş</i></small>}
                                 </li>
                                 <li className="flex items-center gap-2">
                                     <IconMapPin className="shrink-0" />
-                                    {userData?.region?userData?.region:<small><i>ilçe blirtilmemiş</i></small>}
+                                    {userData?.region?userData?.region:<small><i>İlçe Belirtilmemiş</i></small>}
                                 </li>
                                 <li className="flex items-center gap-2">
                                     <IconMapPin className="shrink-0" />
-                                    {userData?.city?userData?.city:<small><i>il blirtilmemiş</i></small>}
+                                    {userData?.city?userData?.city:<small><i>İl Belirtilmemiş</i></small>}
                                 </li>
                                 <li>
                                     <button className="flex items-center gap-2">
@@ -75,7 +75,7 @@ const Profile = () => {
                                 <li className="flex items-center gap-2">
                                     <IconPhone />
                                     <span className="whitespace-nowrap" dir="ltr">
-                                        {userData?.phone?userData?.phone:<small><i>telefon belirtilmemiş</i></small>}
+                                        {userData?.phone?userData?.phone:<small><i>Telefon Belirtilmemiş</i></small>}
                                     </span>
                                 </li>
                             </ul>
