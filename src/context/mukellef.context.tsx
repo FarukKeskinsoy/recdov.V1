@@ -18,6 +18,7 @@ interface MukellefContextProps {
     handleNewMukellefFormInnerChange:any;
     changed:boolean;
     editFormFirst:any;
+    editEntegrator:any;
     updated:boolean;
     updating:boolean;
     editFormSecond:any;
@@ -26,6 +27,7 @@ interface MukellefContextProps {
     handleMukellefChangeFirst:any;
     handleMukellefChangeSecond:any;
     handleMukellefChangeThird:any;
+    handleMukellefChangeEntegrator:any;
     handleMukellefChangeThirdInner:any;
     
 }
@@ -89,6 +91,7 @@ export const MukellefProvider: React.FC<MukellefProviderProps> = ({ children }) 
   const [editFormFirst,setEditFormFirst] = useState<object>({})
   const [editFormSecond,setEditFormSecond] = useState<object>({})
   const [editFormThird,setEditFormThird] = useState<object>({})
+  const [editEntegrator,setEditEntegrator] = useState<object>({})
 
   const [newMukellef,setNewMukellef] = useState<any>({
     yetkilismsmmm:"",//
@@ -224,6 +227,21 @@ export const MukellefProvider: React.FC<MukellefProviderProps> = ({ children }) 
   
     // Update the state with the new value
     setEditFormFirst((prevEditForm) => {
+      const updatedForm = { ...prevEditForm, [name]: value };
+  
+      // Filter out properties with null or ""
+      const filteredForm = Object.fromEntries(
+        Object.entries(updatedForm).filter(([key, value]) => value !== null && value !== "")
+      );
+  
+      return filteredForm;
+    });
+  };
+  const handleMukellefChangeEntegrator = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+  
+    // Update the state with the new value
+    setEditEntegrator((prevEditForm) => {
       const updatedForm = { ...prevEditForm, [name]: value };
   
       // Filter out properties with null or ""
@@ -434,10 +452,12 @@ export const MukellefProvider: React.FC<MukellefProviderProps> = ({ children }) 
     editFormFirst,
     editFormSecond,
     editFormThird,
+    editEntegrator,
     mymukellefs,
     handleMukellefChangeFirst,
     handleMukellefChangeSecond,
     handleMukellefChangeThird,
+    handleMukellefChangeEntegrator,
     handleMukellefChangeThirdInner,
     handleSubmitMukellefUpdate,
     handleDeleteMukellef

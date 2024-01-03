@@ -737,3 +737,7 @@ pre.hljs {
 .error{
     border: 1px solid red;
 }
+.entegratorlink{
+    display: flex;
+    gap: 0.2rem;
+}

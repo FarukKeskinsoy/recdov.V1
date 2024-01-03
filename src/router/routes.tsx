@@ -10,6 +10,9 @@ import GidenDetail from '../pages/Apps/Invoice/GidenDetail';
 import ContactDetail from '../pages/Apps/ContactDetail';
 import MukellefListBill from '../pages/Apps/Invoice/MukellefListBill';
 import FromEntegrator from '../pages/Apps/Invoice/FromEntegrator';
+import BankHome from '../pages/Apps/Bank/BankHome';
+import EkstreList from '../pages/Apps/Bank/EkstreList';
+import EsktrelerHome from '../pages/Apps/Bank/EsktrelerHome';
 const Index = lazy(() => import('../pages/Index'));
 const Finance = lazy(() => import('../pages/Finance'));
 const Crypto = lazy(() => import('../pages/Crypto'));
@@ -111,11 +114,11 @@ const routes = [
         element: <FromEntegrator />,
     },
     {
-        path: 'fatura/gelen-fatura/:id',
+        path: 'fatura/gelen-fatura/:mukellef/:id',
         element: <GelenDetail />,
     },
     {
-        path: 'fatura/giden-fatura/:id',
+        path: 'fatura/giden-fatura/:mukellef/:id',
         element: <GidenDetail />,
     },
     
@@ -155,21 +158,17 @@ const routes = [
     },
     {
         path: '/banka-entegrasyonu',
-        element: <Preview />,
+        element: <BankHome/>,
     },
     {
         path: '/banka-entegrasyonu/ekstreler',
-        element: <Edit />,
+        element: <EsktrelerHome/>,
     },
     {
-        path: '/banka-entegrasyonu/yeni-ekle',
-        element: <Add />,
+        path: '/banka-entegrasyonu/ekstreler/:username',
+        element: <EkstreList/>,
     },
     
-    {
-        path: '/banka-entegrasyonu/bilgileri-guncelle',
-        element: <Edit />,
-    },
     // components page
    
 

@@ -15,7 +15,7 @@ import { useAuth } from '../../context/authentication.context';
 import { Button, IconButton } from '@mui/material';
 import { iller } from '../../rawData/mukellefs';
 import { illers } from '../../rawData/iller';
-import { CopyAll, Details, Facebook, FacebookOutlined, Instagram, LinkedIn, Notes, RemoveCircle, Twitter, Web, WebStories } from '@mui/icons-material';
+import { CopyAll, Details, DoorBack, Facebook, FacebookOutlined, Instagram, Key, LinkedIn, Login, Notes, RemoveCircle, Twitter, Web, WebStories } from '@mui/icons-material';
 import IconXCircle from '../../components/Icon/IconXCircle';
 import { Dialog, Transition } from '@headlessui/react';
 import IconX from '../../components/Icon/IconX';
@@ -26,6 +26,7 @@ import { nacelist } from '../../rawData/nace';
 import { vergidaireleri } from '../../rawData/vergiDaireleri';
 import { useMukellef } from '../../context/mukellef.context';
 import Swal from 'sweetalert2';
+import { entegratorler } from '../../rawData/entegratorList';
 
 
 const ContactDetail = () => {
@@ -89,6 +90,9 @@ const ContactDetail = () => {
         odatemsilcisibilgileri?:any;
         eposta?:string;
         phone?:string;
+        entegrator?:string;
+        enusername?:string;
+        enpassword?:string;
       }
       const h6Ref = useRef(null);
 
@@ -109,6 +113,8 @@ const ContactDetail = () => {
         updated,
         updating,
         handleMukellefChangeThirdInner,
+        editEntegrator,
+        handleMukellefChangeEntegrator
     }=useMukellef();
 
     const copyToClipboard= (item:any)=>{
@@ -182,6 +188,15 @@ const ContactDetail = () => {
                             >
                                 <Details style={{fontSize:16}} />
                                 Detay Bilgiler
+                            </button>
+                        </li>
+                        <li className="inline-block">
+                            <button
+                                onClick={() => toggleTabs('entegrator')}
+                                className={`flex gap-2 p-4 border-b border-transparent hover:border-primary hover:text-primary ${tabs === 'entegrator' ? '!border-primary text-primary' : ''}`}
+                            >
+                                <Login style={{fontSize:16}} />
+                                Entegrator
                             </button>
                         </li>
                         <li className="inline-block">
@@ -683,6 +698,75 @@ const ContactDetail = () => {
                     ''
                 )}
                
+                {tabs === 'entegrator' ? (
+                   <div>
+                   <form className="border border-[#ebedf2] dark:border-[#191e3a] rounded-md p-4 mb-5 bg-white dark:bg-black">
+                       <h6 className="text-lg font-bold mb-5">Entegrasyon Bilgileri</h6>
+                       <div className="flex flex-col sm:flex-row">
+                           <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                               <div>
+
+                               <label htmlFor="entegrator">Entegratör</label>
+                                                <select
+                                                    id="entegrator"
+                                                    placeholder="entegrator seçiniz"
+                                                    className="form-input"
+                                                    name='entegrator'
+                                                    defaultValue={thisUser.entegrator}
+                                                    onChange={handleMukellefChangeEntegrator}
+                                                >
+                                                       <option value="" disabled defaultChecked >Entegratorler</option>
+                                                       {entegratorler.map((i,idx)=>{
+                                                        return(
+                                                            <option key={idx} value={i.entegrator}>{i.label}</option>
+                                                        )
+                                                       })}
+                                                </select>
+                                   </div>
+                                   <div>
+                                       <label htmlFor="enusername">Entegratör Kullanıcı Adı</label>
+                                       <input 
+                                           name="enusername"
+                                           id="enusername"
+                                           type="text"
+                                           placeholder="kullanıcı adı"
+                                           className="form-input"
+                                           defaultValue={thisUser?.enusername}
+                                           //value={editForm?.adi}
+                                           onChange={handleMukellefChangeEntegrator}
+                                       />
+                                   </div>
+                                   <div>
+                                       <label htmlFor="enpassword">Entegratör Şifre</label>
+                                       <input 
+                                           name="enpassword"
+                                           id="enpassword"
+                                           type="text"
+                                           placeholder="şifre"
+                                           className="form-input"
+                                           defaultValue={thisUser?.enpassword}
+                                           //value={editForm?.adi}
+                                           onChange={handleMukellefChangeEntegrator}
+                                       />
+                                   </div>
+                                   
+                               <div className="sm:col-span-2 mt-3">
+                                   <Button
+                                       variant='contained'
+                                       disabled={updating}
+                                       onClick={()=>vktc && handleSubmitMukellefUpdate(vktc,editEntegrator)}
+                                       type="button" className="btn btn-primary">
+                                       Kaydet
+                                   </Button>
+                               </div>
+                           </div>
+                       </div>
+                   </form>
+                   
+               </div>
+                ) : (
+                    ''
+                )}
                 {tabs === 'preferences' ? (
                    <div>
                    <form className="border border-[#ebedf2] dark:border-[#191e3a] rounded-md p-4 mb-5 bg-white dark:bg-black">

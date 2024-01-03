@@ -17,7 +17,7 @@ import {mukellefExtraInfo , iller , mukellefList} from "../../../rawData/mukelle
 import { Launch, MoveToInbox, Outbox } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 import { useMukellef } from '../../../context/mukellef.context';
-
+import uyumsoft from "../../../assets/images/uyumlogo.png"
   
 const MukellefListBill = () => {
    
@@ -231,6 +231,8 @@ const MukellefListBill = () => {
         });
     };
 
+
+
     return (
         <div>
             <div className="flex items-center justify-between flex-wrap gap-4">
@@ -273,10 +275,12 @@ const MukellefListBill = () => {
                                             <td>
                                                 <div className="flex gap-4 items-center justify-center">
                                                    
-                                                    {contact?.entegrator&&<NavLink 
+                                                    {contact?.entegrator&&<NavLink
                                                         to={`${contact.id}`}
-                                                        className="btn btn-sm btn-outline-secondary" 
+                                                        className="btn btn-sm btn-outline-secondary entegratorlink uyumsoft" 
                                                     >
+                                                        <span>{contact.entegrator}</span>
+
                                                         <Launch/>
                                 
                                                     </NavLink>}

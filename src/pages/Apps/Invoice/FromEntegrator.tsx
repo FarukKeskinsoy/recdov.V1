@@ -12,6 +12,9 @@ import IconEye from '../../../components/Icon/IconEye';
 import axios from 'axios';
 import { DocumentReference, doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../../firebase/firebase';
+import { Button, Stack } from '@mui/material';
+import { Group } from '@mui/icons-material';
+import MonthSelector from './MonthSelector';
 
 interface User {
     // Assuming that adresler is an array of Address objects
@@ -83,12 +86,19 @@ const FromEntegrator = () => {
         })
 
     },[])
+
+    const baseUrls:any={
+      uyumsoft:'https://entegratoru-production.up.railway.app/getUyumsoftInvoices',
+
+    }
     useEffect(() => {
         const fetchData = async () => {
           try {
+    
             const response = await axios.post(
-              'https://entegratoru-production.up.railway.app/getUyumsoftInvoices',
+              //'https://entegratoru-production.up.railway.app/getUyumsoftInvoices',
               //'http://localhost:3008/getUyumsoftInvoices',
+              baseUrls[`${thisUser.entegrator}`],
               {
                 UYUMSOFT_USERNAME: thisUser.enusername,
                 UYUMSOFT_PASSWORD: thisUser.enpassword,
@@ -112,7 +122,7 @@ const FromEntegrator = () => {
     
         thisUser&&thisUser.enusername&& fetchData();
       }, [thisUser]); // Empty
-
+  
 
     const [page, setPage] = useState(1);
     const PAGE_SIZES = [10, 20, 30, 50, 100];
@@ -138,6 +148,82 @@ const FromEntegrator = () => {
     // faturaTipi: 'TEVKIFAT',
     // senaryo: 'TICARIFATURA',
     // cariVknTckn: '1911315533',
+    
+      const handleMonthSelect = (selectedMonth: number) => {
+        console.log(`Selected month: ${selectedMonth}`);
+        // Add your logic for handling the selected month
+      };
+      async function uploadDataToServer(dataToUpload:any) {
+        const response = await fetch('http://localhost:5011/upload-data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ dataToUpload }),
+        });
+      
+        const result = await response.json();
+        console.log(result);
+      }
+      
+      // Example usage
+      const faturaData = {
+        Fatura_No: 'INV12345',
+        ETTN: 'ETTN123',
+        Fatura_Tarihi: '2023-12-24', // Assuming a date format, adjust as needed
+        Durum: 'Pending',
+        Tur: 'Sales',
+        Tip_Tur: 'Retail',
+        Cari_Adi: 'Customer ABC',
+        Cari_Vkn_Tckn: '1234567890', // Adjust based on your needs
+        Alias: 'CustomerAlias',
+        Cari_Ulke: 'Turkey',
+        Cari_Sehir: 'Istanbul',
+        Odenecek_Miktar: 500.00,
+        Vergi_Toplamı: 75.00,
+        Vergi_Haric_Tutar:"örnek",
+        Toplam_Indirim:"örnek",
+        Para_Birimi:"örnek",
+        Kur:"örnek",
+        Toplam_Kdv_1:"örnek",
+        Toplam_Kdv_8:"örnek",
+        Toplam_Kdv_18:"örnek",
+        Kdv_0_Matrah:"örnek",
+        Kdv_1_Matrah:"örnek",
+        Kdv_8_Matrah:"örnek",
+        Kdv_18_Matrah:"örnek",
+        Siparis_No:"örnek",
+        Senaryo:"örnek",
+        Tasimacilik:"örnek",
+        Sigorta:"örnek",
+        FOB:"örnek",
+        Lokal_Dokuman_No:"örnek",
+        Ekstra_Bilgi:"örnek",
+        Alici_Email_Adresi:"örnek",
+        Mal_Hizmet_Sira_No:"örnek",
+        Mal_Hizmet_Adi:"örnek",
+        Mal_Hizmet_Miktar:"örnek",
+        Mal_Hizmet_Birim:"örnek",
+        Mal_Hizmet_Birim_Fiyat:"örnek",
+        Mal_Hizmet_Aciklama:"örnek",
+        Mal_Hizmet_Not:"örnek",
+        Mal_Hizmet_Satici_Kodu:"örnek",
+        Mal_Hizmet_Alici_Kodu:"örnek",
+        Mal_Hizmet_Toplam_Tutar:"örnek",
+        Mal_Hizmet_KDV_Orani:"örnek",
+        Mal_Hizmet_KDV_Tutari:"örnek",
+        Mal_Hizmet_OIV_Orani:"örnek",
+        Mal_Hizmet_OIV_Tutari:"örnek",
+        Not_1:"örnek",
+        Not_2:"örnek",
+        Not_3:"örnek",
+        Tevkifat_Tutari:"örnek",
+        Tevkifat_Orani:"örnek",
+        Mal_Hizmet_Vergi_Muafiyet_Kodu:"örnek",
+        Konaklama_Vergisi:"örnek",
+        Irsaliye_Bilgileri:"örnek",
+        // ... (add values for other fields accordingly)
+      };
     return (
         <div className="panel px-0 border-white-light dark:border-[#1b2e4b]">
             <div className="invoice-table">
@@ -148,6 +234,13 @@ const FromEntegrator = () => {
                 </div> */}
 
                 <div className="datatables pagination-padding">
+                    <Button
+                        onClick={()=>uploadDataToServer(faturaData)}
+                    >
+                        send
+                    </Button>
+                {/* <MonthSelector onSelect={handleMonthSelect} /> */}
+
                     <DataTable
                         className="whitespace-nowrap table-hover invoice-table"
                         records={invoices}
