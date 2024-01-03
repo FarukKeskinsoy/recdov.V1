@@ -104,14 +104,14 @@ const Sidebar = () => {
 
                             <li className="nav-item">
                                 <ul>
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                         <NavLink to="/gelen-dokumanlar" className="group">
                                             <div className="flex items-center">
                                             <IconMenuTodo className="group-hover:!text-primary shrink-0" />
                                                 <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Gelen Dökümanlar</span>
                                             </div>
                                         </NavLink>
-                                    </li>
+                                    </li> */}
                                     <li className="menu nav-item">
                                         <button type="button" className={`${currentMenu === 'invoice' ? 'active' : ''} nav-link group w-full`} onClick={() => toggleMenu('invoice')}>
                                             <div className="flex items-center">
@@ -126,9 +126,9 @@ const Sidebar = () => {
 
                                         <AnimateHeight duration={300} height={currentMenu === 'invoice' ? 'auto' : 0}>
                                             <ul className="sub-menu text-gray-500">
-                                                <li>
+                                                {/* <li>
                                                     <NavLink to="/fatura/list">Fatura Listesi</NavLink>
-                                                </li>
+                                                </li> */}
                                                 <li>
                                                     <NavLink to="/fatura/gelen-fatura">Gelen Fatura</NavLink>
                                                 </li>
@@ -141,21 +141,21 @@ const Sidebar = () => {
                                                 {/* <li>
                                                     <NavLink to="/fatura/beyanname-sorgula">Beyanname Sorgula</NavLink>
                                                 </li> */}
-                                                <li>
+                                                {/* <li>
                                                     <NavLink to="/fatura/ekle">Yeni Oluştur</NavLink>
-                                                </li>
+                                                </li> */}
 
                                             </ul>
                                         </AnimateHeight>
                                     </li>
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                         <NavLink to="/notlar" className="group">
                                             <div className="flex items-center">
                                                 <IconMenuNotes className="group-hover:!text-primary shrink-0" />
                                                 <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">Notlar</span>
                                             </div>
                                         </NavLink>
-                                    </li>
+                                    </li> */}
                                     <li className="nav-item">
                                         <NavLink to="/mukellefler" className="group">
                                             <div className="flex items-center">
@@ -181,17 +181,12 @@ const Sidebar = () => {
                                         <AnimateHeight duration={300} height={currentMenu === 'banka' ? 'auto' : 0}>
                                             <ul className="sub-menu text-gray-500">
                                                 <li>
-                                                    <NavLink to="/banka-entegrasyonu">Bilgiler</NavLink>
+                                                    <NavLink to="/banka-entegrasyonu">Entegrasyon</NavLink>
                                                 </li>
                                                 <li>
-                                                    <NavLink to="/banka-entegrasyonu/ekstreler">Ekstreler</NavLink>
+                                                    <NavLink to="/banka-entegrasyonu/">Ekstreler</NavLink>
                                                 </li>
-                                                <li>
-                                                    <NavLink to="/banka-entegrasyonu/bilgileri-guncelle">Güncelleme</NavLink>
-                                                </li>
-                                                <li>
-                                                    <NavLink to="/banka-entegrasyonu/yeni-ekle">Yeni Oluştur</NavLink>
-                                                </li>
+                                                
 
                                             </ul>
                                         </AnimateHeight>

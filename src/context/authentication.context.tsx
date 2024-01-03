@@ -429,6 +429,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         email:a?.user.email,
         uName:regForm.userName,
         apps:["invoice"],
+        credit:5000,
+        is:0,
+        bs:0,
+        bes:0,
         uLname:"",// user lastName
         phone: "",// user phone number
         field: "",// user job field
